@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "laboptimal-engine"
+version = "0.1.0"
+description = "LabOptimal analytical core: OCR, lab parsing, deficiency detection, and nutrient recommendations"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "Zach Auerbach" }]
+dependencies = [
+    "numpy>=2.5",
+    "pandas>=3.0",
+    "pydantic>=2.13",
+    "pillow>=12.0",
+    "pytesseract>=0.3.13",
+    "requests>=2.34",
+    "python-dotenv>=1.2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=9.0"]
+
+[project.scripts]
+laboptimal-engine = "laboptimal_engine.pipeline:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

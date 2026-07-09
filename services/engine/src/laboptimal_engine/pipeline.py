@@ -1,0 +1,108 @@
+"""End-to-end analysis pipeline and CLI entry point.
+
+    OCR text -> parse -> normalize -> detect -> recommend -> Protocol
+
+`analyze` is the public API the Node service calls. Running this module as a
+script with `--demo` executes the whole pipeline on a bundled sample panel and
+prints the protocol JSON, which is useful for eyeballing the contract shape.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+
+from .deficiency.detector import DeficiencyDetector
+from .models import Protocol
+from .normalize.normalizer import Normalizer
+from .ocr.base import OCRProvider, StaticTextProvider
+from .parsing.lab_parser import LabParser
+from .recommend.recommender import Recommender
+
+DEMO_REPORT = """
+COMPREHENSIVE PANEL
+Vitamin D, 25-Hydroxy      22 ng/mL     30-100
+Ferritin                   18 ng/mL     30-400
+Vitamin B12                310 pg/mL    200-900
+Folate, Serum              6.2 ng/mL    3-20
+Magnesium                  1.8 mg/dL    1.7-2.2
+Hemoglobin                 12.9 g/dL    13.5-17.5
+""".strip()
+
+CITATIONS = [
+    "USDA FoodData Central. https://fdc.nal.usda.gov/",
+]
+
+
+def analyze_text(text: str) -> Protocol:
+    """Run the pipeline on already-extracted OCR text."""
+    parser = LabParser()
+    normalizer = Normalizer()
+    detector = DeficiencyDetector()
+    recommender = Recommender()
+
+    raw_readings = parser.parse(text)
+    confidences = {r.canonical: r.confidence for r in raw_readings}
+
+    readings = []
+    warnings: list[str] = []
+    for raw in raw_readings:
+        normalized = normalizer.normalize(raw, warnings=warnings)
+        if normalized is None:
+            warnings.append(f"Unrecognized analyte skipped: {raw.canonical}")
+            continue
+        readings.append(normalized)
+
+    findings = detector.detect(readings, confidences=confidences)
+    foods, supplements = recommender.recommend(findings)
+
+    return Protocol(
+        findings=findings,
+        food_suggestions=foods,
+        supplement_suggestions=supplements,
+        citations=CITATIONS,
+        warnings=warnings,
+    )
+
+
+def analyze(image_bytes: bytes, ocr: OCRProvider | None = None) -> Protocol:
+    """Run the full pipeline starting from raw image bytes.
+
+    This is the entry point the Node API should call. Supply an OCRProvider to
+    override the default (Tesseract) backend.
+    """
+    if ocr is None:
+        from .ocr.base import TesseractProvider
+
+        ocr = TesseractProvider()
+    text = ocr.extract_text(image_bytes)
+    return analyze_text(text)
+
+
+def _run_demo() -> Protocol:
+    ocr = StaticTextProvider(DEMO_REPORT)
+    return analyze(b"", ocr=ocr)
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(prog="laboptimal-engine")
+    parser.add_argument("--demo", action="store_true", help="Run on the bundled sample panel")
+    parser.add_argument("--image", type=str, help="Path to a lab-report image to analyze")
+    args = parser.parse_args(argv)
+
+    if args.demo:
+        protocol = _run_demo()
+    elif args.image:
+        with open(args.image, "rb") as handle:
+            protocol = analyze(handle.read())
+    else:
+        parser.print_help()
+        return 1
+
+    print(protocol.model_dump_json(indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
