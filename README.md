@@ -126,7 +126,7 @@ Change a contract, and both lanes get the update in one place.
 cd services/engine
 py -m venv .venv
 source .venv/Scripts/activate      # Windows Git Bash
-pip install -r requirements.txt
+pip install -e ".[dev]"            # editable install puts the package on the path
 python -m laboptimal_engine.pipeline --demo
 pytest
 ```

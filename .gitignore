@@ -33,3 +33,11 @@ uploads/
 samples/*.png
 samples/*.jpg
 samples/*.jpeg
+
+# Internal planning + LLC/IP experimental trademark artifacts
+TASKS.md
+trademark-experiments/
+legal/trademark-experiments/
+docs/brand/trademark-experiments/
+*.trademark-draft.*
+*.tm-draft.*

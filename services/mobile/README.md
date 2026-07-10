@@ -1,28 +1,79 @@
-# LabOptimal mobile (Copilot / GPT-5 lane)
+# LabOptimal mobile
 
-React Native app: capture a lab photo, upload it, and render the returned
-protocol. Owned by the Copilot lane. Integrate through the API in
-`../api` and the shapes in `docs/api-contract.md`.
+The LabOptimal flagship app, Expo + React Native + TypeScript. The screens and
+components here implement zone 03 of the Direction Board (`docs/brand/direction-board.html`)
+using the LabOptimal design tokens (`docs/brand/tokens.css`, ported to
+`src/theme/tokens.ts`).
 
-## What to build
+## Run
 
-See the checklist in `../../TASKS.md` under "Copilot / GPT-5 lane".
+```bash
+cd services/mobile
+npm install
+npx expo start        # then press i / a / w for iOS, Android, or web
+```
 
-Summary:
-- App scaffold (Expo recommended) + navigation
-- Camera / image picker screen
-- Upload flow with processing state (poll `GET /scans/:id` until `complete`)
-- Results screen rendering `Protocol`:
-  - Findings as cards, colored by `status` (deficient/suboptimal/optimal/elevated/high)
-  - Food suggestions grouped by `nutrient`
-  - Supplement list with `form` and `notes`
-  - Citations footer
-- History screen (`GET /scans`)
-- Auth screens
+The three brand fonts (Newsreader, Public Sans, IBM Plex Mono) load at runtime
+via `@expo-google-fonts`; the app holds rendering until they are ready.
 
-## Rendering the protocol
+## What is here, and the lane split
 
-Key off the exact field names in `docs/api-contract.md`. `status` drives color;
-`severity` (0.0-1.0) can drive sort order or a magnitude bar; `confidence` can
-be shown as a secondary signal. Only `deficient` and `suboptimal` findings carry
-`target_nutrients` and map to food/supplement suggestions.
+This is the **presentational layer**, built by the Claude lane because it owns
+design fidelity. Everything renders the design faithfully, is typed against the
+engine's `Protocol` contract, and runs on sample data.
+
+The **Copilot lane** wires it to reality. The boundary:
+
+| Built here (presentational) | Wired by the app lane |
+|-----------------------------|-----------------------|
+| Screens and components matching the board | Real navigation (react-navigation) replacing the preview shell in `App.tsx` |
+| `Protocol` types mirroring `docs/api-contract.md` | Fetching a real protocol from the API and polling scan status |
+| Sample view-model data (`src/data/sample.ts`) | Camera / file upload (`expo-camera`, `expo-document-picker`) behind the Upload screen |
+| Design tokens, fonts, range/trend/status widgets | Auth, secure storage, and the results/history plumbing |
+
+`App.tsx` contains a deliberately minimal tab-plus-overlay shell so the screens
+can be exercised as a running app. It is a placeholder, not the intended
+navigation architecture. Replace it, do not build on it.
+
+## Structure
+
+```
+App.tsx                 preview shell: loads fonts, tabs, pushable detail screens
+src/
+  theme/
+    tokens.ts            colors, type, radius, spacing, shadow (from tokens.css)
+    useAppFonts.ts       @expo-google-fonts loader hook
+  types/
+    protocol.ts          Protocol / Finding / etc. mirror of the engine contract
+  data/
+    sample.ts            sample view models mirroring the board
+  components/
+    Text.tsx             Display / Heading / Body / Label / Mono primitives
+    Card.tsx             cream and green surface cards
+    Icon.tsx             feather-style icon set (react-native-svg)
+    RangeBar.tsx         deficient / optimal / high bar with a status dot
+    MarkerRow.tsx        marker line: name, value, range bar, status pill
+    StatusPill.tsx       low / watch / in range / priority chip
+    SummaryBar.tsx       home overall segmented bar + legend
+    TrendBars.tsx        12-month trend chart
+    Chip.tsx             category / plan / timing chips
+    Button.tsx           primary (green) and secondary (outline) buttons
+    ScreenHeader.tsx     back chevron + serif title + subtitle
+    Avatar.tsx           initials circle
+    TabBar.tsx           bottom tab bar (presentational)
+  screens/
+    HomeScreen.tsx       status at a glance, scan CTA, needs-attention list
+    UploadScreen.tsx     capture / import, privacy note, parse progress
+    DeficiencyScreen.tsx priority finding, ranked list, plan card
+    PlanScreen.tsx       supplements and this week's meals
+    MarkerScreen.tsx     one marker: current, trend, effects, dossier link
+    LibraryScreen.tsx    nutrient dossier library
+```
+
+## Consuming real data
+
+Every screen already takes its data from `src/data/sample.ts` view models. To go
+live, map an API `Protocol` (see `src/types/protocol.ts`) onto those view models:
+`bucketForStatus` collapses the engine's five-way `Finding.status` into the
+three-way in-range / watch / low the UI paints. Keep the token hex values in
+`src/theme/tokens.ts` identical to `docs/brand/tokens.css`.

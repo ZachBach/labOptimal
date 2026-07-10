@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direction Board · Aurelius Open Research Initiative</title>
+<!--
+  Runtime-free implementation of "Direction Board.dc.html" (Claude Design canvas).
+  Generated from the source design file; see docs/brand/README.md.
+  The <helmet> block (fonts + base CSS) and style-hover rules below reproduce
+  what the Claude Design runtime (support.js) did at render time.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#E9DFCE;color:#211C15;font-family:"Public Sans",system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:#A8481B;text-decoration:none}
+a:hover{text-decoration:underline}
+::selection{background:#A8481B;color:#F3ECDF}
+</style>
+<style>
+.dch0:hover{background:#211C15;color:#F3ECDF;border-color:#211C15;text-decoration:none}
+</style>
+</head>
+<body>
+<section id="top" style="padding:clamp(30px,5vw,46px) clamp(18px,5vw,64px) clamp(26px,4vw,40px);scroll-margin-top:24px">
+  <div style="max-width:1560px;margin:0 auto">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:6px 24px;flex-wrap:wrap;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#8A7E68">
+      <span>Aurelius&nbsp;&middot;&nbsp;Open Research Initiative</span>
+      <span>Session 01&nbsp;&middot;&nbsp;Direction Board&nbsp;&middot;&nbsp;Jul 2026</span>
+    </div>
+    <div style="height:2px;background:#A8481B;margin:16px 0 28px;width:100%"></div>
+    <div style="display:flex;gap:clamp(24px,4vw,48px);flex-wrap:wrap;align-items:flex-start;justify-content:space-between">
+      <div style="flex:1 1 600px;max-width:720px">
+        <div style="font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#8A7E68">Working session</div>
+        <h1 style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:clamp(33px,4.6vw,52px);line-height:1.05;letter-spacing:-.012em;margin:12px 0 20px;color:#1B1710">An open initiative, taking shape in public.</h1>
+        <p style="font-size:17px;line-height:1.55;color:#4A4235;max-width:610px;margin:0 0 24px">Four decisions on the table tonight: what to call the umbrella, how it should look, where the flagship app is heading, and the shape of the site that ties it together. Nothing here is locked. Everything is a direction to react to.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="dch0" href="#z1" style="display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#211C15;border:1px solid rgba(33,28,21,.22);border-radius:7px;padding:8px 12px;background:#FBF7EF">01&nbsp;&middot;&nbsp;Naming</a>
+          <a class="dch0" href="#z2" style="display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#211C15;border:1px solid rgba(33,28,21,.22);border-radius:7px;padding:8px 12px;background:#FBF7EF">02&nbsp;&middot;&nbsp;Identity</a>
+          <a class="dch0" href="#z3" style="display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#211C15;border:1px solid rgba(33,28,21,.22);border-radius:7px;padding:8px 12px;background:#FBF7EF">03&nbsp;&middot;&nbsp;LabOptimal</a>
+          <a class="dch0" href="#z4" style="display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#211C15;border:1px solid rgba(33,28,21,.22);border-radius:7px;padding:8px 12px;background:#FBF7EF">04&nbsp;&middot;&nbsp;Landing</a>
+        </div>
+      </div>
+      <div style="flex:1 1 320px;background:#FBF7EF;border:1px solid rgba(33,28,21,.12);border-radius:12px;padding:20px 22px;box-shadow:0 1px 2px rgba(33,28,21,.05)">
+        <div style="font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#8A7E68">How to read this</div>
+        <ul style="list-style:none;padding:0;margin:14px 0 0;display:flex;flex-direction:column;gap:11px;font-size:13.5px;line-height:1.45;color:#4A4235">
+          <li>Every tile has a code (<b style="font-family:'IBM Plex Mono',monospace;font-weight:600;color:#211C15">n1</b>, <b style="font-family:'IBM Plex Mono',monospace;font-weight:600;color:#211C15">v2</b>, <b style="font-family:'IBM Plex Mono',monospace;font-weight:600;color:#211C15">lo-home</b>). Name it in chat to push, cut, or combine.</li>
+          <li>Copy is placeholder. We are locking structure and system tonight, not final words.</li>
+          <li>Type and color are open-license and contrast-checked.</li>
+        </ul>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:16px">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#6B6152;border:1px solid rgba(33,28,21,.18);border-radius:5px;padding:3px 7px">OFL fonts</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#6B6152;border:1px solid rgba(33,28,21,.18);border-radius:5px;padding:3px 7px">AA contrast</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#6B6152;border:1px solid rgba(33,28,21,.18);border-radius:5px;padding:3px 7px">No em dashes</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#6B6152;border:1px solid rgba(33,28,21,.18);border-radius:5px;padding:3px 7px">Aurelius = parent</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="z1" style="padding:clamp(40px,6vw,58px) clamp(18px,5vw,64px);border-top:1px solid rgba(33,28,21,.14);scroll-margin-top:24px">
+  <div style="max-width:1560px;margin:0 auto">
+    <div style="font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#A8481B">01&nbsp;/&nbsp;Naming</div>
+    <h2 style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:34px;line-height:1.1;letter-spacing:-.01em;margin:10px 0 12px;color:#1B1710">The initiative needs its own public name.</h2>
+    <p style="font-size:16px;line-height:1.55;color:#4A4235;max-width:720px;margin:0">Aurelius Dynamic stays the parent company. The open initiative sitting on top of it should read like a commons, not a product launch. Here is the strategy, then six candidates in two families to react to.</p>
+
+    <div style="display:flex;gap:32px;flex-wrap:wrap;margin-top:34px;align-items:flex-start">
+      <div style="flex:0 1 344px;display:flex;flex-direction:column;gap:18px">
+        <div style="background:#FBF7EF;border:1px solid rgba(33,28,21,.12);border-radius:12px;padding:20px;box-shadow:0 1px 2px rgba(33,28,21,.05)">
+          <div style="font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#8A7E68">Naming strategy</div>
+          <h3 style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:21px;line-height:1.2;margin:10px 0 8px;color:#1B1710">A public name, parented by Aurelius.</h3>
+          <p style="font-size:13.5px;line-height:1.5;color:#4A4235;margin:0 0 14px">The name should sound like infrastructure, hold several projects under one roof, and stay quiet about the K1 mission. Products keep their own names and live inside it.</p>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px;font-size:13px;line-height:1.45;color:#4A4235">
+            <li><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#A8481B">Holds many.</span> One roof: app, research, hardware.</li>
+            <li><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#A8481B">Open by default.</span> Reads as a commons, not a launch.</li>
+            <li><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#A8481B">Ownable.</span> Clean TM, .org / .science / .dev, GitHub org.</li>
+            <li><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#A8481B">Quiet on K1.</span> The mission is substrate, not the label.</li>
+            <li><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#A8481B">Pairs.</span> Works as "[name], an Aurelius initiative."</li>
+          </ul>
+        </div>
+        <div style="background:#211C15;border-radius:12px;padding:20px;box-shadow:0 1px 2px rgba(33,28,21,.08)">
+          <div style="font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#B79B6E">How it nests</div>
+          <pre style="font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;line-height:1.8;color:#E9DFCE;margin:14px 0 0;white-space:pre;overflow-x:auto">Aurelius Dynamic     <span style="color:#8A7E68">parent company</span>
+  &#9492; [Name]           <span style="color:#8A7E68">open initiative</span>
+     &#9500; LabOptimal    <span style="color:#8A7E68">consumer app</span>
+     &#9500; Research Agent <span style="color:#8A7E68">backend + dossiers</span>
+     &#9492; Resonance     <span style="color:#8A7E68">hardware, concept</span></pre>
+        </div>
+      </div>
+
+      <div style="flex:1 1 700px;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(228px,100%),1fr));gap:16px">
+        <article id="n1" style="background:#FCF8F0;border:1px solid rgba(168,72,27,.45);border-radius:12px;padding:18px;box-shadow:0 3px 14px rgba(168,72,27,.12);scroll-margin-top:24px;display:flex;flex-direction:column">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:13px">
+            <span style="display:inline-flex;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.05em;padding:3px 8px;border-radius:6px;background:#211C15;color:#F3ECDF">n1</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#F3ECDF;background:#A8481B;border-radius:5px;padding:3px 7px">Recommended lead</span>
+          </div>
+          <h3 style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:25px;line-height:1;margin:0;color:#1B1710">Groundwork</h3>
+          <p style="font-size:13px;line-height:1.42;color:#4A4235;margin:9px 0 11px;min-height:37px">The unglamorous, load-bearing work under everything else.</p>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:#9A8E77;margin-bottom:13px">infrastructure / patience / public works</div>
+          <div style="border:1px dashed rgba(33,28,21,.22);border-radius:9px;padding:13px 14px;background:#F4EDE0;margin-top:auto">
+            <div style="font-family:'Newsreader',Georgia,serif;font-size:19px;font-weight:500;letter-spacing:.01em;color:#211C15;line-height:1">Groundwork</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#9A8E77;margin-top:6px">an Aurelius initiative</div>
+          </div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;line-height:1.4;color:#A79A83;margin-top:11px">Common word. Grab groundwork.science and the GitHub org before someone else does.</div>
+        </article>
+
+        <article id="n2" style="background:#FBF7EF;border:1px solid rgba(33,28,21,.12);border-radius:12px;padding:18px;box-shadow:0 1px 2px rgba(33,28,21,.05);scroll-margin-top:24px;display:flex;flex-direction:column">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:13px">
+            <span style="display:inline-flex;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.05em;padding:3px 8px;border-radius:6px;background:#211C15;color:#F3ECDF">n2</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A7E68">Strong alternate</span>
+          </div>
+          <h3 style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:25px;line-height:1;margin:0;color:#1B1710">Baseline</h3>
+          <p style="font-size:13px;line-height:1.42;color:#4A4235;margin:9px 0 11px;min-height:37px">The reference you measure against. Also a personal health baseline.</p>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:#9A8E77;margin-bottom:13px">measurement / ground truth / starting line</div>
+          <div style="border:1px dashed rgba(33,28,21,.22);border-radius:9px;padding:13px 14px;background:#F4EDE0;margin-top:auto">
+            <div style="font-family:'Newsreader',Georgia,serif;font-size:19px;font-weight:500;letter-spacing:.01em;color:#211C15;line-height:1">Baseline</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#9A8E77;margin-top:6px">an Aurelius initiative</div>
+          </div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;line-height:1.4;color:#A79A83;margin-top:11px">Ties nicely to LabOptimal. Bare baseline.* is taken, so qualify it.</div>
+        </article>
+
+        <article id="n3" style="background:#FBF7EF;border:1px solid rgba(33,28,21,.12);border-radius:12px;padding:18px;box-shadow:0 1px 2px rgba(33,28,21,.05);scroll-margin-top:24px;display:flex;flex-direction:column">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:13px">
+            <span style="display:inline-flex;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.05em;padding:3px 8px;border-radius:6px;background:#211C15;color:#F3ECDF">n3</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A7E68">Commons family</span>
+          </div>
+          <h3 style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:25px;line-height:1;margin:0;color:#1B1710">Commons</h3>
+          <p style="font-size:13px;line-height:1.42;color:#4A4235;margin:9px 0 11px;min-height:37px">A shared resource nobody owns and everyone maintains.</p>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:#9A8E77;margin-bottom:13px">open access / stewardship / public good</div>
+          <div style="border:1px dashed rgba(33,28,21,.22);border-radius:9px;padding:13px 14px;background:#F4EDE0;margin-top:auto">
+            <div style="font-family:'Newsreader',Georgia,serif;font-size:19px;font-weight:500;letter-spacing:.01em;color:#211C15;line-height:1">Aurelius Commons</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#9A8E77;margin-top:6px">open research</div>
+          </div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;line-height:1.4;color:#A79A83;margin-top:11px">Generic alone. Reads best qualified: Aurelius Commons or Open Commons.</div>
+        </article>
+
+        <article id="n4" style="background:#FBF7EF;border:1px solid rgba(33,28,21,.12);border-radius:12px;padding:18px;box-shadow:0 1px 2px rgba(33,28,21,.05);scroll-margin-top:24px;display:flex;flex-direction:column">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:13px">
+            <span style="display:inline-flex;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.05em;padding:3px 8px;border-radius:6px;background:#211C15;color:#F3ECDF">n4</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A7E68">Aspiration family</span>
+          </div>
+          <h3 style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:25px;line-height:1;margin:0;color:#1B1710">First Kind</h3>
+          <p style="font-size:13px;line-height:1.42;color:#4A4235;margin:9px 0 11px;min-height:37px">A civilization of the first kind. The K1 thesis, said once and quietly.</p>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:#9A8E77;margin-bottom:13px">aspiration / ownable phrase / restraint</div>
+          <div style="border:1px dashed rgba(33,28,21,.22);border-radius:9px;padding:13px 14px;background:#F4EDE0;margin-top:auto">
+            <div style="font-family:'Newsreader',Georgia,serif;font-size:19px;font-weight:500;letter-spacing:.01em;color:#211C15;line-height:1">First Kind</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#9A8E77;margin-top:6px">an Aurelius initiative</div>
+          </div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;line-height:1.4;color:#A79A83;margin-top:11px">Strong wordmark. Verify it is not overloaded in sci-fi and games.</div>
+        </article>
+
+        <article id="n5" style="background:#FBF7EF;border:1px solid rgba(33,28,21,.12);border-radius:12px;padding:18px;box-shadow:0 1px 2px rgba(33,28,21,.05);scroll-margin-top:24px;display:flex;flex-direction:column">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:13px">
+            <span style="display:inline-flex;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.05em;padding:3px 8px;border-radius:6px;background:#211C15;color:#F3ECDF">n5</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A7E68">Evidence family</span>
+          </div>
+          <h3 style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:25px;line-height:1;margin:0;color:#1B1710">Provenance</h3>
+          <p style="font-size:13px;line-height:1.42;color:#4A4235;margin:9px 0 11px;min-height:37px">Every claim traceable to its source. Built around the evidence.</p>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:#9A8E77;margin-bottom:13px">citations / lineage / rigor</div>
+          <div style="border:1px dashed rgba(33,28,21,.22);border-radius:9px;padding:13px 14px;background:#F4EDE0;margin-top:auto">
+            <div style="font-family:'Newsreader',Georgia,serif;font-size:19px;font-weight:500;letter-spacing:.01em;color:#211C15;line-height:1">Provenance</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#9A8E77;margin-top:6px">an Aurelius initiative</div>
+          </div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;line-height:1.4;color:#A79A83;margin-top:11px">Perfect for the research agent. A touch long to carry the whole umbrella.</div>
+        </article>
+
+        <article id="n6" style="background:#FBF7EF;border:1px solid rgba(33,28,21,.12);border-radius:12px;padding:18px;box-shadow:0 1px 2px rgba(33,28,21,.05);scroll-margin-top:24px;display:flex;flex-direction:column">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:13px">
+            <span style="display:inline-flex;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.05em;padding:3px 8px;border-radius:6px;background:#211C15;color:#F3ECDF">n6</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8A7E68">Evidence family</span>
+          </div>
+          <h3 style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:25px;line-height:1;margin:0;color:#1B1710">Assay</h3>
+          <p style="font-size:13px;line-height:1.42;color:#4A4235;margin:9px 0 11px;min-height:37px">To test, and to attempt. The lab bench and the ambition in one word.</p>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:#9A8E77;margin-bottom:13px">analysis / endeavor / precision</div>
+          <div style="border:1px dashed rgba(33,28,21,.22);border-radius:9px;padding:13px 14px;background:#F4EDE0;margin-top:auto">
+            <div style="font-family:'Newsreader',Georgia,serif;font-size:19px;font-weight:500;letter-spacing:.01em;color:#211C15;line-height:1">Assay</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#9A8E77;margin-top:6px">an Aurelius initiative</div>
+          </div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;line-height:1.4;color:#A79A83;margin-top:11px">Very ownable and short. Teach the pronunciation: a-SAY.</div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="z2" style="padding:clamp(40px,6vw,58px) clamp(18px,5vw,64px);border-top:1px solid rgba(33,28,21,.14);scroll-margin-top:24px">
+  <div style="max-width:1560px;margin:0 auto">
+    <div style="font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#A8481B">02&nbsp;/&nbsp;Identity</div>
+    <h2 style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:34px;line-height:1.1;letter-spacing:-.01em;margin:10px 0 12px;color:#1B1710">One system, three temperaments.</h2>
+    <p style="font-size:16px;line-height:1.55;color:#4A4235;max-width:760px;margin:0">A shared visual language every project inherits: warm archival neutrals, an editorial serif over a public-service sans, monospace for anything measured. Below are three temperatures of the same system. v1 is the recommended base.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:22px;margin-top:32px">
+
+      <article id="v1" style="background:#F3ECDF;border:1px solid rgba(168,72,27,.4);border-radius:14px;padding:22px;box-shadow:0 4px 18px rgba(168,72,27,.1);scroll-margin-top:24px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <span style="display:inline-flex;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.05em;padding:3px 8px;border-radius:6px;background:#211C15;color:#F3ECDF">v1</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#F3ECDF;background:#A8481B;border-radius:5px;padding:3px 7px">Recommended base</span>
+        </div>
+        <h3 style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:24px;margin:6px 0 4px;color:#1B1710">Field Notes</h3>
+        <p style="font-size:12.5px;line-height:1.45;color:#6B6152;margin:0 0 16px">Archival, load-bearing, quietly confident. A public records office that ships code.</p>
+        <div style="display:flex;gap:5px;margin-bottom:7px">
+          <div style="flex:1;height:50px;border-radius:7px;background:#F3ECDF;border:1px solid rgba(0,0,0,.1);display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:'IBM Plex Mono',monospace;font-size:8px;color:#6B6152">F3ECDF</div>
+          <div style="flex:1;height:50px;border-radius:7px;background:#FBF7EF;border:1px solid rgba(0,0,0,.1);display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:'IBM Plex Mono',monospace;font-size:8px;color:#6B6152">FBF7EF</div>
+          <div style="flex:1;height:50px;border-radius:7px;background:#211C15;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:'IBM Plex Mono',monospace;font-size:8px;color:#E9DFCE">211C15</div>
+          <div style="flex:1;height:50px;border-radius:7px;background:#6B6152;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:'IBM Plex Mono',monospace;font-size:8px;color:#F3ECDF">6B6152</div>
+          <div style="flex:1;height:50px;border-radius:7px;background:#A8481B;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:'IBM Plex Mono',monospace;font-size:8px;color:#F3ECDF">A8481B</div>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.04em;color:#9A8E77;margin-bottom:16px">Ink 15:1&nbsp;&middot;&nbsp;Secondary 6.2:1&nbsp;&middot;&nbsp;Ember 4.9:1 large</div>
+        <div style="background:#FBF7EF;border:1px solid rgba(33,28,21,.1);border-radius:10px;padding:15px 16px;margin-bottom:14px">
+          <div style="font-family:'Newsreader',Georgia,serif;font-size:32px;font-weight:500;color:#1B1710;line-height:1">Newsreader</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#9A8E77;margin:3px 0 12px">Editorial serif&nbsp;&middot;&nbsp;display and long reads</div>
+          <div style="font-family:'Public Sans',sans-serif;font-weight:600;font-size:15px;color:#211C15">Public Sans, the interface voice</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#9A8E77;margin:3px 0 12px">Body and UI</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#211C15">IBM Plex Mono / 01</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#9A8E77;margin-top:3px">Data, labels, code</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;justify-content:space-between">
+          <div style="border-left:2px solid #A8481B;padding-left:10px">
+            <div style="font-family:'Newsreader',Georgia,serif;font-size:18px;font-weight:500;color:#211C15;line-height:1.05">Groundwork</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#9A8E77;margin-top:3px">an Aurelius initiative</div>
+          </div>
+          <div style="display:flex;gap:7px;align-items:center">
+            <span style="font-family:'Public Sans',sans-serif;font-weight:600;font-size:11px;color:#F3ECDF;background:#211C15;border-radius:7px;padding:7px 12px">Read the research</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:#A8481B;border:1px solid rgba(168,72,27,.5);border-radius:5px;padding:5px 8px">Open</span>
+          </div>
+        </div>
+      </article>
+
+      <article id="v2" style="background:#EDEFF1;border:1px solid rgba(23,26,29,.12);border-radius:14px;padding:22px;box-shadow:0 1px 3px rgba(23,26,29,.06);scroll-margin-top:24px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <span style="display:inline-flex;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.05em;padding:3px 8px;border-radius:6px;background:#171A1D;color:#EDEFF1">v2</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#5A646E">Cooler variant</span>
+        </div>
+        <h3 style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:24px;margin:6px 0 4px;color:#171A1D">Instrument</h3>
+        <p style="font-size:12.5px;line-height:1.45;color:#5A646E;margin:0 0 16px">Schematic and precise. Reads as an open-hardware lab. A natural home for the research agent and the mask.</p>
+        <div style="display:flex;gap:5px;margin-bottom:7px">
+          <div style="flex:1;height:50px;border-radius:7px;background:#EDEFF1;border:1px solid rgba(0,0,0,.1);display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:'IBM Plex Mono',monospace;font-size:8px;color:#5A646E">EDEFF1</div>
+          <div style="flex:1;height:50px;border-radius:7px;background:#FFFFFF;border:1px solid rgba(0,0,0,.1);display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:'IBM Plex Mono',monospace;font-size:8px;color:#5A646E">FFFFFF</div>
+          <div style="flex:1;height:50px;border-radius:7px;background:#171A1D;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:'IBM Plex Mono',monospace;font-size:8px;color:#E7EAEC">171A1D</div>
+          <div style="flex:1;height:50px;border-radius:7px;background:#5A646E;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:'IBM Plex Mono',monospace;font-size:8px;color:#FFFFFF">5A646E</div>
+          <div style="flex:1;height:50px;border-radius:7px;background:#2F5D8A;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:'IBM Plex Mono',monospace;font-size:8px;color:#FFFFFF">2F5D8A</div>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.04em;color:#8A94A0;margin-bottom:16px">Ink 16:1&nbsp;&middot;&nbsp;Steel 4.7:1&nbsp;&middot;&nbsp;Blueprint 5.1:1</div>
+        <div style="background:#FFFFFF;border:1px solid rgba(23,26,29,.1);border-radius:10px;padding:15px 16px;margin-bottom:14px;background-image:linear-gradient(rgba(47,93,138,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(47,93,138,.07) 1px,transparent 1px);background-size:16px 16px">
+          <div style="font-family:'Newsreader',Georgia,serif;font-size:32px;font-weight:500;color:#171A1D;line-height:1">Newsreader</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#8A94A0;margin:3px 0 12px">Editorial serif&nbsp;&middot;&nbsp;kept for gravitas</div>
+          <div style="font-family:'Public Sans',sans-serif;font-weight:600;font-size:15px;color:#171A1D">Public Sans, the interface voice</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#8A94A0;margin:3px 0 12px">Body and UI</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#2F5D8A">IBM Plex Mono / 01 &#9633; &#9633;</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#8A94A0;margin-top:3px">Leans harder on mono</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;justify-content:space-between">
+          <div style="border-left:2px solid #2F5D8A;padding-left:10px">
+            <div style="font-family:'Newsreader',Georgia,serif;font-size:18px;font-weight:500;color:#171A1D;line-height:1.05">Groundwork</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#8A94A0;margin-top:3px">an Aurelius initiative</div>
+          </div>
+          <div style="display:flex;gap:7px;align-items:center">
+            <span style="font-family:'Public Sans',sans-serif;font-weight:600;font-size:11px;color:#FFFFFF;background:#2F5D8A;border-radius:7px;padding:7px 12px">Read the research</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:#2F5D8A;border:1px solid rgba(47,93,138,.5);border-radius:5px;padding:5px 8px">Open</span>
+          </div>
+        </div>
+      </article>
+
+      <article id="v3" style="background:#F6EEDB;border:1px solid rgba(34,29,20,.12);border-radius:14px;padding:22px;box-shadow:0 1px 3px rgba(34,29,20,.06);scroll-margin-top:24px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <span style="display:inline-flex;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.05em;padding:3px 8px;border-radius:6px;background:#221D14;color:#F6EEDB">v3</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#6E6146">Warmer variant</span>
+        </div>
+        <h3 style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:24px;margin:6px 0 4px;color:#221D14">Almanac</h3>
+        <p style="font-size:12.5px;line-height:1.45;color:#6E6146;margin:0 0 16px">Warmer and more public. A modern Whole Earth Catalog. Best when speaking to the curious public and to funders.</p>
+        <div style="display:flex;gap:5px;margin-bottom:7px">
+          <div style="flex:1;height:50px;border-radius:7px;background:#F6EEDB;border:1px solid rgba(0,0,0,.1);display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:#6E6146">F6EEDB</div>
+          <div style="flex:1;height:50px;border-radius:7px;background:#FFFDF7;border:1px solid rgba(0,0,0,.1);display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:#6E6146">FFFDF7</div>
+          <div style="flex:1;height:50px;border-radius:7px;background:#221D14;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:#EFE6D2">221D14</div>
+          <div style="flex:1;height:50px;border-radius:7px;background:#B87415;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:#FFFDF7">B87415</div>
+          <div style="flex:1;height:50px;border-radius:7px;background:#245C3B;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:#FFFDF7">245C3B</div>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.04em;color:#A0906E;margin-bottom:16px">Ink 15:1&nbsp;&middot;&nbsp;Solar 4.6:1 large&nbsp;&middot;&nbsp;Field 6.0:1</div>
+        <div style="background:#FFFDF7;border:1px solid rgba(34,29,20,.1);border-radius:10px;padding:15px 16px;margin-bottom:14px">
+          <div style="font-family:'Newsreader',Georgia,serif;font-size:32px;font-weight:500;color:#221D14;line-height:1;font-style:italic">Newsreader</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#A0906E;margin:3px 0 12px">Serif-forward&nbsp;&middot;&nbsp;bigger display, italics</div>
+          <div style="font-family:'Public Sans',sans-serif;font-weight:600;font-size:15px;color:#221D14">Public Sans, the interface voice</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#A0906E;margin:3px 0 12px">Body and UI</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#B87415">IBM Plex Mono / 01</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#A0906E;margin-top:3px">Warm accent pairing</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;justify-content:space-between">
+          <div style="border-left:2px solid #B87415;padding-left:10px">
+            <div style="font-family:'Newsreader',Georgia,serif;font-size:18px;font-weight:500;color:#221D14;line-height:1.05;font-style:italic">Groundwork</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#A0906E;margin-top:3px">an Aurelius initiative</div>
+          </div>
+          <div style="display:flex;gap:7px;align-items:center">
+            <span style="font-family:'Public Sans',sans-serif;font-weight:600;font-size:11px;color:#FFFDF7;background:#245C3B;border-radius:7px;padding:7px 12px">Read the research</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:#B87415;border:1px solid rgba(184,116,21,.5);border-radius:5px;padding:5px 8px">Open</span>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div style="display:flex;gap:26px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-top:26px;background:#211C15;border-radius:14px;padding:24px 28px">
+      <div style="flex:1 1 460px">
+        <div style="font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#6FBF97">The flagship, within the system</div>
+        <h3 style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:23px;line-height:1.2;margin:8px 0 8px;color:#F3ECDF">LabOptimal keeps the family and dials it up.</h3>
+        <p style="font-size:13.5px;line-height:1.55;color:#C9BFA9;margin:0;max-width:520px">Same neutrals, same type. It swaps the umbrella ember for a confident clinical green, adds a touch more warmth and roundness, and lets the data carry color. It reads as alive and premium without leaving the umbrella. Full screens in section 03.</p>
+      </div>
+      <div style="flex:0 0 auto;display:flex;gap:6px">
+        <div style="width:54px;height:64px;border-radius:8px;background:#F5F1E6;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:#5C6B60">F5F1E6</div>
+        <div style="width:54px;height:64px;border-radius:8px;background:#1C6B4A;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:#DDF0E6">1C6B4A</div>
+        <div style="width:54px;height:64px;border-radius:8px;background:#2E8B5E;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:#EAF6EF">2E8B5E</div>
+        <div style="width:54px;height:64px;border-radius:8px;background:#C77A1B;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:#FBEFDD">C77A1B</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="z3" style="padding:clamp(44px,6vw,60px) clamp(18px,5vw,64px) clamp(48px,6vw,64px);background:#14251C;scroll-margin-top:24px">
+  <div style="max-width:1560px;margin:0 auto">
+    <div style="font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#6FBF97">03&nbsp;/&nbsp;LabOptimal&nbsp;&middot;&nbsp;the flagship</div>
+    <h2 style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:34px;line-height:1.1;letter-spacing:-.01em;margin:10px 0 12px;color:#F3ECDF">Your labs, read the way a person would explain them.</h2>
+    <p style="font-size:16px;line-height:1.55;color:#AEBFB2;max-width:760px;margin:0 0 44px">Mobile first, built for React Native. The Function Health lineage: calm, premium, and data you can actually act on. Six screens as direction, not final pixels. Same system as the umbrella, dialed up to pop.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:clamp(28px,4vw,44px);justify-items:center;align-items:start;max-width:1140px;margin:0 auto">
+
+      <div id="lo-home" style="flex:0 0 auto;max-width:300px;scroll-margin-top:24px">
+        <div style="width:min(300px,100%);background:#0C1712;border-radius:42px;padding:9px;box-shadow:0 30px 60px -22px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.04)">
+          <div style="border-radius:34px;overflow:hidden;background:#F5F1E6;height:646px;display:flex;flex-direction:column;position:relative">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 22px 5px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#17231C">
+              <span>9:41</span>
+              <span style="display:flex;gap:6px;align-items:center">
+                <span style="display:flex;gap:1.5px;align-items:flex-end"><span style="width:2.5px;height:5px;background:#17231C;border-radius:1px"></span><span style="width:2.5px;height:7px;background:#17231C;border-radius:1px"></span><span style="width:2.5px;height:9px;background:#17231C;border-radius:1px"></span><span style="width:2.5px;height:11px;background:#17231C;border-radius:1px"></span></span>
+                <span style="font-size:9px">5G</span>
+                <span style="width:20px;height:11px;border:1.4px solid #17231C;border-radius:3px;display:inline-flex;padding:1.5px"><span style="width:72%;height:100%;background:#17231C;border-radius:1px"></span></span>
+              </span>
+            </div>
+            <div style="flex:1;overflow:hidden;padding:6px 18px 0">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+                <div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#8A9389">Wednesday</div>
+                  <div style="font-family:'Newsreader',Georgia,serif;font-size:23px;font-weight:500;color:#17231C;line-height:1.1;margin-top:2px">Good evening, Ada</div>
+                </div>
+                <div style="width:38px;height:38px;border-radius:50%;background:#1C6B4A;color:#EAF6EF;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px">AB</div>
+              </div>
+
+              <div style="background:#FFFDF8;border:1px solid rgba(23,35,28,.08);border-radius:16px;padding:16px;box-shadow:0 1px 3px rgba(23,35,28,.05);margin-bottom:14px">
+                <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#8A9389">Overall</span>
+                  <span style="font-family:'Public Sans',sans-serif;font-size:12px;font-weight:600;color:#1C6B4A">Details</span>
+                </div>
+                <div style="display:flex;align-items:baseline;gap:7px;margin-bottom:12px">
+                  <span style="font-family:'Newsreader',Georgia,serif;font-size:40px;font-weight:500;color:#17231C;line-height:1">42</span>
+                  <span style="font-size:13px;color:#5C6B60;font-weight:500">markers tracked</span>
+                </div>
+                <div style="display:flex;height:10px;border-radius:5px;overflow:hidden;margin-bottom:9px">
+                  <span style="flex:36;background:#2E8B5E"></span><span style="flex:4;background:#C77A1B;margin:0 1.5px"></span><span style="flex:2;background:#B4531F"></span>
+                </div>
+                <div style="display:flex;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#5C6B60">
+                  <span style="display:flex;align-items:center;gap:4px"><span style="width:7px;height:7px;border-radius:2px;background:#2E8B5E"></span>36 in range</span>
+                  <span style="display:flex;align-items:center;gap:4px"><span style="width:7px;height:7px;border-radius:2px;background:#C77A1B"></span>4 watch</span>
+                  <span style="display:flex;align-items:center;gap:4px"><span style="width:7px;height:7px;border-radius:2px;background:#B4531F"></span>2 low</span>
+                </div>
+              </div>
+
+              <button style="width:100%;height:50px;border:none;border-radius:13px;background:#1C6B4A;color:#F5F1E6;font-family:'Public Sans',sans-serif;font-weight:600;font-size:15px;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:0 4px 12px rgba(28,107,74,.28);margin-bottom:18px;cursor:pointer">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#F5F1E6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                Scan a new lab report
+              </button>
+
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#8A9389">Needs attention</span>
+                <span style="font-family:'Public Sans',sans-serif;font-size:12px;font-weight:600;color:#1C6B4A">See all 6</span>
+              </div>
+              <div style="background:#FFFDF8;border:1px solid rgba(23,35,28,.08);border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(23,35,28,.05);margin-bottom:16px">
+                <div style="display:flex;align-items:center;gap:11px;padding:13px 15px;border-bottom:1px solid rgba(23,35,28,.07)">
+                  <div style="flex:1">
+                    <div style="font-weight:600;font-size:14px;color:#17231C">Vitamin D</div>
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#8A9389;margin-top:1px">18 ng/mL</div>
+                  </div>
+                  <div style="position:relative;width:56px;height:6px;border-radius:3px;background:linear-gradient(90deg,#E8B04A 0 32%,#3FA773 32% 78%,#E8B04A 78% 100%)">
+                    <span style="position:absolute;top:50%;left:13%;transform:translate(-50%,-50%);width:9px;height:9px;border-radius:50%;background:#B4531F;border:2px solid #FFFDF8"></span>
+                  </div>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#B4531F;background:rgba(180,83,31,.1);border-radius:5px;padding:3px 6px">Low</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:11px;padding:13px 15px">
+                  <div style="flex:1">
+                    <div style="font-weight:600;font-size:14px;color:#17231C">Magnesium</div>
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#8A9389;margin-top:1px">1.6 mg/dL</div>
+                  </div>
+                  <div style="position:relative;width:56px;height:6px;border-radius:3px;background:linear-gradient(90deg,#E8B04A 0 32%,#3FA773 32% 78%,#E8B04A 78% 100%)">
+                    <span style="position:absolute;top:50%;left:24%;transform:translate(-50%,-50%);width:9px;height:9px;border-radius:50%;background:#C77A1B;border:2px solid #FFFDF8"></span>
+                  </div>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#C77A1B;background:rgba(199,122,27,.12);border-radius:5px;padding:3px 6px">Watch</span>
+                </div>
+              </div>
+
+              <div style="display:flex;gap:8px;overflow:hidden">
+                <span style="font-family:'Public Sans',sans-serif;font-size:12px;font-weight:600;color:#1C6B4A;background:rgba(28,107,74,.1);border-radius:20px;padding:7px 13px;white-space:nowrap">Nutrients</span>
+                <span style="font-family:'Public Sans',sans-serif;font-size:12px;font-weight:500;color:#5C6B60;background:#EDE7D9;border-radius:20px;padding:7px 13px;white-space:nowrap">Microbiome</span>
+                <span style="font-family:'Public Sans',sans-serif;font-size:12px;font-weight:500;color:#5C6B60;background:#EDE7D9;border-radius:20px;padding:7px 13px;white-space:nowrap">Metabolic</span>
+              </div>
+            </div>
+
+            <div style="display:flex;justify-content:space-around;align-items:center;padding:10px 8px 14px;background:#FFFDF8;border-top:1px solid rgba(23,35,28,.08)">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:3px;color:#1C6B4A"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V21h14V9.5"></path></svg><span style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.04em">Home</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:3px;color:#9AA39A"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"></path><path d="M10 20V4"></path><path d="M16 20v-7"></path><path d="M20 20h-18"></path></svg><span style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.04em">Results</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:3px;color:#9AA39A"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="m8.5 12 2.5 2.5 4.5-5"></path></svg><span style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.04em">Plan</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:3px;color:#9AA39A"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v18H6a2 2 0 0 1-2-2z"></path><path d="M19 3v18"></path></svg><span style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.04em">Library</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:3px;color:#9AA39A"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg><span style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.04em">Profile</span></div>
+            </div>
+          </div>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;line-height:1.5;color:#8FA394;margin-top:18px;max-width:300px"><span style="color:#6FBF97;font-weight:600">HOME</span>&nbsp;&nbsp;Status at a glance, one clear action. The needs-attention list is the hook.</div>
+      </div>
+
+      <div id="lo-upload" style="flex:0 0 auto;max-width:300px;scroll-margin-top:24px">
+        <div style="width:min(300px,100%);background:#0C1712;border-radius:42px;padding:9px;box-shadow:0 30px 60px -22px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.04)">
+          <div style="border-radius:34px;overflow:hidden;background:#F5F1E6;height:646px;display:flex;flex-direction:column;position:relative">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 22px 5px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#17231C">
+              <span>9:41</span>
+              <span style="display:flex;gap:6px;align-items:center">
+                <span style="display:flex;gap:1.5px;align-items:flex-end"><span style="width:2.5px;height:5px;background:#17231C;border-radius:1px"></span><span style="width:2.5px;height:7px;background:#17231C;border-radius:1px"></span><span style="width:2.5px;height:9px;background:#17231C;border-radius:1px"></span><span style="width:2.5px;height:11px;background:#17231C;border-radius:1px"></span></span>
+                <span style="font-size:9px">5G</span>
+                <span style="width:20px;height:11px;border:1.4px solid #17231C;border-radius:3px;display:inline-flex;padding:1.5px"><span style="width:72%;height:100%;background:#17231C;border-radius:1px"></span></span>
+              </span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:8px 18px 14px">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#17231C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
+              <span style="font-family:'Newsreader',Georgia,serif;font-size:20px;font-weight:500;color:#17231C">New lab report</span>
+            </div>
+            <div style="flex:1;padding:0 18px;display:flex;flex-direction:column">
+              <div style="flex:1;min-height:250px;border:2px dashed rgba(28,107,74,.4);border-radius:20px;background:#FFFDF8;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;position:relative;padding:20px;text-align:center">
+                <span style="position:absolute;top:14px;left:14px;width:20px;height:20px;border-top:2.5px solid #1C6B4A;border-left:2.5px solid #1C6B4A;border-radius:4px 0 0 0"></span>
+                <span style="position:absolute;top:14px;right:14px;width:20px;height:20px;border-top:2.5px solid #1C6B4A;border-right:2.5px solid #1C6B4A;border-radius:0 4px 0 0"></span>
+                <span style="position:absolute;bottom:14px;left:14px;width:20px;height:20px;border-bottom:2.5px solid #1C6B4A;border-left:2.5px solid #1C6B4A;border-radius:0 0 0 4px"></span>
+                <span style="position:absolute;bottom:14px;right:14px;width:20px;height:20px;border-bottom:2.5px solid #1C6B4A;border-right:2.5px solid #1C6B4A;border-radius:0 0 4px 0"></span>
+                <div style="width:60px;height:60px;border-radius:50%;background:rgba(28,107,74,.1);display:flex;align-items:center;justify-content:center">
+                  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1C6B4A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                </div>
+                <div>
+                  <div style="font-weight:600;font-size:15px;color:#17231C">Position your report in the frame</div>
+                  <div style="font-size:12.5px;color:#5C6B60;margin-top:4px">PDF, photo, or portal import</div>
+                </div>
+              </div>
+
+              <button style="width:100%;height:50px;border:none;border-radius:13px;background:#1C6B4A;color:#F5F1E6;font-family:'Public Sans',sans-serif;font-weight:600;font-size:15px;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:0 4px 12px rgba(28,107,74,.28);margin-top:16px;cursor:pointer">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F5F1E6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="3"></circle></svg>
+                Take photo
+              </button>
+              <div style="display:flex;gap:10px;margin-top:10px">
+                <button style="flex:1;height:44px;border:1px solid rgba(23,35,28,.16);border-radius:12px;background:transparent;color:#17231C;font-family:'Public Sans',sans-serif;font-weight:600;font-size:13px;cursor:pointer">Upload file</button>
+                <button style="flex:1;height:44px;border:1px solid rgba(23,35,28,.16);border-radius:12px;background:transparent;color:#17231C;font-family:'Public Sans',sans-serif;font-weight:600;font-size:13px;cursor:pointer">Connect portal</button>
+              </div>
+
+              <div style="display:flex;align-items:center;gap:9px;margin-top:16px;padding:11px 13px;background:rgba(28,107,74,.07);border-radius:11px">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1C6B4A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg>
+                <span style="font-size:11.5px;line-height:1.35;color:#3A4A40">Processed on your device. Nothing shared without your say.</span>
+              </div>
+
+              <div style="margin-top:12px;margin-bottom:16px;padding:12px 14px;background:#FFFDF8;border:1px solid rgba(23,35,28,.08);border-radius:12px">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#5C6B60">Reading 3 pages</span>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:#1C6B4A">24 markers found</span>
+                </div>
+                <div style="height:6px;border-radius:3px;background:#EDE7D9;overflow:hidden"><span style="display:block;width:68%;height:100%;background:#2E8B5E;border-radius:3px"></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;line-height:1.5;color:#8FA394;margin-top:18px;max-width:300px"><span style="color:#6FBF97;font-weight:600">UPLOAD</span>&nbsp;&nbsp;The core gesture: snap a report, get it parsed. Privacy stated up front, not buried.</div>
+      </div>
+
+      <div id="lo-dash" style="flex:0 0 auto;max-width:300px;scroll-margin-top:24px">
+        <div style="width:min(300px,100%);background:#0C1712;border-radius:42px;padding:9px;box-shadow:0 30px 60px -22px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.04)">
+          <div style="border-radius:34px;overflow:hidden;background:#F5F1E6;height:646px;display:flex;flex-direction:column;position:relative">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 22px 5px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#17231C">
+              <span>9:41</span>
+              <span style="display:flex;gap:6px;align-items:center">
+                <span style="display:flex;gap:1.5px;align-items:flex-end"><span style="width:2.5px;height:5px;background:#17231C;border-radius:1px"></span><span style="width:2.5px;height:7px;background:#17231C;border-radius:1px"></span><span style="width:2.5px;height:9px;background:#17231C;border-radius:1px"></span><span style="width:2.5px;height:11px;background:#17231C;border-radius:1px"></span></span>
+                <span style="font-size:9px">5G</span>
+                <span style="width:20px;height:11px;border:1.4px solid #17231C;border-radius:3px;display:inline-flex;padding:1.5px"><span style="width:72%;height:100%;background:#17231C;border-radius:1px"></span></span>
+              </span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:8px 18px 12px">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#17231C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
+              <div>
+                <div style="font-family:'Newsreader',Georgia,serif;font-size:20px;font-weight:500;color:#17231C;line-height:1.1">Deficiencies</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#8A9389;margin-top:1px">From labs dated Jun 28</div>
+              </div>
+            </div>
+            <div style="flex:1;overflow:hidden;padding:0 18px 16px">
+              <div style="background:#FFFDF8;border:1px solid rgba(23,35,28,.08);border-radius:16px;padding:16px;box-shadow:0 1px 3px rgba(23,35,28,.05);margin-bottom:13px">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">
+                  <div>
+                    <div style="font-weight:600;font-size:16px;color:#17231C">Vitamin D</div>
+                    <div style="display:flex;align-items:baseline;gap:5px;margin-top:3px">
+                      <span style="font-family:'Newsreader',Georgia,serif;font-size:32px;font-weight:500;color:#B4531F;line-height:1">18</span>
+                      <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A9389">ng/mL</span>
+                    </div>
+                  </div>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#B4531F;background:rgba(180,83,31,.1);border-radius:6px;padding:4px 8px">Priority</span>
+                </div>
+                <div style="position:relative;height:12px;border-radius:6px;background:linear-gradient(90deg,#E8B04A 0 30%,#3FA773 30% 72%,#E8B04A 72% 100%);margin-bottom:8px">
+                  <span style="position:absolute;top:50%;left:12%;transform:translate(-50%,-50%);width:15px;height:15px;border-radius:50%;background:#B4531F;border:3px solid #FFFDF8;box-shadow:0 1px 3px rgba(0,0,0,.2)"></span>
+                </div>
+                <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.03em;color:#8A9389">
+                  <span style="color:#B4531F;font-weight:600">Deficient</span><span>Optimal</span><span>High</span>
+                </div>
+              </div>
+
+              <div style="background:#FFFDF8;border:1px solid rgba(23,35,28,.08);border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(23,35,28,.05);margin-bottom:13px">
+                <div style="display:flex;align-items:center;gap:10px;padding:11px 15px;border-bottom:1px solid rgba(23,35,28,.07)">
+                  <div style="flex:1"><span style="font-weight:600;font-size:13.5px;color:#17231C">Magnesium</span><span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#8A9389;margin-left:6px">1.6 mg/dL</span></div>
+                  <div style="position:relative;width:50px;height:6px;border-radius:3px;background:linear-gradient(90deg,#E8B04A 0 32%,#3FA773 32% 78%,#E8B04A 78% 100%)"><span style="position:absolute;top:50%;left:22%;transform:translate(-50%,-50%);width:8px;height:8px;border-radius:50%;background:#B4531F;border:2px solid #FFFDF8"></span></div>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;font-weight:600;text-transform:uppercase;color:#B4531F">Low</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;padding:11px 15px;border-bottom:1px solid rgba(23,35,28,.07)">
+                  <div style="flex:1"><span style="font-weight:600;font-size:13.5px;color:#17231C">Ferritin</span><span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#8A9389;margin-left:6px">22 ng/mL</span></div>
+                  <div style="position:relative;width:50px;height:6px;border-radius:3px;background:linear-gradient(90deg,#E8B04A 0 32%,#3FA773 32% 78%,#E8B04A 78% 100%)"><span style="position:absolute;top:50%;left:26%;transform:translate(-50%,-50%);width:8px;height:8px;border-radius:50%;background:#B4531F;border:2px solid #FFFDF8"></span></div>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;font-weight:600;text-transform:uppercase;color:#B4531F">Low</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;padding:11px 15px">
+                  <div style="flex:1"><span style="font-weight:600;font-size:13.5px;color:#17231C">Omega-3 index</span><span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#8A9389;margin-left:6px">4.1%</span></div>
+                  <div style="position:relative;width:50px;height:6px;border-radius:3px;background:linear-gradient(90deg,#E8B04A 0 32%,#3FA773 32% 78%,#E8B04A 78% 100%)"><span style="position:absolute;top:50%;left:30%;transform:translate(-50%,-50%);width:8px;height:8px;border-radius:50%;background:#C77A1B;border:2px solid #FFFDF8"></span></div>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;font-weight:600;text-transform:uppercase;color:#C77A1B">Watch</span>
+                </div>
+              </div>
+
+              <div style="background:#1C6B4A;border-radius:16px;padding:15px 16px">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:11px">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#8FD3B0">Your plan</span>
+                  <span style="font-family:'Public Sans',sans-serif;font-size:12px;font-weight:600;color:#F5F1E6">See full plan</span>
+                </div>
+                <div style="display:flex;gap:8px;margin-bottom:9px">
+                  <span style="font-family:'Public Sans',sans-serif;font-size:11.5px;font-weight:600;color:#12402C;background:#8FD3B0;border-radius:8px;padding:6px 10px">D3 + K2</span>
+                  <span style="font-family:'Public Sans',sans-serif;font-size:11.5px;font-weight:600;color:#12402C;background:#8FD3B0;border-radius:8px;padding:6px 10px">Magnesium glycinate</span>
+                </div>
+                <div style="font-size:12px;line-height:1.4;color:#DDF0E6">Meals lean toward more oily fish and leafy greens this week.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;line-height:1.5;color:#8FA394;margin-top:18px;max-width:300px"><span style="color:#6FBF97;font-weight:600">DEFICIENCY DASHBOARD</span>&nbsp;&nbsp;Finding first, then the ranked list, then the plan. Every result routes to an action.</div>
+      </div>
+
+      <div id="lo-plan" style="max-width:300px;scroll-margin-top:24px">
+        <div style="width:min(300px,100%);background:#0C1712;border-radius:42px;padding:9px;box-shadow:0 30px 60px -22px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.04)">
+          <div style="border-radius:34px;overflow:hidden;background:#F5F1E6;height:646px;display:flex;flex-direction:column;position:relative">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 22px 5px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#17231C">
+              <span>9:41</span>
+              <span style="display:flex;gap:6px;align-items:center">
+                <span style="display:flex;gap:1.5px;align-items:flex-end"><span style="width:2.5px;height:5px;background:#17231C;border-radius:1px"></span><span style="width:2.5px;height:7px;background:#17231C;border-radius:1px"></span><span style="width:2.5px;height:9px;background:#17231C;border-radius:1px"></span><span style="width:2.5px;height:11px;background:#17231C;border-radius:1px"></span></span>
+                <span style="font-size:9px">5G</span>
+                <span style="width:20px;height:11px;border:1.4px solid #17231C;border-radius:3px;display:inline-flex;padding:1.5px"><span style="width:72%;height:100%;background:#17231C;border-radius:1px"></span></span>
+              </span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:8px 18px 12px">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#17231C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
+              <div>
+                <div style="font-family:'Newsreader',Georgia,serif;font-size:20px;font-weight:500;color:#17231C;line-height:1.1">Your plan</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#8A9389;margin-top:1px">Built from labs dated Jun 28</div>
+              </div>
+            </div>
+            <div style="flex:1;overflow:hidden;padding:0 18px 16px">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#8A9389">Supplements</span>
+                <span style="font-family:'Public Sans',sans-serif;font-size:12px;font-weight:600;color:#1C6B4A">3 daily</span>
+              </div>
+              <div style="background:#FFFDF8;border:1px solid rgba(23,35,28,.08);border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(23,35,28,.05);margin-bottom:16px">
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 15px;border-bottom:1px solid rgba(23,35,28,.07)">
+                  <div style="width:34px;height:34px;border-radius:9px;background:rgba(28,107,74,.1);display:flex;align-items:center;justify-content:center;flex:0 0 auto"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1C6B4A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5 3.5 13.5a4.95 4.95 0 0 1 7-7l7 7a4.95 4.95 0 0 1-7 7Z"></path><path d="m8.5 8.5 7 7"></path></svg></div>
+                  <div style="flex:1"><div style="font-weight:600;font-size:13.5px;color:#17231C">D3 + K2</div><div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#8A9389;margin-top:1px">5,000 IU</div></div>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#1C6B4A;background:rgba(28,107,74,.1);border-radius:5px;padding:3px 7px">Morning</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 15px;border-bottom:1px solid rgba(23,35,28,.07)">
+                  <div style="width:34px;height:34px;border-radius:9px;background:rgba(28,107,74,.1);display:flex;align-items:center;justify-content:center;flex:0 0 auto"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1C6B4A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5 3.5 13.5a4.95 4.95 0 0 1 7-7l7 7a4.95 4.95 0 0 1-7 7Z"></path><path d="m8.5 8.5 7 7"></path></svg></div>
+                  <div style="flex:1"><div style="font-weight:600;font-size:13.5px;color:#17231C">Magnesium glycinate</div><div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#8A9389;margin-top:1px">300 mg</div></div>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#1C6B4A;background:rgba(28,107,74,.1);border-radius:5px;padding:3px 7px">Evening</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:11px;padding:12px 15px">
+                  <div style="width:34px;height:34px;border-radius:9px;background:rgba(28,107,74,.1);display:flex;align-items:center;justify-content:center;flex:0 0 auto"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1C6B4A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5 3.5 13.5a4.95 4.95 0 0 1 7-7l7 7a4.95 4.95 0 0 1-7 7Z"></path><path d="m8.5 8.5 7 7"></path></svg></div>
+                  <div style="flex:1"><div style="font-weight:600;font-size:13.5px;color:#17231C">Omega-3 (EPA/DHA)</div><div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#8A9389;margin-top:1px">2 g</div></div>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#1C6B4A;background:rgba(28,107,74,.1);border-radius:5px;padding:3px 7px">With a meal</span>
+                </div>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#8A9389">This week's meals</span>
+                <span style="font-family:'Public Sans',sans-serif;font-size:12px;font-weight:600;color:#1C6B4A">Swap</span>
+              </div>
+              <div style="background:#1C6B4A;border-radius:16px;padding:15px 16px">
+                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+                  <span style="font-family:'Public Sans',sans-serif;font-size:11.5px;font-weight:600;color:#12402C;background:#8FD3B0;border-radius:8px;padding:6px 10px">Oily fish 2x</span>
+                  <span style="font-family:'Public Sans',sans-serif;font-size:11.5px;font-weight:600;color:#12402C;background:#8FD3B0;border-radius:8px;padding:6px 10px">Leafy greens daily</span>
+                  <span style="font-family:'Public Sans',sans-serif;font-size:11.5px;font-weight:600;color:#12402C;background:#8FD3B0;border-radius:8px;padding:6px 10px">Fortified foods</span>
+                </div>
+                <div style="font-size:12px;line-height:1.4;color:#DDF0E6">Chosen to raise vitamin D, magnesium, and omega-3 over the next month.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;line-height:1.5;color:#8FA394;margin-top:18px;max-width:300px"><span style="color:#6FBF97;font-weight:600">PLAN</span>&nbsp;&nbsp;Supplements and meals in one place. The destination behind "See full plan".</div>
+      </div>
+
+      <div id="lo-marker" style="max-width:300px;scroll-margin-top:24px">
+        <div style="width:min(300px,100%);background:#0C1712;border-radius:42px;padding:9px;box-shadow:0 30px 60px -22px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.04)">
+          <div style="border-radius:34px;overflow:hidden;background:#F5F1E6;height:646px;display:flex;flex-direction:column;position:relative">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 22px 5px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#17231C">
+              <span>9:41</span>
+              <span style="display:flex;gap:6px;align-items:center">
+                <span style="display:flex;gap:1.5px;align-items:flex-end"><span style="width:2.5px;height:5px;background:#17231C;border-radius:1px"></span><span style="width:2.5px;height:7px;background:#17231C;border-radius:1px"></span><span style="width:2.5px;height:9px;background:#17231C;border-radius:1px"></span><span style="width:2.5px;height:11px;background:#17231C;border-radius:1px"></span></span>
+                <span style="font-size:9px">5G</span>
+                <span style="width:20px;height:11px;border:1.4px solid #17231C;border-radius:3px;display:inline-flex;padding:1.5px"><span style="width:72%;height:100%;background:#17231C;border-radius:1px"></span></span>
+              </span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:8px 18px 12px">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#17231C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
+              <div>
+                <div style="font-family:'Newsreader',Georgia,serif;font-size:20px;font-weight:500;color:#17231C;line-height:1.1">Vitamin D</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#8A9389;margin-top:1px">Nutrient marker</div>
+              </div>
+            </div>
+            <div style="flex:1;overflow:hidden;padding:0 18px 16px">
+              <div style="background:#FFFDF8;border:1px solid rgba(23,35,28,.08);border-radius:16px;padding:16px;box-shadow:0 1px 3px rgba(23,35,28,.05);margin-bottom:13px">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">
+                  <div>
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#8A9389;margin-bottom:4px">Current</div>
+                    <div style="display:flex;align-items:baseline;gap:5px"><span style="font-family:'Newsreader',Georgia,serif;font-size:32px;font-weight:500;color:#B4531F;line-height:1">18</span><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A9389">ng/mL</span></div>
+                  </div>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#B4531F;background:rgba(180,83,31,.1);border-radius:6px;padding:4px 8px">Low</span>
+                </div>
+                <div style="position:relative;height:12px;border-radius:6px;background:linear-gradient(90deg,#E8B04A 0 30%,#3FA773 30% 72%,#E8B04A 72% 100%);margin-bottom:8px"><span style="position:absolute;top:50%;left:12%;transform:translate(-50%,-50%);width:15px;height:15px;border-radius:50%;background:#B4531F;border:3px solid #FFFDF8;box-shadow:0 1px 3px rgba(0,0,0,.2)"></span></div>
+                <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.03em;color:#8A9389"><span style="color:#B4531F;font-weight:600">Deficient</span><span>Optimal</span><span>High</span></div>
+              </div>
+              <div style="background:#FFFDF8;border:1px solid rgba(23,35,28,.08);border-radius:16px;padding:14px 15px;box-shadow:0 1px 3px rgba(23,35,28,.05);margin-bottom:13px">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:11px"><span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#8A9389">12-month trend</span><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#B4531F">Below range</span></div>
+                <div style="display:flex;align-items:flex-end;gap:5px;height:52px;margin-bottom:7px"><span style="flex:1;height:40%;background:#E2D8C6;border-radius:3px 3px 0 0"></span><span style="flex:1;height:32%;background:#E2D8C6;border-radius:3px 3px 0 0"></span><span style="flex:1;height:37%;background:#E2D8C6;border-radius:3px 3px 0 0"></span><span style="flex:1;height:29%;background:#E2D8C6;border-radius:3px 3px 0 0"></span><span style="flex:1;height:35%;background:#E2D8C6;border-radius:3px 3px 0 0"></span><span style="flex:1;height:31%;background:#E2D8C6;border-radius:3px 3px 0 0"></span><span style="flex:1;height:38%;background:#E2D8C6;border-radius:3px 3px 0 0"></span><span style="flex:1;height:45%;background:#B4531F;border-radius:3px 3px 0 0"></span></div>
+                <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:#A89B85"><span>Jul</span><span>Oct</span><span>Jan</span><span>Apr</span><span>Jun</span></div>
+              </div>
+              <div style="background:#FFFDF8;border:1px solid rgba(23,35,28,.08);border-radius:16px;padding:14px 15px;box-shadow:0 1px 3px rgba(23,35,28,.05);margin-bottom:13px">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#8A9389;margin-bottom:10px">What low vitamin D affects</div>
+                <div style="display:flex;flex-direction:column;gap:9px">
+                  <div style="display:flex;align-items:center;gap:9px"><span style="width:7px;height:7px;border-radius:2px;background:#B4531F;flex:0 0 auto"></span><span style="font-size:12.5px;color:#3A4A40">Mood and seasonal energy</span></div>
+                  <div style="display:flex;align-items:center;gap:9px"><span style="width:7px;height:7px;border-radius:2px;background:#B4531F;flex:0 0 auto"></span><span style="font-size:12.5px;color:#3A4A40">Immune response</span></div>
+                  <div style="display:flex;align-items:center;gap:9px"><span style="width:7px;height:7px;border-radius:2px;background:#B4531F;flex:0 0 auto"></span><span style="font-size:12.5px;color:#3A4A40">Bone and muscle strength</span></div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 4px 0;border-top:1px solid rgba(23,35,28,.08)"><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#8A9389">Synthesized from 42 sources</span><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:#1C6B4A">Open dossier ›</span></div>
+            </div>
+          </div>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;line-height:1.5;color:#8FA394;margin-top:18px;max-width:300px"><span style="color:#6FBF97;font-weight:600">MARKER DETAIL</span>&nbsp;&nbsp;One marker in depth: trend, effects, and a link straight to the open dossier.</div>
+      </div>
+
+      <div id="lo-library" style="max-width:300px;scroll-margin-top:24px">
+        <div style="width:min(300px,100%);background:#0C1712;border-radius:42px;padding:9px;box-shadow:0 30px 60px -22px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.04)">
+          <div style="border-radius:34px;overflow:hidden;background:#F5F1E6;height:646px;display:flex;flex-direction:column;position:relative">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 22px 5px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#17231C">
+              <span>9:41</span>
+              <span style="display:flex;gap:6px;align-items:center">
+                <span style="display:flex;gap:1.5px;align-items:flex-end"><span style="width:2.5px;height:5px;background:#17231C;border-radius:1px"></span><span style="width:2.5px;height:7px;background:#17231C;border-radius:1px"></span><span style="width:2.5px;height:9px;background:#17231C;border-radius:1px"></span><span style="width:2.5px;height:11px;background:#17231C;border-radius:1px"></span></span>
+                <span style="font-size:9px">5G</span>
+                <span style="width:20px;height:11px;border:1.4px solid #17231C;border-radius:3px;display:inline-flex;padding:1.5px"><span style="width:72%;height:100%;background:#17231C;border-radius:1px"></span></span>
+              </span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:8px 18px 12px">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#17231C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
+              <div>
+                <div style="font-family:'Newsreader',Georgia,serif;font-size:20px;font-weight:500;color:#17231C;line-height:1.1">Nutrient library</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#8A9389;margin-top:1px">Open evidence, updated weekly</div>
+              </div>
+            </div>
+            <div style="flex:1;overflow:hidden;padding:0 18px 16px">
+              <div style="display:flex;align-items:center;gap:9px;background:#FFFDF8;border:1px solid rgba(23,35,28,.12);border-radius:12px;padding:11px 13px;margin-bottom:14px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A9389" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg><span style="font-size:13px;color:#8A9389">Search nutrients and markers</span></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px"><span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#8A9389">Dossiers</span><span style="font-family:'Public Sans',sans-serif;font-size:12px;font-weight:600;color:#1C6B4A">A to Z</span></div>
+              <div style="background:#FFFDF8;border:1px solid rgba(23,35,28,.08);border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(23,35,28,.05)">
+                <div style="display:flex;align-items:center;gap:11px;padding:13px 15px;border-bottom:1px solid rgba(23,35,28,.07)"><div style="flex:1"><div style="font-weight:600;font-size:13.5px;color:#17231C">Vitamin D</div><div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#8A9389;margin-top:2px">42 sources&nbsp;&middot;&nbsp;Jun 2026</div></div><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8A9389">›</span></div>
+                <div style="display:flex;align-items:center;gap:11px;padding:13px 15px;border-bottom:1px solid rgba(23,35,28,.07)"><div style="flex:1"><div style="font-weight:600;font-size:13.5px;color:#17231C">Magnesium</div><div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#8A9389;margin-top:2px">67 sources&nbsp;&middot;&nbsp;May 2026</div></div><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8A9389">›</span></div>
+                <div style="display:flex;align-items:center;gap:11px;padding:13px 15px;border-bottom:1px solid rgba(23,35,28,.07)"><div style="flex:1"><div style="font-weight:600;font-size:13.5px;color:#17231C">Omega-3 index</div><div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#8A9389;margin-top:2px">31 sources&nbsp;&middot;&nbsp;May 2026</div></div><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8A9389">›</span></div>
+                <div style="display:flex;align-items:center;gap:11px;padding:13px 15px"><div style="flex:1"><div style="font-weight:600;font-size:13.5px;color:#17231C">Ferritin &amp; iron</div><div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#8A9389;margin-top:2px">28 sources&nbsp;&middot;&nbsp;May 2026</div></div><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8A9389">›</span></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;margin-top:14px;padding:11px 13px;background:rgba(168,72,27,.06);border-radius:11px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A8481B" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18"></path></svg><span style="font-size:11.5px;line-height:1.35;color:#6B4A38">Every dossier is also public at groundwork.science</span></div>
+            </div>
+          </div>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;line-height:1.5;color:#8FA394;margin-top:18px;max-width:300px"><span style="color:#6FBF97;font-weight:600">NUTRIENT LIBRARY</span>&nbsp;&nbsp;The public evidence library, in the app. The same dossiers the umbrella site serves.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="z4" style="padding:clamp(40px,6vw,58px) clamp(18px,5vw,64px);border-top:1px solid rgba(33,28,21,.14);scroll-margin-top:24px">
+  <div style="max-width:1560px;margin:0 auto">
+    <div style="font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#A8481B">04&nbsp;/&nbsp;Landing</div>
+    <h2 style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:34px;line-height:1.1;letter-spacing:-.01em;margin:10px 0 12px;color:#1B1710">One page. Projects first, mission underneath.</h2>
+    <p style="font-size:16px;line-height:1.55;color:#4A4235;max-width:760px;margin:0 0 34px">Reading the open research is the primary action, so the dossier library sits high. The K1 mission stays in the substrate. This is structure only, copy is bracketed as placeholder bars.</p>
+
+    <div style="display:flex;flex-direction:column;gap:16px">
+
+      <div style="display:flex;gap:26px;align-items:stretch;flex-wrap:wrap">
+        <div style="flex:1 1 660px;background:#FBF7EF;border:1px solid rgba(33,28,21,.12);border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(33,28,21,.05)">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+            <div>
+              <div style="font-family:'Newsreader',Georgia,serif;font-size:16px;font-weight:500;color:#211C15">Groundwork</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#9A8E77;margin-top:2px">an Aurelius initiative</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px">
+              <span style="width:42px;height:9px;background:#E4DAC7;border-radius:4px"></span>
+              <span style="width:42px;height:9px;background:#E4DAC7;border-radius:4px"></span>
+              <span style="width:42px;height:9px;background:#E4DAC7;border-radius:4px"></span>
+              <span style="font-family:'Public Sans',sans-serif;font-size:11px;font-weight:600;color:#F3ECDF;background:#A8481B;border-radius:7px;padding:6px 11px">Read the research</span>
+            </div>
+          </div>
+        </div>
+        <div style="flex:1 1 280px">
+          <div style="display:flex;align-items:center;gap:9px;margin-bottom:6px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;background:#211C15;color:#F3ECDF;border-radius:6px;padding:3px 8px">S1</span><span style="font-weight:600;font-size:14px;color:#1B1710">Masthead + nav</span></div>
+          <p style="font-size:12.5px;line-height:1.5;color:#5B5241;margin:0">Establish that this is a public initiative within three seconds. No hero gradient. The one nav CTA is Read the research.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:26px;align-items:stretch;flex-wrap:wrap">
+        <div style="flex:1 1 660px;background:#FBF7EF;border:1px solid rgba(33,28,21,.12);border-radius:12px;padding:26px 24px;box-shadow:0 1px 2px rgba(33,28,21,.05)">
+          <div style="height:22px;width:74%;background:#D8CDB6;border-radius:5px;margin-bottom:11px"></div>
+          <div style="height:22px;width:52%;background:#D8CDB6;border-radius:5px;margin-bottom:16px"></div>
+          <div style="height:11px;width:62%;background:#E4DAC7;border-radius:4px;margin-bottom:7px"></div>
+          <div style="height:11px;width:48%;background:#E4DAC7;border-radius:4px;margin-bottom:20px"></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px">
+            <span style="font-family:'Public Sans',sans-serif;font-size:12px;font-weight:600;color:#F3ECDF;background:#A8481B;border-radius:8px;padding:9px 15px">Browse the dossier library</span>
+            <span style="font-family:'Public Sans',sans-serif;font-size:12px;font-weight:600;color:#211C15;border:1px solid rgba(33,28,21,.28);border-radius:8px;padding:9px 15px">Explore projects</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.05em;color:#8A7E68;border:1px solid rgba(33,28,21,.16);border-radius:20px;padding:4px 10px">LabOptimal&nbsp;&middot;&nbsp;Live</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.05em;color:#8A7E68;border:1px solid rgba(33,28,21,.16);border-radius:20px;padding:4px 10px">Research Agent&nbsp;&middot;&nbsp;Preview</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.05em;color:#8A7E68;border:1px solid rgba(33,28,21,.16);border-radius:20px;padding:4px 10px">Resonance&nbsp;&middot;&nbsp;Concept</span>
+          </div>
+        </div>
+        <div style="flex:1 1 280px">
+          <div style="display:flex;align-items:center;gap:9px;margin-bottom:6px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;background:#211C15;color:#F3ECDF;border-radius:6px;padding:3px 8px">S2</span><span style="font-weight:600;font-size:14px;color:#1B1710">Hero</span></div>
+          <p style="font-size:12.5px;line-height:1.5;color:#5B5241;margin:0">One-line thesis, mission implied not shouted. Primary: browse the dossier library. Secondary: explore projects.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:26px;align-items:stretch;flex-wrap:wrap">
+        <div style="flex:1 1 660px;background:#FBF7EF;border:1px solid rgba(33,28,21,.12);border-radius:12px;padding:20px;box-shadow:0 1px 2px rgba(33,28,21,.05)">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));gap:12px">
+            <div style="border:1.5px solid rgba(28,107,74,.55);border-radius:10px;padding:14px;background:rgba(28,107,74,.05)">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font-weight:600;font-size:13px;color:#17231C">LabOptimal</span><span style="font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#F5F1E6;background:#1C6B4A;border-radius:4px;padding:2px 6px">Live</span></div>
+              <div style="height:8px;width:90%;background:#E4DAC7;border-radius:4px;margin-bottom:5px"></div>
+              <div style="height:8px;width:70%;background:#E4DAC7;border-radius:4px;margin-bottom:12px"></div>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#1C6B4A">github ›</span>
+            </div>
+            <div style="border:1px solid rgba(33,28,21,.14);border-radius:10px;padding:14px">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font-weight:600;font-size:13px;color:#211C15">Research Agent</span><span style="font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#8A7E68;border:1px solid rgba(33,28,21,.2);border-radius:4px;padding:2px 6px">Preview</span></div>
+              <div style="height:8px;width:88%;background:#E4DAC7;border-radius:4px;margin-bottom:5px"></div>
+              <div style="height:8px;width:64%;background:#E4DAC7;border-radius:4px;margin-bottom:12px"></div>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#A8481B">github ›</span>
+            </div>
+            <div style="border:1px solid rgba(33,28,21,.14);border-radius:10px;padding:14px">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font-weight:600;font-size:13px;color:#211C15">Resonance</span><span style="font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#8A7E68;border:1px solid rgba(33,28,21,.2);border-radius:4px;padding:2px 6px">Concept</span></div>
+              <div style="height:8px;width:80%;background:#E4DAC7;border-radius:4px;margin-bottom:5px"></div>
+              <div style="height:8px;width:58%;background:#E4DAC7;border-radius:4px;margin-bottom:12px"></div>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#9A8E77">soon</span>
+            </div>
+          </div>
+        </div>
+        <div style="flex:1 1 280px">
+          <div style="display:flex;align-items:center;gap:9px;margin-bottom:6px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;background:#211C15;color:#F3ECDF;border-radius:6px;padding:3px 8px">S3</span><span style="font-weight:600;font-size:14px;color:#1B1710">Projects, first</span></div>
+          <p style="font-size:12.5px;line-height:1.5;color:#5B5241;margin:0">Concrete work before mission, per your K1 framing. LabOptimal is the hero card and visibly pops with the green primary.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:26px;align-items:stretch;flex-wrap:wrap">
+        <div style="flex:1 1 660px;background:#FBF7EF;border:1px solid rgba(33,28,21,.12);border-radius:12px;padding:20px;box-shadow:0 1px 2px rgba(33,28,21,.05)">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#8A7E68">Open evidence library</span><span style="font-family:'Public Sans',sans-serif;font-size:11px;font-weight:600;color:#F3ECDF;background:#A8481B;border-radius:7px;padding:6px 11px">Browse all</span></div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;align-items:center;gap:14px"><div style="flex:1"><div style="height:11px;width:56%;background:#D8CDB6;border-radius:4px;margin-bottom:5px"></div><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#9A8E77">42 sources&nbsp;&middot;&nbsp;updated Jun 2026</div></div><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8A7E68">›</span></div>
+            <div style="height:1px;background:rgba(33,28,21,.08)"></div>
+            <div style="display:flex;align-items:center;gap:14px"><div style="flex:1"><div style="height:11px;width:48%;background:#D8CDB6;border-radius:4px;margin-bottom:5px"></div><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#9A8E77">67 sources&nbsp;&middot;&nbsp;updated May 2026</div></div><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8A7E68">›</span></div>
+            <div style="height:1px;background:rgba(33,28,21,.08)"></div>
+            <div style="display:flex;align-items:center;gap:14px"><div style="flex:1"><div style="height:11px;width:62%;background:#D8CDB6;border-radius:4px;margin-bottom:5px"></div><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#9A8E77">31 sources&nbsp;&middot;&nbsp;updated May 2026</div></div><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8A7E68">›</span></div>
+          </div>
+        </div>
+        <div style="flex:1 1 280px">
+          <div style="display:flex;align-items:center;gap:9px;margin-bottom:6px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;background:#A8481B;color:#F3ECDF;border-radius:6px;padding:3px 8px">S4</span><span style="font-weight:600;font-size:14px;color:#1B1710">Open evidence library</span></div>
+          <p style="font-size:12.5px;line-height:1.5;color:#5B5241;margin:0">The primary action's destination, so it sits high with real estate. Every dossier shows its source count and last-updated date.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:26px;align-items:stretch;flex-wrap:wrap">
+        <div style="flex:1 1 660px;background:#FBF7EF;border:1px solid rgba(33,28,21,.12);border-radius:12px;padding:22px 20px;box-shadow:0 1px 2px rgba(33,28,21,.05)">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center">
+            <div style="border:1px solid rgba(33,28,21,.18);border-radius:9px;padding:10px 12px;text-align:center;background:#F4EDE0"><div style="font-weight:600;font-size:11.5px;color:#211C15">Research Agent</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:#9A8E77;margin-top:2px">synthesis</div></div>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:15px;color:#A8481B">&#8594;</span>
+            <div style="border:1px solid rgba(33,28,21,.18);border-radius:9px;padding:10px 12px;text-align:center;background:#F4EDE0"><div style="font-weight:600;font-size:11.5px;color:#211C15">Public dossiers</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:#9A8E77;margin-top:2px">open</div></div>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:15px;color:#A8481B">&#8594;</span>
+            <div style="border:1.5px solid rgba(28,107,74,.5);border-radius:9px;padding:10px 12px;text-align:center;background:rgba(28,107,74,.06)"><div style="font-weight:600;font-size:11.5px;color:#17231C">LabOptimal</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:#1C6B4A;margin-top:2px">consumer</div></div>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:15px;color:#A8481B">&#8594;</span>
+            <div style="border:1px solid rgba(33,28,21,.18);border-radius:9px;padding:10px 12px;text-align:center;background:#F4EDE0"><div style="font-weight:600;font-size:11.5px;color:#211C15">Anon signal</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:#9A8E77;margin-top:2px">back to research</div></div>
+          </div>
+        </div>
+        <div style="flex:1 1 280px">
+          <div style="display:flex;align-items:center;gap:9px;margin-bottom:6px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;background:#211C15;color:#F3ECDF;border-radius:6px;padding:3px 8px">S5</span><span style="font-weight:600;font-size:14px;color:#1B1710">The loop</span></div>
+          <p style="font-size:12.5px;line-height:1.5;color:#5B5241;margin:0">One glance shows the open flywheel: research to public dossiers to the app to anonymized signal, and back to research.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:26px;align-items:stretch;flex-wrap:wrap">
+        <div style="flex:1 1 660px;background:#FBF7EF;border:1px solid rgba(33,28,21,.12);border-radius:12px;padding:20px;box-shadow:0 1px 2px rgba(33,28,21,.05)">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(140px,100%),1fr));gap:14px">
+            <div><div style="width:26px;height:26px;border-radius:7px;background:#EAE0CD;margin-bottom:9px"></div><div style="font-weight:600;font-size:12px;color:#211C15;margin-bottom:6px">Open by default</div><div style="height:7px;width:90%;background:#E4DAC7;border-radius:3px;margin-bottom:4px"></div><div style="height:7px;width:66%;background:#E4DAC7;border-radius:3px"></div></div>
+            <div><div style="width:26px;height:26px;border-radius:7px;background:#EAE0CD;margin-bottom:9px"></div><div style="font-weight:600;font-size:12px;color:#211C15;margin-bottom:6px">Evidence-grounded</div><div style="height:7px;width:88%;background:#E4DAC7;border-radius:3px;margin-bottom:4px"></div><div style="height:7px;width:60%;background:#E4DAC7;border-radius:3px"></div></div>
+            <div><div style="width:26px;height:26px;border-radius:7px;background:#EAE0CD;margin-bottom:9px"></div><div style="font-weight:600;font-size:12px;color:#211C15;margin-bottom:6px">License-clean</div><div style="height:7px;width:84%;background:#E4DAC7;border-radius:3px;margin-bottom:4px"></div><div style="height:7px;width:70%;background:#E4DAC7;border-radius:3px"></div></div>
+            <div><div style="width:26px;height:26px;border-radius:7px;background:#EAE0CD;margin-bottom:9px"></div><div style="font-weight:600;font-size:12px;color:#211C15;margin-bottom:6px">Accessible</div><div style="height:7px;width:80%;background:#E4DAC7;border-radius:3px;margin-bottom:4px"></div><div style="height:7px;width:64%;background:#E4DAC7;border-radius:3px"></div></div>
+          </div>
+        </div>
+        <div style="flex:1 1 280px">
+          <div style="display:flex;align-items:center;gap:9px;margin-bottom:6px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;background:#211C15;color:#F3ECDF;border-radius:6px;padding:3px 8px">S6</span><span style="font-weight:600;font-size:14px;color:#1B1710">Why open</span></div>
+          <p style="font-size:12.5px;line-height:1.5;color:#5B5241;margin:0">The stance, stated plainly. This is where the K1 mission gets exactly one quiet sentence, and nowhere else.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:26px;align-items:stretch;flex-wrap:wrap">
+        <div style="flex:1 1 660px;background:#FBF7EF;border:1px solid rgba(33,28,21,.12);border-radius:12px;padding:20px;box-shadow:0 1px 2px rgba(33,28,21,.05)">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(140px,100%),1fr));gap:12px">
+            <div style="border:1px solid rgba(33,28,21,.14);border-radius:10px;padding:13px"><div style="font-weight:600;font-size:12.5px;color:#211C15;margin-bottom:7px">Write code</div><div style="height:7px;width:80%;background:#E4DAC7;border-radius:3px;margin-bottom:10px"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#A8481B">GitHub ›</span></div>
+            <div style="border:1px solid rgba(33,28,21,.14);border-radius:10px;padding:13px"><div style="font-weight:600;font-size:12.5px;color:#211C15;margin-bottom:7px">Review evidence</div><div style="height:7px;width:76%;background:#E4DAC7;border-radius:3px;margin-bottom:10px"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#A8481B">Researchers ›</span></div>
+            <div style="border:1px solid rgba(33,28,21,.14);border-radius:10px;padding:13px"><div style="font-weight:600;font-size:12.5px;color:#211C15;margin-bottom:7px">Build hardware</div><div style="height:7px;width:72%;background:#E4DAC7;border-radius:3px;margin-bottom:10px"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#A8481B">Concept ›</span></div>
+            <div style="border:1px solid rgba(33,28,21,.14);border-radius:10px;padding:13px"><div style="font-weight:600;font-size:12.5px;color:#211C15;margin-bottom:7px">Fund or partner</div><div style="height:7px;width:78%;background:#E4DAC7;border-radius:3px;margin-bottom:10px"></div><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#A8481B">Contact ›</span></div>
+          </div>
+        </div>
+        <div style="flex:1 1 280px">
+          <div style="display:flex;align-items:center;gap:9px;margin-bottom:6px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;background:#211C15;color:#F3ECDF;border-radius:6px;padding:3px 8px">S7</span><span style="font-weight:600;font-size:14px;color:#1B1710">Contribute</span></div>
+          <p style="font-size:12.5px;line-height:1.5;color:#5B5241;margin:0">A door for every audience you named: code, evidence, hardware, funding. No generic join us.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:26px;align-items:stretch;flex-wrap:wrap">
+        <div style="flex:1 1 660px;background:#211C15;border-radius:12px;padding:22px 20px">
+          <div style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap">
+            <div style="display:flex;gap:34px;flex-wrap:wrap">
+              <div style="display:flex;flex-direction:column;gap:7px"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#8A7E68;margin-bottom:2px">Projects</span><span style="width:56px;height:7px;background:#3A342A;border-radius:3px"></span><span style="width:44px;height:7px;background:#3A342A;border-radius:3px"></span><span style="width:52px;height:7px;background:#3A342A;border-radius:3px"></span></div>
+              <div style="display:flex;flex-direction:column;gap:7px"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#8A7E68;margin-bottom:2px">Research</span><span style="width:50px;height:7px;background:#3A342A;border-radius:3px"></span><span style="width:58px;height:7px;background:#3A342A;border-radius:3px"></span></div>
+              <div style="display:flex;flex-direction:column;gap:7px"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#8A7E68;margin-bottom:2px">Docs</span><span style="width:46px;height:7px;background:#3A342A;border-radius:3px"></span><span style="width:54px;height:7px;background:#3A342A;border-radius:3px"></span></div>
+              <div style="display:flex;flex-direction:column;gap:7px"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#8A7E68;margin-bottom:2px">Updates</span><span style="width:52px;height:7px;background:#3A342A;border-radius:3px"></span><span style="width:40px;height:7px;background:#3A342A;border-radius:3px"></span></div>
+            </div>
+            <div style="text-align:right"><div style="font-family:'Newsreader',Georgia,serif;font-size:15px;color:#E9DFCE">Groundwork</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:#8A7E68;margin-top:3px">an Aurelius initiative&nbsp;&middot;&nbsp;MIT + CC-BY</div></div>
+          </div>
+        </div>
+        <div style="flex:1 1 280px">
+          <div style="display:flex;align-items:center;gap:9px;margin-bottom:6px"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;background:#211C15;color:#F3ECDF;border-radius:6px;padding:3px 8px">S8</span><span style="font-weight:600;font-size:14px;color:#1B1710">Footer</span></div>
+          <p style="font-size:12.5px;line-height:1.5;color:#5B5241;margin:0">Treat it as project infrastructure: repos, licenses, docs, updates, contact. Not a marketing footer.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section style="padding:clamp(36px,5vw,46px) clamp(18px,5vw,64px) clamp(44px,5vw,60px);border-top:1px solid rgba(33,28,21,.14)">
+  <div style="max-width:1560px;margin:0 auto;display:flex;gap:30px;flex-wrap:wrap;align-items:flex-start;justify-content:space-between">
+    <div style="flex:1 1 420px;max-width:640px">
+      <div style="font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#8A7E68">End of Session 01</div>
+      <h2 style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:26px;line-height:1.2;margin:10px 0 12px;color:#1B1710">Tell me where to push, in codes.</h2>
+      <p style="font-size:14.5px;line-height:1.55;color:#4A4235;margin:0 0 16px">My reads tonight: the name is <a href="#n1">n1</a> Groundwork, the base system is <a href="#v1">v1</a> Field Notes, and LabOptimal earns the extra warmth it is showing. Push back on any of it.</p>
+      <div style="display:flex;flex-direction:column;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:1.5;color:#5B5241">
+        <span>&#8250;&nbsp;&nbsp;"lock <a href="#v1">v1</a> with the name <a href="#n1">n1</a>, show me a real hero"</span>
+        <span>&#8250;&nbsp;&nbsp;"combine <a href="#n2">n2</a> and <a href="#n5">n5</a> into a two-word mark"</span>
+        <span>&#8250;&nbsp;&nbsp;"make <a href="#lo-dash">lo-dash</a> bolder" or "draft copy for <a href="#z4">S2</a>"</span>
+      </div>
+    </div>
+    <div style="flex:1 1 320px;background:#FBF7EF;border:1px solid rgba(33,28,21,.12);border-radius:12px;padding:18px 20px;box-shadow:0 1px 2px rgba(33,28,21,.05)">
+      <div style="font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#8A7E68;margin-bottom:12px">Not touched tonight, on purpose</div>
+      <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px;font-size:13px;line-height:1.45;color:#4A4235">
+        <li>Final logos and full brand system. These are directions only.</li>
+        <li>Resonance mask identity. Held until the project is ready to be public.</li>
+        <li>Real copy. We locked structure, not words.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+</body>
+</html>

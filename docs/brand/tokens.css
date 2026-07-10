@@ -1,0 +1,98 @@
+/*
+  Aurelius Open Research Initiative — design tokens
+  Extracted from Direction Board.dc.html (see direction-board.html).
+
+  Two token sets:
+    :root                      the umbrella system, "Field Notes" (identity v1,
+                               the board's recommended base)
+    [data-brand="laboptimal"]  the LabOptimal flagship sub-brand: same neutrals
+                               and type, ember swapped for clinical green
+
+  Values are lifted verbatim from the board's swatches and type scale. Naming
+  (n1..n6) and the identity temperature (v1..v3) are still open decisions; if the
+  umbrella lands on Instrument (v2) or Almanac (v3) instead, only the accent and
+  neutral hues below change, not the structure. Alternate accents for v2/v3 are
+  recorded at the bottom for reference.
+*/
+
+:root {
+  /* Surfaces (warm archival neutrals) */
+  --paper: #E9DFCE;          /* page background */
+  --surface: #F3ECDF;        /* panels */
+  --surface-raised: #FBF7EF; /* cards */
+  --surface-inset: #F4EDE0;  /* wells, dashed insets */
+  --ink-surface: #211C15;    /* dark panels */
+
+  /* Text */
+  --ink: #211C15;            /* primary text, 15:1 on paper */
+  --ink-strong: #1B1710;     /* headings */
+  --text-secondary: #4A4235; /* 6.2:1 on paper */
+  --text-muted: #6B6152;
+  --text-faint: #8A7E68;
+  --text-fainter: #9A8E77;
+  --on-ink: #F3ECDF;         /* text on the dark ink surface */
+  --on-ink-muted: #C9BFA9;
+
+  /* Accent */
+  --ember: #A8481B;          /* primary accent, 4.9:1 large */
+  --ember-on-dark: #B79B6E;  /* accent legible on ink surfaces */
+
+  /* Lines */
+  --hairline: rgba(33, 28, 21, 0.12);
+  --hairline-strong: rgba(33, 28, 21, 0.22);
+
+  /* Type */
+  --font-serif: "Newsreader", Georgia, serif;         /* display, long reads */
+  --font-sans: "Public Sans", system-ui, -apple-system, sans-serif; /* UI, body */
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace; /* data, labels, code */
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius: 12px;
+  --radius-lg: 14px;
+  --radius-pill: 20px;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px rgba(33, 28, 21, 0.05);
+  --shadow: 0 4px 18px rgba(168, 72, 27, 0.10);
+}
+
+/*
+  LabOptimal flagship. Inherits the umbrella neutrals and type; swaps the ember
+  for a confident clinical green and lets the data carry status color. The status
+  tokens map 1:1 to the engine's Finding.status (services/engine models.py):
+    in-range  -> optimal
+    watch     -> suboptimal / elevated
+    low       -> deficient / high
+*/
+[data-brand="laboptimal"] {
+  --paper: #F5F1E6;
+  --surface-raised: #FFFDF8;
+  --ink: #17231C;
+  --text-muted: #5C6B60;
+  --text-faint: #8A9389;
+
+  --brand: #1C6B4A;          /* primary clinical green */
+  --brand-bright: #2E8B5E;
+  --brand-on-dark: #6FBF97;
+  --brand-soft: #8FD3B0;     /* chips on green surfaces */
+  --brand-ink: #12402C;      /* text on brand-soft */
+
+  /* Result status */
+  --status-in-range: #2E8B5E;
+  --status-watch: #C77A1B;
+  --status-watch-track: #E8B04A;
+  --status-low: #B4531F;
+  --status-optimal-track: #3FA773;
+
+  --hairline: rgba(23, 35, 28, 0.08);
+  --shadow-brand: 0 4px 12px rgba(28, 107, 74, 0.28);
+}
+
+/*
+  Alternate umbrella temperatures (only if identity moves off v1):
+    Instrument (v2, cooler):  paper #EDEFF1  surface #FFFFFF  ink #171A1D
+                              steel #5A646E  blueprint accent #2F5D8A
+    Almanac    (v3, warmer):  paper #F6EEDB  surface #FFFDF7  ink #221D14
+                              solar accent #B87415  field green #245C3B
+*/

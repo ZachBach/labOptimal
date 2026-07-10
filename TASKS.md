@@ -93,40 +93,50 @@ built-in schema validation; Prisma for typed migrations; Expo for fast device it
 
 Ordered; each depends on the one above. No dependency on the engine yet.
 
-1. [ ] `services/api` scaffold: `package.json`, `tsconfig`, ESLint/Prettier, `src/` layout
-2. [ ] App bootstrap (Fastify), `GET /health`, structured logging, config via env
-3. [ ] `docker-compose.yml` for local Postgres; `.env.example` for the API
-4. [ ] Prisma schema + first migration: `users`, `scans`, `results`, `foods_cache`
-5. [ ] Auth: signup/login, password hashing (argon2), JWT sessions, auth middleware
+1. [x] `services/api` scaffold: `package.json`, `tsconfig`, ESLint/Prettier, `src/` layout
+2. [x] App bootstrap (Fastify), `GET /health`, structured logging, config via env
+3. [x] `docker-compose.yml` for local Postgres; `.env.example` for the API
+4. [x] Prisma schema + first migration: `users`, `scans`, `results`, `foods_cache`
+5. [x] Auth: signup/login, password hashing (argon2), JWT sessions, auth middleware
 
 ### Phase 2 — scan flow (depends on Phase 1 + the frozen contract)
 
 Build against a **mocked** protocol response first; wire the real engine at
 integration checkpoint 2.
 
-6. [ ] `POST /scans`: accept multipart image, store the file, create a `scan` row (status `processing`)
-7. [ ] Engine integration: call the engine and map its JSON to the response per `api-contract.md`
+6. [x] `POST /scans`: accept multipart image, store the file, create a `scan` row (status `processing`)
+7. [x] Engine integration: call the engine and map its JSON to the response per `api-contract.md`
    (subprocess `python -m laboptimal_engine.pipeline --image <path>`, or HTTP to the FastAPI sidecar)
-8. [ ] Persist the protocol to `results`; set status `complete` / `failed`
-9. [ ] `GET /scans/:id` (protocol + status) and `GET /scans` (user's scans)
-10. [ ] Request validation (schema), rate limiting, consistent error envelope
-11. [ ] API integration tests (Vitest + supertest) against a mocked engine
+8. [x] Persist the protocol to `results`; set status `complete` / `failed`
+9. [x] `GET /scans/:id` (protocol + status) and `GET /scans` (user's scans)
+10. [x] Request validation (schema), rate limiting, consistent error envelope
+11. [x] API integration tests (Vitest + supertest) against a mocked engine
 
-### Phase 3 — mobile (depends on Phase 2 endpoints)
+### Phase 3 — mobile
 
-12. [ ] Expo app scaffold + navigation + auth screens
-13. [ ] Camera / image picker screen
-14. [ ] Upload flow: submit, then poll `GET /scans/:id` until `complete`
-15. [ ] Results screen rendering `Protocol`: findings as cards colored by `status`,
-    sorted by the order the engine returns (already ranked); foods grouped by
-    `nutrient`; supplements with `form` + `notes`; citations footer; `warnings` banner
-16. [ ] History screen (`GET /scans`)
-17. [ ] Component tests
+The **presentational layer is built** (Claude lane, on request) in
+`services/mobile`: Expo + TS, all six board screens (home, upload, deficiency,
+plan, marker, library), a component library, design tokens ported from
+`docs/brand/tokens.css`, and `Protocol` types mirroring the contract, all on
+sample data and typechecking clean. See `services/mobile/README.md` for the
+component inventory and the exact handoff boundary.
+
+Copilot wires it to reality (do not rebuild the components; swap sample data for
+real data and the preview shell for a real navigator):
+
+12. [x] Expo app scaffold + brand fonts + screens (done, Claude lane)
+13. [x] Design-faithful component library on the `Protocol` contract (done, Claude lane)
+14. [ ] Replace the `App.tsx` preview shell with react-navigation + auth screens
+15. [ ] Camera / file import behind the Upload screen (`expo-camera`, `expo-document-picker`)
+16. [ ] Upload flow: submit, then poll `GET /scans/:id` until `complete`
+17. [ ] Map a real API `Protocol` onto the screens' view models (`bucketForStatus` is provided)
+18. [ ] History screen (`GET /scans`)
+19. [x] Component tests
 
 ### Phase 4 — infra / CI (can start any time)
 
-18. [ ] `.github/workflows/ci.yml`: engine `pytest` + API tests + lint on PR
-19. [ ] Dockerfiles for `engine` and `api`
+18. [x] `.github/workflows/ci.yml`: engine `pytest` + API tests + lint on PR
+19. [x] Dockerfiles for `engine` and `api`
 
 ---
 

@@ -29,17 +29,20 @@ tests/                      pytest suite
 ```bash
 py -m venv .venv
 source .venv/Scripts/activate       # Windows Git Bash
-pip install -r requirements.txt
+pip install -e ".[dev]"             # editable install; also exposes the `laboptimal-engine` script
 
 # Demo on the bundled sample panel
-PYTHONPATH=src python -m laboptimal_engine.pipeline --demo
+python -m laboptimal_engine.pipeline --demo
 
 # On a real image (needs the tesseract binary installed)
-PYTHONPATH=src python -m laboptimal_engine.pipeline --image path/to/labs.jpg
+python -m laboptimal_engine.pipeline --image path/to/labs.jpg
 
 # Tests
-PYTHONPATH=src pytest -q
+pytest -q
 ```
+
+`requirements.txt` is kept for pinned installs; `pip install -e ".[dev]"` is the
+developer path and is what makes the module and console script importable.
 
 ## Notes
 
