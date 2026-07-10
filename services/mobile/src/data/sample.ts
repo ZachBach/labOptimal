@@ -13,6 +13,7 @@ export interface MarkerVM {
   value: string; // formatted, e.g. "18 ng/mL"
   markerPos: number; // 0..100 along the range bar
   bucket: StatusBucket;
+  category?: string; // e.g. "Nutrients" — drives the home filter
 }
 
 export interface SupplementVM {
@@ -42,8 +43,8 @@ export const summary = {
 };
 
 export const needsAttention: MarkerVM[] = [
-  { name: 'Vitamin D', value: '18 ng/mL', markerPos: 13, bucket: 'low' },
-  { name: 'Magnesium', value: '1.6 mg/dL', markerPos: 24, bucket: 'watch' },
+  { name: 'Vitamin D', value: '18 ng/mL', markerPos: 13, bucket: 'low', category: 'Nutrients' },
+  { name: 'Magnesium', value: '1.6 mg/dL', markerPos: 24, bucket: 'watch', category: 'Nutrients' },
 ];
 
 export const priorityMarker: MarkerVM = {

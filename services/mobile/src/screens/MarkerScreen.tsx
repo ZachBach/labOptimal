@@ -1,6 +1,6 @@
 /**
  * Marker detail: one marker in depth. Current value, 12-month trend, what a low
- * reading affects, and a link straight to the open dossier.
+ * reading affects, and a link to the open dossier. Cards cascade in.
  */
 
 import React from 'react';
@@ -11,6 +11,7 @@ import { RangeBar } from '@/components/RangeBar';
 import { ScreenHeader } from '@/components/ScreenHeader';
 import { StatusPill } from '@/components/StatusPill';
 import { TrendBars } from '@/components/TrendBars';
+import { Reveal } from '@/components/motion';
 import { Body, Heading, Label, Mono } from '@/components/Text';
 import {
   priorityMarker,
@@ -40,51 +41,59 @@ export function MarkerScreen({ marker = priorityMarker, onBack }: MarkerScreenPr
       <ScreenHeader title={marker.name} subtitle="Nutrient marker" onBack={onBack} />
 
       <View style={styles.body}>
-        <Card style={styles.block}>
-          <View style={styles.currentHead}>
-            <View>
-              <Label style={styles.currentLabel}>Current</Label>
-              <View style={styles.currentValue}>
-                <Heading style={styles.bigNumber}>{value}</Heading>
-                <Mono style={styles.bigUnit}>{unit}</Mono>
+        <Reveal delay={40}>
+          <Card style={styles.block}>
+            <View style={styles.currentHead}>
+              <View>
+                <Label style={styles.currentLabel}>Current</Label>
+                <View style={styles.currentValue}>
+                  <Heading style={styles.bigNumber}>{value}</Heading>
+                  <Mono style={styles.bigUnit}>{unit}</Mono>
+                </View>
               </View>
+              <StatusPill variant={marker.bucket} />
             </View>
-            <StatusPill variant={marker.bucket} />
-          </View>
-          <RangeBar markerPos={marker.markerPos} bucket={marker.bucket} size="lg" />
-          <View style={styles.scale}>
-            <Mono style={[styles.scaleLabel, { color: colors.statusLow, fontFamily: font.monoSemiBold }]}>
-              Deficient
-            </Mono>
-            <Mono style={styles.scaleLabel}>Optimal</Mono>
-            <Mono style={styles.scaleLabel}>High</Mono>
-          </View>
-        </Card>
+            <RangeBar markerPos={marker.markerPos} bucket={marker.bucket} size="lg" delay={320} />
+            <View style={styles.scale}>
+              <Mono style={[styles.scaleLabel, { color: colors.statusLow, fontFamily: font.monoSemiBold }]}>
+                Deficient
+              </Mono>
+              <Mono style={styles.scaleLabel}>Optimal</Mono>
+              <Mono style={styles.scaleLabel}>High</Mono>
+            </View>
+          </Card>
+        </Reveal>
 
-        <Card style={styles.block}>
-          <View style={styles.trendHead}>
-            <Label>12-month trend</Label>
-            <Mono style={{ color: colors.statusLow }}>Below range</Mono>
-          </View>
-          <TrendBars values={vitaminDTrend} months={vitaminDTrendMonths} bucket={marker.bucket} />
-        </Card>
+        <Reveal delay={130}>
+          <Card style={styles.block}>
+            <View style={styles.trendHead}>
+              <Label>12-month trend</Label>
+              <Mono style={{ color: colors.statusLow }}>Below range</Mono>
+            </View>
+            <TrendBars values={vitaminDTrend} months={vitaminDTrendMonths} bucket={marker.bucket} />
+          </Card>
+        </Reveal>
 
-        <Card style={styles.block}>
-          <Label style={styles.effectsLabel}>What low {marker.name.toLowerCase()} affects</Label>
-          <View style={styles.effects}>
-            {vitaminDEffects.map((effect) => (
-              <View key={effect} style={styles.effectRow}>
-                <View style={styles.effectDot} />
-                <Body style={styles.effectText}>{effect}</Body>
-              </View>
-            ))}
-          </View>
-        </Card>
+        <Reveal delay={220}>
+          <Card style={styles.block}>
+            <Label style={styles.effectsLabel}>What low {marker.name.toLowerCase()} affects</Label>
+            <View style={styles.effects}>
+              {vitaminDEffects.map((effect) => (
+                <View key={effect} style={styles.effectRow}>
+                  <View style={styles.effectDot} />
+                  <Body style={styles.effectText}>{effect}</Body>
+                </View>
+              ))}
+            </View>
+          </Card>
+        </Reveal>
 
-        <View style={styles.footer}>
-          <Mono style={styles.footerText}>Synthesized from {vitaminDSourceCount} sources</Mono>
-          <Mono style={styles.footerLink}>Open dossier ›</Mono>
-        </View>
+        <Reveal delay={300}>
+          <View style={styles.footer}>
+            <Mono style={styles.footerText}>Synthesized from {vitaminDSourceCount} sources</Mono>
+            <Mono style={styles.footerLink}>Open dossier ›</Mono>
+          </View>
+        </Reveal>
       </View>
     </ScrollView>
   );

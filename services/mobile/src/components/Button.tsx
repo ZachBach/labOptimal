@@ -1,13 +1,16 @@
 /**
- * PrimaryButton is the filled green call to action (with optional leading icon).
- * SecondaryButton is the outline variant used for secondary choices.
+ * PrimaryButton: a gradient-filled green CTA with a colored glow and a spring
+ * press. SecondaryButton: a soft outline that also springs on press.
  */
 
+import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
-import { Pressable, StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
-import { colors, font, radius, shadow } from '@/theme/tokens';
+import { colors, font, radius } from '@/theme/tokens';
+import { diagonal, gradients } from '@/theme/gradients';
 import { Icon, IconName } from './Icon';
+import { PressableScale } from './motion/PressableScale';
 
 interface PrimaryButtonProps {
   label: string;
@@ -17,50 +20,55 @@ interface PrimaryButtonProps {
 
 export function PrimaryButton({ label, icon, onPress }: PrimaryButtonProps) {
   return (
-    <Pressable
-      onPress={onPress}
-      style={({ pressed }) => [styles.primary, pressed && styles.pressed]}
-    >
-      {icon ? <Icon name={icon} size={19} color={colors.paper} /> : null}
-      <Text style={styles.primaryLabel}>{label}</Text>
-    </Pressable>
+    <PressableScale onPress={onPress} style={styles.glow} scaleTo={0.97}>
+      <LinearGradient
+        colors={gradients.brand}
+        start={diagonal.start}
+        end={diagonal.end}
+        style={styles.primary}
+      >
+        {icon ? <Icon name={icon} size={19} color={colors.paper} /> : null}
+        <Text style={styles.primaryLabel}>{label}</Text>
+      </LinearGradient>
+    </PressableScale>
   );
 }
 
 export function SecondaryButton({ label, onPress }: { label: string; onPress?: () => void }) {
   return (
-    <Pressable
-      onPress={onPress}
-      style={({ pressed }) => [styles.secondary, pressed && styles.pressed]}
-    >
+    <PressableScale onPress={onPress} style={styles.secondary} scaleTo={0.97}>
       <Text style={styles.secondaryLabel}>{label}</Text>
-    </Pressable>
+    </PressableScale>
   );
 }
 
 const styles = StyleSheet.create({
+  glow: {
+    borderRadius: radius.button,
+    shadowColor: colors.brand,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.4,
+    shadowRadius: 18,
+    elevation: 8,
+  },
   primary: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     gap: 9,
-    height: 50,
+    height: 54,
     borderRadius: radius.button,
-    backgroundColor: colors.brand,
-    ...shadow.brand,
+    overflow: 'hidden',
   },
   secondary: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 44,
+    height: 46,
     borderRadius: radius.md,
     borderWidth: 1,
     borderColor: colors.hairlineStrong,
-    backgroundColor: 'transparent',
-  },
-  pressed: {
-    opacity: 0.85,
+    backgroundColor: colors.surface,
   },
   primaryLabel: {
     fontFamily: font.sansSemiBold,

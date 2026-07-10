@@ -19,9 +19,11 @@ interface ScreenHeaderProps {
 export function ScreenHeader({ title, subtitle, onBack }: ScreenHeaderProps) {
   return (
     <View style={styles.row}>
-      <Pressable onPress={onBack} hitSlop={10} style={({ pressed }) => (pressed ? styles.pressed : null)}>
-        <Icon name="chevron-left" size={22} color={colors.ink} />
-      </Pressable>
+      {onBack ? (
+        <Pressable onPress={onBack} hitSlop={10} style={({ pressed }) => (pressed ? styles.pressed : null)}>
+          <Icon name="chevron-left" size={22} color={colors.ink} />
+        </Pressable>
+      ) : null}
       <View style={styles.titles}>
         <Heading>{title}</Heading>
         {subtitle ? <Mono style={styles.subtitle}>{subtitle}</Mono> : null}

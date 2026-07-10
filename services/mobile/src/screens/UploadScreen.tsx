@@ -1,8 +1,9 @@
 /**
  * Upload: the core gesture. Frame a report, capture or import it, with privacy
- * stated up front and a live parsing progress card.
+ * stated up front and a live parsing progress card. Content eases in.
  */
 
+import * as ImagePicker from 'expo-image-picker';
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
@@ -10,14 +11,39 @@ import { Card } from '@/components/Card';
 import { Icon } from '@/components/Icon';
 import { PrimaryButton, SecondaryButton } from '@/components/Button';
 import { ScreenHeader } from '@/components/ScreenHeader';
+import { Reveal } from '@/components/motion';
 import { Body, BodyStrong, Label, Mono } from '@/components/Text';
 import { colors, font, radius, space, tint } from '@/theme/tokens';
 
 interface UploadScreenProps {
   onBack?: () => void;
+  /** Called with the picked image uri (or undefined for a demo import) once the
+   *  user has chosen a source; the navigator starts the scan and pushes on. */
+  onPicked?: (uri?: string) => void;
 }
 
-export function UploadScreen({ onBack }: UploadScreenProps) {
+export function UploadScreen({ onBack, onPicked }: UploadScreenProps) {
+  const takePhoto = async () => {
+    try {
+      const perm = await ImagePicker.requestCameraPermissionsAsync();
+      if (!perm.granted) return;
+      const res = await ImagePicker.launchCameraAsync({ quality: 0.7 });
+      if (!res.canceled) onPicked?.(res.assets[0]?.uri);
+    } catch {
+      // Camera unavailable (e.g. web) — fall back to a demo import.
+      onPicked?.();
+    }
+  };
+
+  const uploadFile = async () => {
+    try {
+      const res = await ImagePicker.launchImageLibraryAsync({ quality: 0.7 });
+      if (!res.canceled) onPicked?.(res.assets[0]?.uri);
+    } catch {
+      onPicked?.();
+    }
+  };
+
   return (
     <ScrollView
       style={styles.screen}
@@ -27,44 +53,48 @@ export function UploadScreen({ onBack }: UploadScreenProps) {
       <ScreenHeader title="New lab report" onBack={onBack} />
 
       <View style={styles.body}>
-        <View style={styles.dropzone}>
-          <View style={[styles.corner, styles.tl]} />
-          <View style={[styles.corner, styles.tr]} />
-          <View style={[styles.corner, styles.bl]} />
-          <View style={[styles.corner, styles.br]} />
-          <View style={styles.cameraCircle}>
-            <Icon name="camera" size={30} color={colors.brand} strokeWidth={1.7} />
+        <Reveal delay={40}>
+          <View style={styles.dropzone}>
+            <View style={[styles.corner, styles.tl]} />
+            <View style={[styles.corner, styles.tr]} />
+            <View style={[styles.corner, styles.bl]} />
+            <View style={[styles.corner, styles.br]} />
+            <View style={styles.cameraCircle}>
+              <Icon name="camera" size={30} color={colors.brand} strokeWidth={1.7} />
+            </View>
+            <View style={styles.dropzoneText}>
+              <BodyStrong style={styles.dropTitle}>Position your report in the frame</BodyStrong>
+              <Body style={styles.dropSub}>PDF, photo, or portal import</Body>
+            </View>
           </View>
-          <View style={styles.dropzoneText}>
-            <BodyStrong style={styles.dropTitle}>Position your report in the frame</BodyStrong>
-            <Body style={styles.dropSub}>PDF, photo, or portal import</Body>
-          </View>
-        </View>
+        </Reveal>
 
-        <View style={styles.primaryWrap}>
-          <PrimaryButton label="Take photo" icon="aperture" />
-        </View>
-        <View style={styles.secondaryRow}>
-          <SecondaryButton label="Upload file" />
-          <SecondaryButton label="Connect portal" />
-        </View>
-
-        <View style={styles.privacy}>
-          <Icon name="lock" size={16} color={colors.brand} strokeWidth={1.9} />
-          <Body style={styles.privacyText}>
-            Processed on your device. Nothing shared without your say.
-          </Body>
-        </View>
-
-        <Card style={styles.progress}>
-          <View style={styles.progressHead}>
-            <Label>Reading 3 pages</Label>
-            <Mono style={styles.progressCount}>24 markers found</Mono>
+        <Reveal delay={140}>
+          <View style={styles.primaryWrap}>
+            <PrimaryButton label="Take photo" icon="aperture" onPress={takePhoto} />
           </View>
-          <View style={styles.progressTrack}>
-            <View style={styles.progressFill} />
+          <View style={styles.secondaryRow}>
+            <SecondaryButton label="Upload file" onPress={uploadFile} />
+            <SecondaryButton label="Connect portal" onPress={() => onPicked?.()} />
           </View>
-        </Card>
+
+          <View style={styles.privacy}>
+            <Icon name="lock" size={16} color={colors.brand} strokeWidth={1.9} />
+            <Body style={styles.privacyText}>
+              Processed on your device. Nothing shared without your say.
+            </Body>
+          </View>
+
+          <Card style={styles.progress}>
+            <View style={styles.progressHead}>
+              <Label>Reading 3 pages</Label>
+              <Mono style={styles.progressCount}>24 markers found</Mono>
+            </View>
+            <View style={styles.progressTrack}>
+              <View style={styles.progressFill} />
+            </View>
+          </Card>
+        </Reveal>
       </View>
     </ScrollView>
   );

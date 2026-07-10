@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { colors, font } from '@/theme/tokens';
 import { Icon, IconName } from './Icon';
@@ -26,8 +27,9 @@ interface TabBarProps {
 }
 
 export function TabBar({ active, onSelect }: TabBarProps) {
+  const insets = useSafeAreaInsets();
   return (
-    <View style={styles.bar}>
+    <View style={[styles.bar, { paddingBottom: Math.max(12, insets.bottom) }]}>
       {TABS.map((tab) => {
         const selected = tab.key === active;
         const color = selected ? colors.brand : '#9AA39A';

@@ -1,14 +1,14 @@
 /**
- * Nutrient library: the public evidence library inside the app, the same
- * dossiers the umbrella site serves.
+ * Nutrient library: the public evidence library, with a working search filter.
  */
 
-import React from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import React, { useState } from 'react';
+import { ScrollView, StyleSheet, TextInput, View } from 'react-native';
 
 import { Card } from '@/components/Card';
 import { Icon } from '@/components/Icon';
 import { ScreenHeader } from '@/components/ScreenHeader';
+import { Reveal } from '@/components/motion';
 import { Body, BodyStrong, Label, Mono } from '@/components/Text';
 import { dossiers } from '@/data/sample';
 import type { DossierVM } from '@/data/sample';
@@ -19,37 +19,60 @@ interface LibraryScreenProps {
 }
 
 export function LibraryScreen({ onBack }: LibraryScreenProps) {
+  const [query, setQuery] = useState('');
+  const filtered = dossiers.filter((d) => d.name.toLowerCase().includes(query.trim().toLowerCase()));
+
   return (
     <ScrollView
       style={styles.screen}
       contentContainerStyle={styles.content}
+      keyboardShouldPersistTaps="handled"
       showsVerticalScrollIndicator={false}
     >
       <ScreenHeader title="Nutrient library" subtitle="Open evidence, updated weekly" onBack={onBack} />
 
       <View style={styles.body}>
-        <View style={styles.search}>
-          <Icon name="search" size={16} color={colors.textFaint} strokeWidth={1.8} />
-          <Body style={styles.searchText}>Search nutrients and markers</Body>
-        </View>
+        <Reveal delay={40}>
+          <View style={styles.search}>
+            <Icon name="search" size={16} color={colors.textFaint} strokeWidth={1.8} />
+            <TextInput
+              value={query}
+              onChangeText={setQuery}
+              placeholder="Search nutrients and markers"
+              placeholderTextColor={colors.textFaint}
+              style={styles.searchInput}
+              autoCapitalize="none"
+              autoCorrect={false}
+            />
+          </View>
+        </Reveal>
 
-        <View style={styles.sectionHead}>
-          <Label>Dossiers</Label>
-          <BodyStrong style={styles.link}>A to Z</BodyStrong>
-        </View>
+        <Reveal delay={120}>
+          <View style={styles.sectionHead}>
+            <Label>Dossiers</Label>
+            <BodyStrong style={styles.link}>{query ? `${filtered.length} found` : 'A to Z'}</BodyStrong>
+          </View>
+          {filtered.length > 0 ? (
+            <Card flush>
+              {filtered.map((d, i) => (
+                <DossierRow key={d.name} item={d} divider={i < filtered.length - 1} />
+              ))}
+            </Card>
+          ) : (
+            <Card style={styles.empty}>
+              <Mono style={styles.emptyText}>No dossiers match "{query}"</Mono>
+            </Card>
+          )}
+        </Reveal>
 
-        <Card flush>
-          {dossiers.map((d, i) => (
-            <DossierRow key={d.name} item={d} divider={i < dossiers.length - 1} />
-          ))}
-        </Card>
-
-        <View style={styles.publicNote}>
-          <Icon name="globe" size={16} color="#A8481B" strokeWidth={1.7} />
-          <Body style={styles.publicText}>
-            Every dossier is also public at groundwork.science
-          </Body>
-        </View>
+        <Reveal delay={220}>
+          <View style={styles.publicNote}>
+            <Icon name="globe" size={16} color="#A8481B" strokeWidth={1.7} />
+            <Body style={styles.publicText}>
+              Every dossier is also public at groundwork.science
+            </Body>
+          </View>
+        </Reveal>
       </View>
     </ScrollView>
   );
@@ -92,9 +115,12 @@ const styles = StyleSheet.create({
     paddingVertical: 11,
     marginBottom: 14,
   },
-  searchText: {
+  searchInput: {
+    flex: 1,
+    padding: 0,
+    fontFamily: font.sans,
     fontSize: 13,
-    color: colors.textFaint,
+    color: colors.ink,
   },
   sectionHead: {
     flexDirection: 'row',
@@ -106,6 +132,14 @@ const styles = StyleSheet.create({
     fontFamily: font.sansSemiBold,
     fontSize: 12,
     color: colors.brand,
+  },
+  empty: {
+    alignItems: 'center',
+    paddingVertical: 22,
+  },
+  emptyText: {
+    fontSize: 11,
+    color: colors.textFaint,
   },
   row: {
     flexDirection: 'row',

@@ -15,6 +15,7 @@ export type IconName =
   | 'lock'
   | 'home'
   | 'bar-chart'
+  | 'check'
   | 'check-circle'
   | 'book'
   | 'user'
@@ -36,6 +37,7 @@ const GLYPHS: Record<IconName, React.ReactNode> = {
     </>
   ),
   'chevron-left': <Path d="m15 18-6-6 6-6" />,
+  check: <Path d="M20 6 9 17l-5-5" />,
   lock: (
     <>
       <Rect x={4} y={10} width={16} height={11} rx={2} />
