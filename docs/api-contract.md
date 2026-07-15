@@ -49,21 +49,35 @@ cd services/engine && PYTHONPATH=src python -m laboptimal_engine.pipeline --demo
   "unit": "ng/mL",
   "status": "deficient",                // deficient | suboptimal | optimal | elevated | high
   "severity": 0.267,                    // 0.0 at range boundary, 1.0 far outside
-  "confidence": 0.8,                    // parser + rule confidence, 0.0-1.0
+  "confidence": 0.8,                    // extraction + rule confidence, 0.0-1.0
+  "confidence_drivers": [               // human-readable reasons behind confidence
+    "Unit and reference range printed on the report."
+  ],
   "target_nutrients": ["vitamin_d"],    // populated only for actionable statuses
   "notes": "Magnesium is a cofactor for vitamin D activation; ..."  // or null
 }
 ```
 
+`confidence` starts at 1.0 and is docked when the reading had to be assumed: a
+unit that was not printed, a printed unit that was not recognized (assumed
+canonical), or a missing printed reference range. Interaction rules can raise it
+when a finding is corroborated (e.g. low ferritin + low hemoglobin). Every
+adjustment appends a string to `confidence_drivers`, so the app can explain a
+number rather than just show it.
+
 ### FoodSuggestion
+
+Foods are ranked by nutrient density (amount of the target nutrient per 100 g,
+highest first). Amounts come from the USDA search response when an API key is
+configured, or from a curated table in the offline fallback.
 
 ```jsonc
 {
   "nutrient": "iron",
   "food_name": "Beef liver",
   "fdc_id": 168601,          // USDA FoodData Central id, or null when from offline fallback
-  "amount_per_100g": null,   // populated when nutrient amounts are fetched
-  "amount_unit": null
+  "amount_per_100g": 6.2,    // per-100 g amount of the target nutrient, or null if unknown
+  "amount_unit": "mg"        // unit for amount_per_100g (µg | mg), or null
 }
 ```
 
@@ -73,10 +87,14 @@ cd services/engine && PYTHONPATH=src python -m laboptimal_engine.pipeline --demo
 {
   "nutrient": "iron",
   "form": "Ferrous bisglycinate",
-  "suggested_dose": null,    // left null until the dossier library lands
+  "suggested_dose": "18–65 mg elemental iron daily; recheck ferritin in 8–12 weeks.",
   "notes": "Better tolerated than sulfate; pair with vitamin C."
 }
 ```
+
+`suggested_dose` is filled from the nutrient dossier (see
+`docs/nutrient-dossiers.md`) when one exists for the nutrient, and is `null`
+otherwise (the app shows "As directed").
 
 ### MealPlan
 
@@ -128,3 +146,5 @@ which is what the recommender consumes.
   2. Python sidecar: import `laboptimal_engine.pipeline.analyze(image_bytes)`.
 - `warnings` is non-fatal (e.g. an unrecognized analyte was skipped). Surface it
   but still return `status: complete`.
+- `citations` lists the USDA source plus the reference-range source for every
+  analyte in the report (deduped, sorted). Treat it as display-only provenance.

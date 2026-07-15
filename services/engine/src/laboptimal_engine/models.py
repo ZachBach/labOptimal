@@ -37,6 +37,14 @@ class AnalyteReading(BaseModel):
     source_text: str | None = Field(
         default=None, description="Raw OCR snippet this reading was parsed from"
     )
+    confidence: float = Field(
+        default=1.0, ge=0.0, le=1.0,
+        description="Confidence this reading was extracted and normalized correctly",
+    )
+    confidence_drivers: list[str] = Field(
+        default_factory=list,
+        description="Human-readable reasons behind the confidence score",
+    )
 
 
 class Finding(BaseModel):
@@ -54,6 +62,10 @@ class Finding(BaseModel):
     confidence: float = Field(
         ..., ge=0.0, le=1.0,
         description="Parser + rule confidence for this finding",
+    )
+    confidence_drivers: list[str] = Field(
+        default_factory=list,
+        description="Human-readable reasons behind the confidence score",
     )
     target_nutrients: list[str] = Field(default_factory=list)
     notes: str | None = None

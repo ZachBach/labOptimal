@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   bands: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     flexDirection: 'row',
     borderRadius: 999,
     overflow: 'hidden',

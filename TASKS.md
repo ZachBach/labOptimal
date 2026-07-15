@@ -7,11 +7,15 @@ shared integration surface is the two contract docs in `docs/`.
 
 ## Status snapshot
 
-- **Engine MVP is complete and tested.** 9 pytest tests pass. The full pipeline
-  runs end to end: `cd services/engine && pip install -e ".[dev]" && python -m laboptimal_engine.pipeline --demo`.
-- **Contracts are frozen** in `docs/api-contract.md` and `docs/reference-ranges.md`.
-- **The Copilot lane is unblocked.** It can build the API and mobile app against
-  the frozen contract today; the engine already emits exactly that shape.
+- **Engine MVP + Phase 1 depth are complete and tested.** 29 pytest tests pass.
+  The full pipeline runs end to end: `cd services/engine && pip install -e ".[dev]" && python -m laboptimal_engine.pipeline --demo`.
+  USDA amounts + density ranking, the expanded cited analyte panel, the added
+  interaction rules, the confidence model, and the dossier library are all in.
+- **Contracts are frozen** in `docs/api-contract.md` and `docs/reference-ranges.md`
+  (dossier schema in `docs/nutrient-dossiers.md`).
+- **Mobile is wired to the Node API.** Auth (login/signup/guest), the
+  POST /scans + poll flow, and scan history are built; the app typechecks clean
+  and component tests pass.
 
 ## Why this split
 
@@ -59,16 +63,21 @@ the engine does today; 4-5 raise output quality; 6 is the integration option.
    Deterministic (golden-file safe). `Protocol.meal_plan` added; contract
    documented in `api-contract.md`; mobile types + mapper consume `focus` and
    `notes`. 7 unit tests; verified over the live service.
-2. [ ] **Real nutrient amounts from USDA.** `FoodSuggestion.amount_per_100g` is
-   null today. Fetch per-food nutrient amounts so foods can be ranked by nutrient
-   density, not just membership.
-3. [ ] **Expand the analyte panel with cited ranges.** Add a `source` field to
-   `ReferenceRange`, cite every range, and add high-value analytes (TSH/free T4,
-   lipid panel, HbA1c, CBC differentials, zinc, copper, ferritin+CRP pairing).
-4. [ ] **More interaction rules.** Calcium vs vitamin D, zinc vs copper ratio,
-   B12 masking of folate deficiency, ferritin interpreted with CRP.
-5. [ ] **Confidence model.** Down-weight assumed units and missing printed ranges;
-   surface confidence drivers so the app can explain them.
+2. [x] **Real nutrient amounts from USDA.** `FoodSuggestion.amount_per_100g` now
+   carries the per-food amount of the target nutrient (read from the FDC search
+   response by nutrient number, curated table offline), and foods are ranked by
+   nutrient density. `amount_unit` reports µg/mg. Golden file + tests updated.
+3. [x] **Expand the analyte panel with cited ranges.** `ReferenceRange` gained a
+   `source` field; every range is cited and the citations flow into the protocol.
+   Added TSH/free T4, lipid panel (total/LDL/HDL/triglycerides), HbA1c, CBC
+   context (hematocrit, MCV), zinc, copper, calcium, and hs-CRP.
+4. [x] **More interaction rules.** Calcium↔vitamin D absorption, zinc↔copper
+   competition, B12↔folate masking (with MCV corroboration), and ferritin
+   interpreted with CRP (both masking and low-despite-inflammation cases).
+5. [x] **Confidence model.** Confidence starts at 1.0 and is docked for assumed
+   units and missing printed ranges; interaction rules raise it on corroboration.
+   Every adjustment appends a `confidence_drivers` string so the app can explain
+   the number. Surfaced on both `AnalyteReading` and `Finding`.
 6. [x] **Engine HTTP service (FastAPI).** `services/engine/service.py` exposes
    `POST /analyze` (image / text / demo) over `pipeline.analyze`, returning the
    `Protocol`. Run with `laboptimal-engine-serve` (`pip install -e ".[service]"`).
@@ -78,14 +87,17 @@ the engine does today; 4-5 raise output quality; 6 is the integration option.
    image to this service and maps the returned `Protocol` onto the UI view models
    (`services/mobile/src/api/`), with a graceful fallback to sample data when the
    engine is unreachable. Verified end to end against the live service (real
-   findings, real USDA foods). Remaining engine gap surfaced by this: supplement
-   `suggested_dose` is null, so the app shows "As directed" until doses are added.
+   findings, real USDA foods). The supplement `suggested_dose` gap is now closed
+   by the dossier library (below).
 
 ### Nutrient dossier library (spans initiatives)
 
-- [ ] Curated nutrient dossiers (CC BY 4.0) that back recommendations with
-   citations. Shared with the Mental Health x Microbiome research agent. Design
-   the dossier schema first, then populate.
+- [x] Curated nutrient dossiers (CC BY 4.0) that back recommendations with
+   citations. Shared with the Mental Health x Microbiome research agent. Schema
+   is `dossiers/library.py` (documented in `docs/nutrient-dossiers.md`); seeded
+   for iron, vitamin D, B12, folate, magnesium, zinc, copper, calcium. The
+   recommender reads `supplement_dose` into `SupplementSuggestion.suggested_dose`
+   and the pipeline folds dossier citations into the protocol.
 
 ---
 
@@ -137,11 +149,18 @@ real data and the preview shell for a real navigator):
 
 12. [x] Expo app scaffold + brand fonts + screens (done, Claude lane)
 13. [x] Design-faithful component library on the `Protocol` contract (done, Claude lane)
-14. [ ] Replace the `App.tsx` preview shell with react-navigation + auth screens
-15. [ ] Camera / file import behind the Upload screen (`expo-camera`, `expo-document-picker`)
-16. [ ] Upload flow: submit, then poll `GET /scans/:id` until `complete`
-17. [ ] Map a real API `Protocol` onto the screens' view models (`bucketForStatus` is provided)
-18. [ ] History screen (`GET /scans`)
+14. [x] react-navigation + auth screens. `App.tsx` gates on auth state (loading /
+    signed out / signed in / guest); `AuthContext` persists a JWT via
+    expo-secure-store (localStorage on web) and restores the session on boot.
+    `AuthScreen` does login/signup against the Node API, with a guest path.
+15. [x] Camera / file import behind the Upload screen (`expo-image-picker` for the
+    camera + photo library, `expo-document-picker` for PDF/image files).
+16. [x] Upload flow: signed-in users `POST /scans` then poll `GET /scans/:id` until
+    `complete` (`api/apiClient.ts` `pollScan`); guests hit the engine directly.
+    Falls back to sample data if the backend is unreachable.
+17. [x] Map a real API `Protocol` onto the screens' view models (`protocolToResults`).
+18. [x] History screen (`GET /scans`) with pull-to-refresh and tap-to-open, plus an
+    Account screen (email, history shortcut, sign out) replacing the Profile stub.
 19. [x] Component tests
 
 ### Phase 4 — infra / CI (can start any time)
@@ -165,11 +184,17 @@ real data and the preview shell for a real navigator):
 
 ## Your next three moves
 
-- **Claude**: (1) meal-plan module + contract update, (2) real USDA nutrient
-  amounts, (3) cited range expansion with a `source` field.
-- **Copilot**: (1) `services/api` scaffold + Fastify `GET /health`, (2)
-  docker-compose Postgres + Prisma schema/migration, (3) auth. Build the scan
-  flow against a mocked protocol; wire the real engine at checkpoint 2.
+The Phase 1 depth work and the mobile API integration are done. What's left to
+ship is operational, not feature work:
+
+- **Deploy the backend**: stand up the engine + Node API + Postgres somewhere
+  public (Dockerfiles and `docker-compose.yml` exist). Point the mobile app at it
+  via `EXPO_PUBLIC_API_URL` / `EXPO_PUBLIC_ENGINE_URL`.
+- **Real OCR**: install the Tesseract binary on the engine host (or implement the
+  `CloudOCRProvider`) so photo uploads work, not just text/demo.
+- **Store prep**: fill `app.json` (bundle id, package, icon), add a medical
+  disclaimer + privacy policy, then build with EAS. See TestFlight / Play
+  internal testing before a public release.
 
 ## References
 

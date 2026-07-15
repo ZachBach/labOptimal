@@ -1,11 +1,13 @@
 /**
- * Client for the engine service. Uploads a picked lab image (or requests the
- * bundled demo panel) and returns the raw Protocol. Callers map it to view
- * models via `protocolToResults`.
+ * Client for the engine service (direct). Used by the guest/demo flow: uploads
+ * a picked lab image (or requests the bundled demo panel) straight to the
+ * engine's /analyze and returns the raw Protocol. The signed-in flow goes
+ * through the Node API instead (see apiClient.ts). Callers map the Protocol to
+ * view models via `protocolToResults`.
  */
 
 import type { Protocol } from '@/types/protocol';
-import { API_BASE } from './config';
+import { ENGINE_BASE } from './config';
 
 const TIMEOUT_MS = 12000;
 
@@ -13,7 +15,7 @@ async function postAnalyze(form: FormData): Promise<Protocol> {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
   try {
-    const res = await fetch(`${API_BASE}/analyze`, {
+    const res = await fetch(`${ENGINE_BASE}/analyze`, {
       method: 'POST',
       body: form,
       signal: controller.signal,

@@ -17,12 +17,12 @@ import {
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
 
 import { TabBar, TabKey } from '@/components/TabBar';
-import { Display, Mono } from '@/components/Text';
 import type { MarkerVM } from '@/data/sample';
+import { AccountScreen } from '@/screens/AccountScreen';
 import { DeficiencyScreen } from '@/screens/DeficiencyScreen';
+import { HistoryScreen } from '@/screens/HistoryScreen';
 import { HomeScreen } from '@/screens/HomeScreen';
 import { LibraryScreen } from '@/screens/LibraryScreen';
 import { MarkerScreen } from '@/screens/MarkerScreen';
@@ -45,6 +45,7 @@ export type RootStackParamList = {
   Upload: undefined;
   Processing: undefined;
   Marker: { marker?: MarkerVM };
+  History: undefined;
 };
 
 declare global {
@@ -113,12 +114,8 @@ function LibraryTab() {
 }
 
 function ProfileTab() {
-  return (
-    <View style={styles.placeholder}>
-      <Display>Profile</Display>
-      <Mono style={styles.note}>Coming soon</Mono>
-    </View>
-  );
+  const nav = useNavigation<Nav>();
+  return <AccountScreen onOpenHistory={() => nav.navigate('History')} />;
 }
 
 function Tabs() {
@@ -161,6 +158,16 @@ function MarkerRoute() {
   return <MarkerScreen marker={route.params?.marker} onBack={() => nav.goBack()} />;
 }
 
+function HistoryRoute() {
+  const nav = useNavigation<Nav>();
+  return (
+    <HistoryScreen
+      onBack={() => nav.goBack()}
+      onOpened={() => nav.navigate('Tabs', { screen: 'Results' })}
+    />
+  );
+}
+
 export function RootNavigator() {
   return (
     <Stack.Navigator
@@ -172,19 +179,7 @@ export function RootNavigator() {
         <Stack.Screen name="Processing" component={ProcessingRoute} options={{ gestureEnabled: false }} />
       </Stack.Group>
       <Stack.Screen name="Marker" component={MarkerRoute} />
+      <Stack.Screen name="History" component={HistoryRoute} />
     </Stack.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  placeholder: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 8,
-    backgroundColor: colors.paper,
-  },
-  note: {
-    color: colors.textFaint,
-  },
-});

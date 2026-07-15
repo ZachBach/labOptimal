@@ -55,8 +55,13 @@ class DeficiencyDetector:
         if not readings:
             return []
 
+        # Each reading carries its own confidence and drivers from normalization.
+        # `confidences` is an optional override kept for backward compatibility.
         confidences = confidences or {}
-        frame = pd.DataFrame([r.model_dump() for r in readings])
+        by_canonical = {r.canonical: r for r in readings}
+        frame = pd.DataFrame(
+            [r.model_dump(exclude={"confidence_drivers"}) for r in readings]
+        )
 
         classified = frame.apply(_classify_row, axis=1, result_type="expand")
         frame["status"] = classified[0]
@@ -68,6 +73,8 @@ class DeficiencyDetector:
             rng = REFERENCE_RANGES.get(canonical)
             nutrients = list(rng.nutrients) if rng else []
             status = AnalyteStatus(row["status"])
+            reading = by_canonical[canonical]
+            confidence = confidences.get(canonical, reading.confidence)
 
             findings.append(
                 Finding(
@@ -77,7 +84,8 @@ class DeficiencyDetector:
                     unit=row["unit"],
                     status=status,
                     severity=float(row["severity"]),
-                    confidence=round(float(confidences.get(canonical, 0.6)), 2),
+                    confidence=round(float(confidence), 2),
+                    confidence_drivers=list(reading.confidence_drivers),
                     target_nutrients=nutrients if status in _ACTIONABLE else [],
                 )
             )
@@ -109,6 +117,9 @@ def _rank_findings(findings: list[Finding]) -> list[Finding]:
     )
 
 
+_HIGH = {AnalyteStatus.HIGH, AnalyteStatus.ELEVATED}
+
+
 def _apply_interaction_rules(findings: list[Finding]) -> list[Finding]:
     """Cross-analyte adjustments and clinical caveats.
 
@@ -119,6 +130,7 @@ def _apply_interaction_rules(findings: list[Finding]) -> list[Finding]:
 
     hemoglobin = by_analyte.get("hemoglobin")
     ferritin = by_analyte.get("ferritin")
+    crp = by_analyte.get("crp")
 
     # Iron-deficiency anemia pattern: low hemoglobin with low ferritin raises
     # confidence that iron is the driver.
@@ -129,18 +141,44 @@ def _apply_interaction_rules(findings: list[Finding]) -> list[Finding]:
         and ferritin.status in _ACTIONABLE
     ):
         ferritin.confidence = min(1.0, ferritin.confidence + 0.15)
+        ferritin.confidence_drivers.append(
+            "Corroborated by low hemoglobin (iron-deficiency pattern)."
+        )
         ferritin.notes = (
             "Low ferritin alongside low hemoglobin is consistent with "
             "iron-deficiency anemia; iron is the likely driver."
         )
 
-    # Ferritin is an acute-phase reactant: a normal/high value can mask iron
-    # deficiency during inflammation. Flag the caveat when ferritin is not low.
-    if ferritin is not None and ferritin.status not in _ACTIONABLE:
-        ferritin.notes = (
-            "Ferritin is an acute-phase reactant and can read normal-to-high "
-            "during inflammation; interpret alongside CRP if available."
-        )
+    # Ferritin is an acute-phase reactant, interpreted with CRP when present.
+    if ferritin is not None:
+        crp_elevated = crp is not None and crp.status in _HIGH
+        if ferritin.status not in _ACTIONABLE:
+            # Normal/high ferritin: inflammation can inflate it and mask iron
+            # deficiency.
+            if crp_elevated:
+                ferritin.notes = (
+                    "Ferritin is normal-to-high but CRP is elevated: "
+                    "inflammation can inflate ferritin and mask true iron "
+                    "deficiency. Consider iron studies (transferrin saturation)."
+                )
+            else:
+                ferritin.notes = (
+                    "Ferritin is an acute-phase reactant and can read "
+                    "normal-to-high during inflammation; interpret alongside "
+                    "CRP if available."
+                )
+        elif crp_elevated:
+            # Low ferritin *despite* active inflammation is strong evidence for
+            # iron deficiency, since inflammation pushes ferritin up.
+            ferritin.confidence = min(1.0, ferritin.confidence + 0.1)
+            ferritin.confidence_drivers.append(
+                "Low despite elevated CRP, which normally raises ferritin."
+            )
+            ferritin.notes = (
+                "Ferritin is low even with CRP elevated; because inflammation "
+                "raises ferritin, a low value here strongly supports iron "
+                "deficiency."
+            )
 
     # Magnesium is a cofactor for vitamin D activation.
     vitd = by_analyte.get("vitamin_d_25oh")
@@ -155,5 +193,63 @@ def _apply_interaction_rules(findings: list[Finding]) -> list[Finding]:
             "Magnesium is a cofactor for vitamin D activation; repleting "
             "magnesium supports the response to vitamin D supplementation."
         )
+
+    # Vitamin D drives intestinal calcium absorption: low calcium with low
+    # vitamin D is often a downstream effect worth correcting at the source.
+    calcium = by_analyte.get("calcium")
+    if (
+        calcium is not None
+        and vitd is not None
+        and calcium.status in _ACTIONABLE
+        and vitd.status in _ACTIONABLE
+    ):
+        calcium.notes = (
+            "Vitamin D is required for intestinal calcium absorption; low "
+            "vitamin D can drive low calcium, so correct vitamin D alongside "
+            "calcium."
+        )
+
+    # Zinc and copper compete for absorption. Sustained high zinc depletes
+    # copper; flag the pairing so supplementation does not create a new gap.
+    zinc = by_analyte.get("zinc")
+    copper = by_analyte.get("copper")
+    if zinc is not None and copper is not None:
+        if zinc.status in _HIGH and copper.status in _ACTIONABLE:
+            copper.notes = (
+                "Copper is low while zinc is high: excess zinc competes with "
+                "copper absorption and can cause copper deficiency. Balance "
+                "zinc intake and repletion copper."
+            )
+        elif zinc.status in _ACTIONABLE:
+            zinc.notes = (
+                "When supplementing zinc, monitor copper: sustained high zinc "
+                "intake lowers copper. Keep a zinc-to-copper balance."
+            )
+
+    # B12 deficiency masked by folate: folic acid can correct megaloblastic
+    # anemia while B12-driven neurologic damage progresses. Macrocytosis (high
+    # MCV) with either low supports megaloblastic anemia.
+    b12 = by_analyte.get("vitamin_b12")
+    folate = by_analyte.get("folate_serum")
+    mcv = by_analyte.get("mcv")
+    if b12 is not None and folate is not None:
+        if b12.status in _ACTIONABLE and folate.status in _ACTIONABLE:
+            b12.notes = (
+                "B12 and folate are both low: correcting folate alone can mask "
+                "B12 deficiency while neurologic damage progresses. Replete B12 "
+                "before or alongside folate."
+            )
+    if mcv is not None and mcv.status in _HIGH:
+        target = b12 if (b12 and b12.status in _ACTIONABLE) else folate
+        if target is not None and target.status in _ACTIONABLE:
+            target.confidence = min(1.0, target.confidence + 0.1)
+            target.confidence_drivers.append(
+                "Corroborated by elevated MCV (macrocytosis)."
+            )
+            note = (
+                "Elevated MCV (macrocytosis) alongside this low value is "
+                "consistent with megaloblastic anemia from B12/folate deficiency."
+            )
+            target.notes = f"{target.notes} {note}" if target.notes else note
 
     return findings

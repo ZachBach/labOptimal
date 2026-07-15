@@ -8,6 +8,7 @@ orientation only and is meant to be reviewed against the curated dossiers.
 
 from __future__ import annotations
 
+from ..dossiers import dossier_for
 from ..models import Finding, FoodSuggestion, SupplementSuggestion
 from .usda_client import USDAClient
 
@@ -19,6 +20,9 @@ _SUPPLEMENT_FORMS: dict[str, dict[str, str]] = {
     "vitamin_b12": {"form": "Methylcobalamin", "notes": "Sublingual absorbs well if intrinsic factor is limiting."},
     "folate": {"form": "L-methylfolate", "notes": "Preferred over folic acid for MTHFR variants."},
     "magnesium": {"form": "Magnesium glycinate", "notes": "Glycinate is gentle on the gut."},
+    "calcium": {"form": "Calcium citrate", "notes": "Citrate absorbs without stomach acid; split doses above 500 mg."},
+    "zinc": {"form": "Zinc picolinate", "notes": "Take away from iron and calcium; long-term use needs copper to balance."},
+    "copper": {"form": "Copper bisglycinate", "notes": "Usually only needed to offset high-dose zinc."},
 }
 
 
@@ -52,10 +56,14 @@ class Recommender:
 
             form = _SUPPLEMENT_FORMS.get(nutrient)
             if form is not None:
+                # The dossier, when present, supplies a concrete repletion dose;
+                # otherwise the dose stays null and the app shows "As directed".
+                dossier = dossier_for(nutrient)
                 supplements.append(
                     SupplementSuggestion(
                         nutrient=nutrient,
                         form=form["form"],
+                        suggested_dose=dossier.supplement_dose if dossier else None,
                         notes=form.get("notes"),
                     )
                 )

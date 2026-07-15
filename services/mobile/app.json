@@ -21,7 +21,10 @@
       "bundler": "metro"
     },
     "plugins": [
-      "expo-asset"
+      "expo-asset",
+      "expo-font",
+      "expo-status-bar",
+      "expo-secure-store"
     ]
   }
 }

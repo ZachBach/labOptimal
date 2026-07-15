@@ -3,6 +3,7 @@
  * stated up front and a live parsing progress card. Content eases in.
  */
 
+import * as DocumentPicker from 'expo-document-picker';
 import * as ImagePicker from 'expo-image-picker';
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
@@ -37,7 +38,11 @@ export function UploadScreen({ onBack, onPicked }: UploadScreenProps) {
 
   const uploadFile = async () => {
     try {
-      const res = await ImagePicker.launchImageLibraryAsync({ quality: 0.7 });
+      // Accept a PDF export or an image file from the device's document store.
+      const res = await DocumentPicker.getDocumentAsync({
+        type: ['application/pdf', 'image/*'],
+        copyToCacheDirectory: true,
+      });
       if (!res.canceled) onPicked?.(res.assets[0]?.uri);
     } catch {
       onPicked?.();

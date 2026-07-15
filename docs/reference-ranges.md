@@ -6,9 +6,9 @@ is the human-facing view of `services/engine/src/laboptimal_engine/data/referenc
 which is the machine-readable source of truth.
 
 > These ranges are conventional adult intervals seeded for the scaffold. They
-> are for orientation, not medical advice, and each will be reviewed with a
-> cited source before any public release. Sourcing is tracked in the table's
-> `source` column as it is added.
+> are for orientation, not medical advice. Each range carries a cited `source`;
+> the pipeline aggregates those sources into the protocol's `citations` so the
+> provenance travels with every result.
 
 ## Schema
 
@@ -25,8 +25,11 @@ Each canonical analyte has:
 | `optimal_high`   | Upper bound of the functional optimal band (optional).         |
 | `aliases`        | Strings the parser may encounter for this analyte.             |
 | `nutrients`      | Target nutrients a shortfall maps to.                          |
+| `source`         | Citation for the reference interval (flows into `citations`).  |
 
 ## Seeded analytes
+
+Nutrient-backed analytes (a shortfall drives food/supplement recommendations):
 
 | Canonical         | Display              | Unit   | Reference   | Optimal    | Nutrients            |
 |-------------------|----------------------|--------|-------------|------------|----------------------|
@@ -35,7 +38,28 @@ Each canonical analyte has:
 | `vitamin_b12`     | Vitamin B12          | pg/mL  | 200 - 900   | 500 - 900  | vitamin_b12          |
 | `folate_serum`    | Folate, Serum        | ng/mL  | 3 - 20      | 10 - 20    | folate               |
 | `magnesium`       | Magnesium            | mg/dL  | 1.7 - 2.2   | 1.9 - 2.2  | magnesium            |
+| `calcium`         | Calcium              | mg/dL  | 8.6 - 10.3  | 9.0 - 10.0 | calcium              |
+| `zinc`            | Zinc                 | µg/dL  | 60 - 120    | 80 - 120   | zinc                 |
+| `copper`          | Copper               | µg/dL  | 70 - 140    | 80 - 130   | copper               |
 | `hemoglobin`      | Hemoglobin           | g/dL   | 13.5 - 17.5 | 14 - 16    | iron, b12, folate    |
+| `hematocrit`      | Hematocrit           | %      | 38.3 - 48.6 | 40 - 48    | iron, b12, folate    |
+
+Marker analytes (status is shown, but no nutrient is inferred):
+
+| Canonical            | Display                    | Unit   | Reference   | Optimal   |
+|----------------------|----------------------------|--------|-------------|-----------|
+| `mcv`                | Mean Corpuscular Volume    | fL     | 80 - 100    | -         |
+| `crp`                | C-Reactive Protein (hs)    | mg/L   | 0 - 3       | ≤ 1       |
+| `tsh`                | Thyroid-Stimulating Hormone| mIU/L  | 0.4 - 4.0   | 0.5 - 2.5 |
+| `free_t4`            | Free T4                    | ng/dL  | 0.8 - 1.8   | -         |
+| `hba1c`              | Hemoglobin A1c             | %      | 4.0 - 5.6   | ≤ 5.4     |
+| `total_cholesterol`  | Total Cholesterol          | mg/dL  | 125 - 200   | -         |
+| `ldl_cholesterol`    | LDL Cholesterol            | mg/dL  | 0 - 130     | ≤ 100     |
+| `hdl_cholesterol`    | HDL Cholesterol            | mg/dL  | ≥ 40        | ≥ 60      |
+| `triglycerides`      | Triglycerides              | mg/dL  | 0 - 150     | ≤ 100     |
+
+Each analyte's `source` citation lives in `reference_ranges.py`; see that file
+for the exact reference behind every interval.
 
 ## Unit conversions handled
 

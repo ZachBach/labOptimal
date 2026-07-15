@@ -9,6 +9,10 @@
       "status": "deficient",
       "severity": 0.4,
       "confidence": 1.0,
+      "confidence_drivers": [
+        "Unit and reference range printed on the report.",
+        "Corroborated by low hemoglobin (iron-deficiency pattern)."
+      ],
       "target_nutrients": [
         "iron"
       ],
@@ -22,6 +26,9 @@
       "status": "deficient",
       "severity": 0.267,
       "confidence": 1.0,
+      "confidence_drivers": [
+        "Unit and reference range printed on the report."
+      ],
       "target_nutrients": [
         "vitamin_d"
       ],
@@ -35,6 +42,9 @@
       "status": "deficient",
       "severity": 0.044,
       "confidence": 1.0,
+      "confidence_drivers": [
+        "Unit and reference range printed on the report."
+      ],
       "target_nutrients": [
         "iron",
         "vitamin_b12",
@@ -50,10 +60,13 @@
       "status": "suboptimal",
       "severity": 0.633,
       "confidence": 1.0,
+      "confidence_drivers": [
+        "Unit and reference range printed on the report."
+      ],
       "target_nutrients": [
         "vitamin_b12"
       ],
-      "notes": null
+      "notes": "B12 and folate are both low: correcting folate alone can mask B12 deficiency while neurologic damage progresses. Replete B12 before or alongside folate."
     },
     {
       "analyte": "folate_serum",
@@ -63,6 +76,9 @@
       "status": "suboptimal",
       "severity": 0.543,
       "confidence": 1.0,
+      "confidence_drivers": [
+        "Unit and reference range printed on the report."
+      ],
       "target_nutrients": [
         "folate"
       ],
@@ -76,6 +92,9 @@
       "status": "suboptimal",
       "severity": 0.5,
       "confidence": 1.0,
+      "confidence_drivers": [
+        "Unit and reference range printed on the report."
+      ],
       "target_nutrients": [
         "magnesium"
       ],
@@ -85,182 +104,182 @@
   "food_suggestions": [
     {
       "nutrient": "iron",
-      "food_name": "Beef liver",
+      "food_name": "Pumpkin seeds",
       "fdc_id": null,
-      "amount_per_100g": null,
-      "amount_unit": null
+      "amount_per_100g": 8.8,
+      "amount_unit": "mg"
     },
     {
       "nutrient": "iron",
-      "food_name": "Lentils, cooked",
+      "food_name": "Beef liver",
       "fdc_id": null,
-      "amount_per_100g": null,
-      "amount_unit": null
+      "amount_per_100g": 6.2,
+      "amount_unit": "mg"
     },
     {
       "nutrient": "iron",
       "food_name": "Spinach, cooked",
       "fdc_id": null,
-      "amount_per_100g": null,
-      "amount_unit": null
+      "amount_per_100g": 3.6,
+      "amount_unit": "mg"
     },
     {
       "nutrient": "iron",
-      "food_name": "Pumpkin seeds",
+      "food_name": "Lentils, cooked",
       "fdc_id": null,
-      "amount_per_100g": null,
-      "amount_unit": null
+      "amount_per_100g": 3.3,
+      "amount_unit": "mg"
     },
     {
       "nutrient": "vitamin_d",
       "food_name": "Salmon, cooked",
       "fdc_id": null,
-      "amount_per_100g": null,
-      "amount_unit": null
-    },
-    {
-      "nutrient": "vitamin_d",
-      "food_name": "Sardines, canned",
-      "fdc_id": null,
-      "amount_per_100g": null,
-      "amount_unit": null
+      "amount_per_100g": 13.1,
+      "amount_unit": "\u00b5g"
     },
     {
       "nutrient": "vitamin_d",
       "food_name": "Egg yolk",
       "fdc_id": null,
-      "amount_per_100g": null,
-      "amount_unit": null
+      "amount_per_100g": 5.4,
+      "amount_unit": "\u00b5g"
+    },
+    {
+      "nutrient": "vitamin_d",
+      "food_name": "Sardines, canned",
+      "fdc_id": null,
+      "amount_per_100g": 4.8,
+      "amount_unit": "\u00b5g"
     },
     {
       "nutrient": "vitamin_d",
       "food_name": "Fortified milk",
       "fdc_id": null,
-      "amount_per_100g": null,
-      "amount_unit": null
-    },
-    {
-      "nutrient": "vitamin_b12",
-      "food_name": "Clams, cooked",
-      "fdc_id": null,
-      "amount_per_100g": null,
-      "amount_unit": null
-    },
-    {
-      "nutrient": "vitamin_b12",
-      "food_name": "Beef liver",
-      "fdc_id": null,
-      "amount_per_100g": null,
-      "amount_unit": null
-    },
-    {
-      "nutrient": "vitamin_b12",
-      "food_name": "Sardines",
-      "fdc_id": null,
-      "amount_per_100g": null,
-      "amount_unit": null
+      "amount_per_100g": 1.3,
+      "amount_unit": "\u00b5g"
     },
     {
       "nutrient": "vitamin_b12",
       "food_name": "Nutritional yeast (fortified)",
       "fdc_id": null,
-      "amount_per_100g": null,
-      "amount_unit": null
+      "amount_per_100g": 115.0,
+      "amount_unit": "\u00b5g"
     },
     {
-      "nutrient": "folate",
-      "food_name": "Lentils, cooked",
+      "nutrient": "vitamin_b12",
+      "food_name": "Clams, cooked",
       "fdc_id": null,
-      "amount_per_100g": null,
-      "amount_unit": null
+      "amount_per_100g": 98.9,
+      "amount_unit": "\u00b5g"
     },
     {
-      "nutrient": "folate",
-      "food_name": "Chickpeas",
+      "nutrient": "vitamin_b12",
+      "food_name": "Beef liver",
       "fdc_id": null,
-      "amount_per_100g": null,
-      "amount_unit": null
+      "amount_per_100g": 70.6,
+      "amount_unit": "\u00b5g"
     },
     {
-      "nutrient": "folate",
-      "food_name": "Asparagus",
+      "nutrient": "vitamin_b12",
+      "food_name": "Sardines",
       "fdc_id": null,
-      "amount_per_100g": null,
-      "amount_unit": null
+      "amount_per_100g": 8.9,
+      "amount_unit": "\u00b5g"
     },
     {
       "nutrient": "folate",
       "food_name": "Spinach, raw",
       "fdc_id": null,
-      "amount_per_100g": null,
-      "amount_unit": null
+      "amount_per_100g": 194.0,
+      "amount_unit": "\u00b5g"
+    },
+    {
+      "nutrient": "folate",
+      "food_name": "Lentils, cooked",
+      "fdc_id": null,
+      "amount_per_100g": 181.0,
+      "amount_unit": "\u00b5g"
+    },
+    {
+      "nutrient": "folate",
+      "food_name": "Chickpeas",
+      "fdc_id": null,
+      "amount_per_100g": 172.0,
+      "amount_unit": "\u00b5g"
+    },
+    {
+      "nutrient": "folate",
+      "food_name": "Asparagus",
+      "fdc_id": null,
+      "amount_per_100g": 149.0,
+      "amount_unit": "\u00b5g"
     },
     {
       "nutrient": "magnesium",
       "food_name": "Pumpkin seeds",
       "fdc_id": null,
-      "amount_per_100g": null,
-      "amount_unit": null
+      "amount_per_100g": 592.0,
+      "amount_unit": "mg"
     },
     {
       "nutrient": "magnesium",
       "food_name": "Almonds",
       "fdc_id": null,
-      "amount_per_100g": null,
-      "amount_unit": null
-    },
-    {
-      "nutrient": "magnesium",
-      "food_name": "Black beans",
-      "fdc_id": null,
-      "amount_per_100g": null,
-      "amount_unit": null
+      "amount_per_100g": 270.0,
+      "amount_unit": "mg"
     },
     {
       "nutrient": "magnesium",
       "food_name": "Dark chocolate",
       "fdc_id": null,
-      "amount_per_100g": null,
-      "amount_unit": null
+      "amount_per_100g": 228.0,
+      "amount_unit": "mg"
+    },
+    {
+      "nutrient": "magnesium",
+      "food_name": "Black beans",
+      "fdc_id": null,
+      "amount_per_100g": 70.0,
+      "amount_unit": "mg"
     }
   ],
   "supplement_suggestions": [
     {
       "nutrient": "iron",
       "form": "Ferrous bisglycinate",
-      "suggested_dose": null,
+      "suggested_dose": "18\u201365 mg elemental iron daily; recheck ferritin in 8\u201312 weeks.",
       "notes": "Better tolerated than sulfate; pair with vitamin C."
     },
     {
       "nutrient": "vitamin_d",
       "form": "Vitamin D3 (cholecalciferol)",
-      "suggested_dose": null,
+      "suggested_dose": "1,000\u20132,000 IU (25\u201350 \u00b5g) daily maintenance, with a fat-containing meal.",
       "notes": "Take with a fat-containing meal."
     },
     {
       "nutrient": "vitamin_b12",
       "form": "Methylcobalamin",
-      "suggested_dose": null,
+      "suggested_dose": "500\u20131,000 \u00b5g daily (oral or sublingual); more if malabsorption.",
       "notes": "Sublingual absorbs well if intrinsic factor is limiting."
     },
     {
       "nutrient": "folate",
       "form": "L-methylfolate",
-      "suggested_dose": null,
+      "suggested_dose": "400\u2013800 \u00b5g daily (L-methylfolate preferred).",
       "notes": "Preferred over folic acid for MTHFR variants."
     },
     {
       "nutrient": "magnesium",
       "form": "Magnesium glycinate",
-      "suggested_dose": null,
+      "suggested_dose": "200\u2013400 mg elemental daily (glycinate or citrate).",
       "notes": "Glycinate is gentle on the gut."
     }
   ],
   "meal_plan": {
     "focus": [
-      "Beef liver 3x",
+      "Pumpkin seeds 3x",
       "Egg yolk 3x",
-      "Clams 1x"
+      "Nutritional yeast (fortified) 2x"
     ],
     "days": [
       {
@@ -268,9 +287,9 @@
         "meals": [
           {
             "slot": "breakfast",
-            "title": "Beef liver",
+            "title": "Pumpkin seeds",
             "foods": [
-              "Beef liver"
+              "Pumpkin seeds"
             ],
             "target_nutrients": [
               "iron"
@@ -288,9 +307,9 @@
           },
           {
             "slot": "dinner",
-            "title": "Clams, cooked",
+            "title": "Nutritional yeast (fortified)",
             "foods": [
-              "Clams, cooked"
+              "Nutritional yeast (fortified)"
             ],
             "target_nutrients": [
               "vitamin_b12"
@@ -303,9 +322,9 @@
         "meals": [
           {
             "slot": "breakfast",
-            "title": "Lentils, cooked",
+            "title": "Spinach, raw",
             "foods": [
-              "Lentils, cooked"
+              "Spinach, raw"
             ],
             "target_nutrients": [
               "folate"
@@ -323,9 +342,9 @@
           },
           {
             "slot": "dinner",
-            "title": "Lentils, cooked",
+            "title": "Beef liver",
             "foods": [
-              "Lentils, cooked"
+              "Beef liver"
             ],
             "target_nutrients": [
               "iron"
@@ -348,9 +367,9 @@
           },
           {
             "slot": "lunch",
-            "title": "Beef liver",
+            "title": "Clams, cooked",
             "foods": [
-              "Beef liver"
+              "Clams, cooked"
             ],
             "target_nutrients": [
               "vitamin_b12"
@@ -358,9 +377,9 @@
           },
           {
             "slot": "dinner",
-            "title": "Chickpeas",
+            "title": "Lentils, cooked",
             "foods": [
-              "Chickpeas"
+              "Lentils, cooked"
             ],
             "target_nutrients": [
               "folate"
@@ -393,9 +412,9 @@
           },
           {
             "slot": "dinner",
-            "title": "Sardines, canned",
+            "title": "Egg yolk",
             "foods": [
-              "Sardines, canned"
+              "Egg yolk"
             ],
             "target_nutrients": [
               "vitamin_d"
@@ -418,9 +437,9 @@
           },
           {
             "slot": "lunch",
-            "title": "Asparagus",
+            "title": "Chickpeas",
             "foods": [
-              "Asparagus"
+              "Chickpeas"
             ],
             "target_nutrients": [
               "folate"
@@ -428,9 +447,9 @@
           },
           {
             "slot": "dinner",
-            "title": "Pumpkin seeds",
+            "title": "Lentils, cooked",
             "foods": [
-              "Pumpkin seeds"
+              "Lentils, cooked"
             ],
             "target_nutrients": [
               "iron"
@@ -463,9 +482,9 @@
           },
           {
             "slot": "dinner",
-            "title": "Sardines",
+            "title": "Beef liver",
             "foods": [
-              "Sardines"
+              "Beef liver"
             ],
             "target_nutrients": [
               "vitamin_b12"
@@ -478,9 +497,9 @@
         "meals": [
           {
             "slot": "breakfast",
-            "title": "Spinach, raw",
+            "title": "Asparagus",
             "foods": [
-              "Spinach, raw"
+              "Asparagus"
             ],
             "target_nutrients": [
               "folate"
@@ -488,9 +507,9 @@
           },
           {
             "slot": "lunch",
-            "title": "Beef liver",
+            "title": "Pumpkin seeds",
             "foods": [
-              "Beef liver"
+              "Pumpkin seeds"
             ],
             "target_nutrients": [
               "iron"
@@ -498,9 +517,9 @@
           },
           {
             "slot": "dinner",
-            "title": "Egg yolk",
+            "title": "Sardines, canned",
             "foods": [
-              "Egg yolk"
+              "Sardines, canned"
             ],
             "target_nutrients": [
               "vitamin_d"
@@ -512,7 +531,15 @@
     "notes": "Built to raise iron, vitamin D, vitamin B12 over the next month."
   },
   "citations": [
-    "USDA FoodData Central. https://fdc.nal.usda.gov/"
+    "USDA FoodData Central. https://fdc.nal.usda.gov/",
+    "NIH Office of Dietary Supplements, Folate fact sheet (2024).",
+    "NIH Office of Dietary Supplements, Iron fact sheet (2023).",
+    "NIH Office of Dietary Supplements, Magnesium fact sheet (2022).",
+    "NIH Office of Dietary Supplements, Vitamin B12 fact sheet (2024).",
+    "NIH Office of Dietary Supplements, Vitamin D fact sheet (2023).",
+    "NIH Office of Dietary Supplements, Vitamin D fact sheet (2023); Endocrine Society Clinical Practice Guideline (2011).",
+    "WHO, Haemoglobin concentrations for the diagnosis of anaemia (2011).",
+    "WHO, Serum ferritin concentrations for iron status (2020)."
   ],
   "warnings": []
 }

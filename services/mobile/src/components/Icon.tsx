@@ -12,6 +12,7 @@ export type IconName =
   | 'camera'
   | 'aperture'
   | 'chevron-left'
+  | 'chevron-right'
   | 'lock'
   | 'home'
   | 'bar-chart'
@@ -21,7 +22,10 @@ export type IconName =
   | 'user'
   | 'capsule'
   | 'search'
-  | 'globe';
+  | 'globe'
+  | 'file-text'
+  | 'clock'
+  | 'log-out';
 
 const GLYPHS: Record<IconName, React.ReactNode> = {
   camera: (
@@ -37,6 +41,7 @@ const GLYPHS: Record<IconName, React.ReactNode> = {
     </>
   ),
   'chevron-left': <Path d="m15 18-6-6 6-6" />,
+  'chevron-right': <Path d="m9 18 6-6-6-6" />,
   check: <Path d="M20 6 9 17l-5-5" />,
   lock: (
     <>
@@ -93,6 +98,27 @@ const GLYPHS: Record<IconName, React.ReactNode> = {
       <Circle cx={12} cy={12} r={9} />
       <Path d="M3 12h18" />
       <Path d="M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18" />
+    </>
+  ),
+  'file-text': (
+    <>
+      <Path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
+      <Path d="M14 3v5h5" />
+      <Path d="M9 13h6" />
+      <Path d="M9 17h6" />
+    </>
+  ),
+  clock: (
+    <>
+      <Circle cx={12} cy={12} r={9} />
+      <Path d="M12 7v5l3 2" />
+    </>
+  ),
+  'log-out': (
+    <>
+      <Path d="M15 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3" />
+      <Path d="M10 17l5-5-5-5" />
+      <Path d="M15 12H3" />
     </>
   ),
 };

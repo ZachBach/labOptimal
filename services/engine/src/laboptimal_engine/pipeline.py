@@ -13,7 +13,9 @@ import argparse
 import json
 import sys
 
+from .data.reference_ranges import REFERENCE_RANGES
 from .deficiency.detector import DeficiencyDetector
+from .dossiers import dossier_for
 from .mealplan.generator import MealPlanGenerator
 from .models import Protocol
 from .normalize.normalizer import Normalizer
@@ -44,7 +46,6 @@ def analyze_text(text: str) -> Protocol:
     recommender = Recommender()
 
     raw_readings = parser.parse(text)
-    confidences = {r.canonical: r.confidence for r in raw_readings}
 
     readings = []
     warnings: list[str] = []
@@ -55,18 +56,40 @@ def analyze_text(text: str) -> Protocol:
             continue
         readings.append(normalized)
 
-    findings = detector.detect(readings, confidences=confidences)
+    # Confidence now travels on each normalized reading (unit/range provenance);
+    # the detector reads it directly rather than a separate parser dict.
+    findings = detector.detect(readings)
     foods, supplements = recommender.recommend(findings)
     meal_plan = MealPlanGenerator().generate(findings, foods)
+
+    citations = _citations_for(readings, supplements)
 
     return Protocol(
         findings=findings,
         food_suggestions=foods,
         supplement_suggestions=supplements,
         meal_plan=meal_plan,
-        citations=CITATIONS,
+        citations=citations,
         warnings=warnings,
     )
+
+
+def _citations_for(readings, supplements) -> list[str]:
+    """Sources for this report: reference ranges, nutrient dossiers, plus USDA.
+
+    Provenance travels with the result: every range and dossier cited, deduped
+    and sorted for a deterministic protocol.
+    """
+    sources: set[str] = set()
+    for reading in readings:
+        rng = REFERENCE_RANGES.get(reading.canonical)
+        if rng is not None and rng.source:
+            sources.add(rng.source)
+    for supplement in supplements:
+        dossier = dossier_for(supplement.nutrient)
+        if dossier is not None:
+            sources.update(dossier.citations)
+    return CITATIONS + sorted(sources)
 
 
 def analyze(image_bytes: bytes, ocr: OCRProvider | None = None) -> Protocol:

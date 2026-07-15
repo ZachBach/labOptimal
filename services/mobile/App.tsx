@@ -1,7 +1,9 @@
 /**
- * App root: load the brand fonts, provide scan state, and mount the navigator.
- * Web deep-link paths (/results, /plan, /marker, ...) are wired through the
- * linking config.
+ * App root: load the brand fonts, provide auth + scan state, and mount the
+ * navigator. Routing is gated on auth: a loading splash while the session is
+ * restored, the Auth screen when signed out, and the main app once signed in or
+ * continuing as a guest. Web deep-link paths are wired through the linking
+ * config.
  */
 
 import { LinkingOptions, NavigationContainer } from '@react-navigation/native';
@@ -11,6 +13,8 @@ import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 import { RootNavigator, RootStackParamList } from '@/navigation/RootNavigator';
+import { AuthScreen } from '@/screens/AuthScreen';
+import { AuthProvider, useAuth } from '@/state/AuthContext';
 import { ScanProvider } from '@/state/ScanContext';
 import { colors } from '@/theme/tokens';
 import { useAppFonts } from '@/theme/useAppFonts';
@@ -32,31 +36,56 @@ const linking: LinkingOptions<RootStackParamList> = {
       Upload: 'upload',
       Processing: 'processing',
       Marker: 'marker',
+      History: 'history',
     },
   },
 };
+
+function Splash() {
+  return (
+    <View style={styles.loading}>
+      <ActivityIndicator color={colors.brand} />
+    </View>
+  );
+}
+
+/** Chooses the auth screen or the main app based on session state. */
+function Gate() {
+  const { status } = useAuth();
+
+  if (status === 'loading') {
+    return <Splash />;
+  }
+
+  if (status === 'signedOut') {
+    return <AuthScreen />;
+  }
+
+  // signedIn | guest -> full app, with scan state scoped to the session.
+  return (
+    <ScanProvider>
+      <NavigationContainer linking={linking}>
+        <RootNavigator />
+      </NavigationContainer>
+    </ScanProvider>
+  );
+}
 
 export default function App() {
   const fontsLoaded = useAppFonts();
 
   if (!fontsLoaded) {
-    return (
-      <View style={styles.loading}>
-        <ActivityIndicator color={colors.brand} />
-      </View>
-    );
+    return <Splash />;
   }
 
   return (
     <SafeAreaProvider>
-      <ScanProvider>
+      <AuthProvider>
         <StatusBar style="dark" />
         <SafeAreaView style={styles.safe} edges={['top']}>
-          <NavigationContainer linking={linking}>
-            <RootNavigator />
-          </NavigationContainer>
+          <Gate />
         </SafeAreaView>
-      </ScanProvider>
+      </AuthProvider>
     </SafeAreaProvider>
   );
 }
