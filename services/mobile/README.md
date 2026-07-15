@@ -70,10 +70,26 @@ src/
     LibraryScreen.tsx    nutrient dossier library
 ```
 
-## Consuming real data
+## The real engine (wired)
 
-Every screen already takes its data from `src/data/sample.ts` view models. To go
-live, map an API `Protocol` (see `src/types/protocol.ts`) onto those view models:
-`bucketForStatus` collapses the engine's five-way `Finding.status` into the
-three-way in-range / watch / low the UI paints. Keep the token hex values in
-`src/theme/tokens.ts` identical to `docs/brand/tokens.css`.
+Scanning calls the engine over HTTP. The flow: Upload picks an image
+(`expo-image-picker`) → `ScanContext.startScan(uri)` POSTs it to the engine
+service (`services/engine/service.py`, `POST /analyze`) → `src/api/mapProtocol.ts`
+maps the returned `Protocol` onto the screen view models. If the engine is
+unreachable, it falls back to `src/data/sample.ts` so the app still completes.
+
+Run both sides:
+
+```bash
+# 1. Engine service (in services/engine, with the venv active)
+pip install -e ".[service]" && laboptimal-engine-serve      # :8000
+
+# 2. Mobile, pointed at your machine's LAN IP so a phone can reach it
+EXPO_PUBLIC_API_URL=http://<your-lan-ip>:8000 npm start
+```
+
+On web dev the default `http://localhost:8000` works. `src/api/` holds the client,
+config, and the `protocolToResults` mapper; `bucketForStatus` (in
+`src/types/protocol.ts`) collapses the engine's five-way `Finding.status` into the
+UI's in-range / watch / low. Keep the token hex values in `src/theme/tokens.ts`
+identical to `docs/brand/tokens.css`.

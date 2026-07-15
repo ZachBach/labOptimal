@@ -27,7 +27,7 @@ interface DeficiencyScreenProps {
 }
 
 export function DeficiencyScreen({ onBack, onOpenMarker, onOpenPlan }: DeficiencyScreenProps) {
-  const { priorityMarker, rankedFindings, planTags, summary } = useResults();
+  const { priorityMarker, rankedFindings, planTags, mealNote, summary } = useResults();
   return (
     <ScrollView
       style={styles.screen}
@@ -95,9 +95,7 @@ export function DeficiencyScreen({ onBack, onOpenMarker, onOpenPlan }: Deficienc
                 <Chip key={t} label={t} variant="onGreen" />
               ))}
             </View>
-            <Body style={styles.planNote}>
-              Meals lean toward more oily fish and leafy greens this week.
-            </Body>
+            <Body style={styles.planNote}>{mealNote}</Body>
           </LinearGradient>
         </Reveal>
       </View>

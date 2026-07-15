@@ -52,10 +52,13 @@ Owns: `services/engine/**`, `docs/**`, `README.md`, `TASKS.md`
 Ordered by leverage. Items 1-3 close gaps between the README's promise and what
 the engine does today; 4-5 raise output quality; 6 is the integration option.
 
-1. [ ] **Meal-plan generation.** The product promises meal plans; the engine only
-   emits per-nutrient food suggestions. Add a `mealplan/` module that assembles
-   food suggestions into daily meals biased toward the deficient nutrients, and
-   add `meal_plan` to the `Protocol` (contract change -> update `api-contract.md`).
+1. [x] **Meal-plan generation.** `mealplan/generator.py` assembles the food
+   suggestions into a 7-day plan (breakfast/lunch/dinner), distributing slots in
+   proportion to nutrient need (deficient outweighs suboptimal, scaled by
+   severity) via largest-remainder allocation + smooth weighted round robin.
+   Deterministic (golden-file safe). `Protocol.meal_plan` added; contract
+   documented in `api-contract.md`; mobile types + mapper consume `focus` and
+   `notes`. 7 unit tests; verified over the live service.
 2. [ ] **Real nutrient amounts from USDA.** `FoodSuggestion.amount_per_100g` is
    null today. Fetch per-food nutrient amounts so foods can be ranked by nutrient
    density, not just membership.
@@ -66,9 +69,17 @@ the engine does today; 4-5 raise output quality; 6 is the integration option.
    B12 masking of folate deficiency, ferritin interpreted with CRP.
 5. [ ] **Confidence model.** Down-weight assumed units and missing printed ranges;
    surface confidence drivers so the app can explain them.
-6. [ ] **Engine HTTP service (FastAPI).** A thin `POST /analyze` wrapper over
-   `pipeline.analyze` for the sidecar integration option (see checkpoint 2). Lives
-   in `services/engine/` because it wraps engine internals.
+6. [x] **Engine HTTP service (FastAPI).** `services/engine/service.py` exposes
+   `POST /analyze` (image / text / demo) over `pipeline.analyze`, returning the
+   `Protocol`. Run with `laboptimal-engine-serve` (`pip install -e ".[service]"`).
+   The mobile app calls it directly today; the Node API can proxy it later.
+
+   **Phase B is wired**: the mobile `ScanContext.startScan` uploads the picked
+   image to this service and maps the returned `Protocol` onto the UI view models
+   (`services/mobile/src/api/`), with a graceful fallback to sample data when the
+   engine is unreachable. Verified end to end against the live service (real
+   findings, real USDA foods). Remaining engine gap surfaced by this: supplement
+   `suggested_dose` is null, so the app shows "As directed" until doses are added.
 
 ### Nutrient dossier library (spans initiatives)
 

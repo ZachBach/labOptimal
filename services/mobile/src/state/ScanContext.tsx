@@ -16,6 +16,8 @@ import React, {
   useState,
 } from 'react';
 
+import { analyzeDemo, analyzeImage } from '@/api/client';
+import { protocolToResults } from '@/api/mapProtocol';
 import * as sample from '@/data/sample';
 import type { MarkerVM, SupplementVM } from '@/data/sample';
 
@@ -26,6 +28,7 @@ export interface Results {
   rankedFindings: MarkerVM[];
   supplements: SupplementVM[];
   mealFocus: string[];
+  mealNote: string;
   planTags: string[];
 }
 
@@ -36,6 +39,7 @@ const baseResults: Results = {
   rankedFindings: sample.rankedFindings,
   supplements: sample.supplements,
   mealFocus: sample.mealFocus,
+  mealNote: sample.mealNote,
   planTags: sample.planTags,
 };
 
@@ -48,7 +52,6 @@ function today(): string {
 export type ScanStatus = 'idle' | 'processing' | 'complete';
 
 const TOTAL_MARKERS = 24;
-const SCAN_MS = 2400;
 
 interface ScanState {
   status: ScanStatus;
@@ -76,26 +79,40 @@ export function ScanProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const startScan = useCallback((_imageUri?: string) => {
+  const startScan = useCallback((imageUri?: string) => {
     clear();
     setStatus('processing');
-    setProgress(0);
+    setProgress(0.06);
     setMarkersFound(0);
-    const steps = 40;
-    let step = 0;
+
+    // Ease progress toward 90% while the request is in flight, then finish when
+    // the engine responds.
+    let p = 0.06;
     timer.current = setInterval(() => {
-      step += 1;
-      const t = step / steps;
-      setProgress(t);
-      setMarkersFound(Math.min(TOTAL_MARKERS, Math.round(TOTAL_MARKERS * t * 1.15)));
-      if (step >= steps) {
+      p = Math.min(0.9, p + 0.03);
+      setProgress(p);
+      setMarkersFound(Math.round(TOTAL_MARKERS * p));
+    }, 90);
+
+    const request = imageUri ? analyzeImage(imageUri) : analyzeDemo();
+    request
+      .then((protocol) => {
+        const mapped = protocolToResults(protocol);
         clear();
-        // A real parse would return fresh findings here; stamp today's date so
-        // the result visibly reflects the new scan.
-        setResults({ ...baseResults, summary: { ...baseResults.summary, labDate: today() } });
+        setResults(mapped);
+        setMarkersFound(mapped.summary.markersTracked);
+        setProgress(1);
         setStatus('complete');
-      }
-    }, SCAN_MS / steps);
+      })
+      .catch(() => {
+        // Offline or no engine running: fall back to sample results so the flow
+        // still completes and the app stays demoable without a server.
+        clear();
+        setResults({ ...baseResults, summary: { ...baseResults.summary, labDate: today() } });
+        setMarkersFound(TOTAL_MARKERS);
+        setProgress(1);
+        setStatus('complete');
+      });
   }, []);
 
   const reset = useCallback(() => {

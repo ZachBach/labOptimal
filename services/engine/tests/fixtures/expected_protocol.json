@@ -256,6 +256,261 @@
       "notes": "Glycinate is gentle on the gut."
     }
   ],
+  "meal_plan": {
+    "focus": [
+      "Beef liver 3x",
+      "Egg yolk 3x",
+      "Clams 1x"
+    ],
+    "days": [
+      {
+        "day": 1,
+        "meals": [
+          {
+            "slot": "breakfast",
+            "title": "Beef liver",
+            "foods": [
+              "Beef liver"
+            ],
+            "target_nutrients": [
+              "iron"
+            ]
+          },
+          {
+            "slot": "lunch",
+            "title": "Salmon, cooked",
+            "foods": [
+              "Salmon, cooked"
+            ],
+            "target_nutrients": [
+              "vitamin_d"
+            ]
+          },
+          {
+            "slot": "dinner",
+            "title": "Clams, cooked",
+            "foods": [
+              "Clams, cooked"
+            ],
+            "target_nutrients": [
+              "vitamin_b12"
+            ]
+          }
+        ]
+      },
+      {
+        "day": 2,
+        "meals": [
+          {
+            "slot": "breakfast",
+            "title": "Lentils, cooked",
+            "foods": [
+              "Lentils, cooked"
+            ],
+            "target_nutrients": [
+              "folate"
+            ]
+          },
+          {
+            "slot": "lunch",
+            "title": "Pumpkin seeds",
+            "foods": [
+              "Pumpkin seeds"
+            ],
+            "target_nutrients": [
+              "magnesium"
+            ]
+          },
+          {
+            "slot": "dinner",
+            "title": "Lentils, cooked",
+            "foods": [
+              "Lentils, cooked"
+            ],
+            "target_nutrients": [
+              "iron"
+            ]
+          }
+        ]
+      },
+      {
+        "day": 3,
+        "meals": [
+          {
+            "slot": "breakfast",
+            "title": "Egg yolk",
+            "foods": [
+              "Egg yolk"
+            ],
+            "target_nutrients": [
+              "vitamin_d"
+            ]
+          },
+          {
+            "slot": "lunch",
+            "title": "Beef liver",
+            "foods": [
+              "Beef liver"
+            ],
+            "target_nutrients": [
+              "vitamin_b12"
+            ]
+          },
+          {
+            "slot": "dinner",
+            "title": "Chickpeas",
+            "foods": [
+              "Chickpeas"
+            ],
+            "target_nutrients": [
+              "folate"
+            ]
+          }
+        ]
+      },
+      {
+        "day": 4,
+        "meals": [
+          {
+            "slot": "breakfast",
+            "title": "Almonds",
+            "foods": [
+              "Almonds"
+            ],
+            "target_nutrients": [
+              "magnesium"
+            ]
+          },
+          {
+            "slot": "lunch",
+            "title": "Spinach, cooked",
+            "foods": [
+              "Spinach, cooked"
+            ],
+            "target_nutrients": [
+              "iron"
+            ]
+          },
+          {
+            "slot": "dinner",
+            "title": "Sardines, canned",
+            "foods": [
+              "Sardines, canned"
+            ],
+            "target_nutrients": [
+              "vitamin_d"
+            ]
+          }
+        ]
+      },
+      {
+        "day": 5,
+        "meals": [
+          {
+            "slot": "breakfast",
+            "title": "Nutritional yeast (fortified)",
+            "foods": [
+              "Nutritional yeast (fortified)"
+            ],
+            "target_nutrients": [
+              "vitamin_b12"
+            ]
+          },
+          {
+            "slot": "lunch",
+            "title": "Asparagus",
+            "foods": [
+              "Asparagus"
+            ],
+            "target_nutrients": [
+              "folate"
+            ]
+          },
+          {
+            "slot": "dinner",
+            "title": "Pumpkin seeds",
+            "foods": [
+              "Pumpkin seeds"
+            ],
+            "target_nutrients": [
+              "iron"
+            ]
+          }
+        ]
+      },
+      {
+        "day": 6,
+        "meals": [
+          {
+            "slot": "breakfast",
+            "title": "Egg yolk",
+            "foods": [
+              "Egg yolk"
+            ],
+            "target_nutrients": [
+              "vitamin_d"
+            ]
+          },
+          {
+            "slot": "lunch",
+            "title": "Almonds",
+            "foods": [
+              "Almonds"
+            ],
+            "target_nutrients": [
+              "magnesium"
+            ]
+          },
+          {
+            "slot": "dinner",
+            "title": "Sardines",
+            "foods": [
+              "Sardines"
+            ],
+            "target_nutrients": [
+              "vitamin_b12"
+            ]
+          }
+        ]
+      },
+      {
+        "day": 7,
+        "meals": [
+          {
+            "slot": "breakfast",
+            "title": "Spinach, raw",
+            "foods": [
+              "Spinach, raw"
+            ],
+            "target_nutrients": [
+              "folate"
+            ]
+          },
+          {
+            "slot": "lunch",
+            "title": "Beef liver",
+            "foods": [
+              "Beef liver"
+            ],
+            "target_nutrients": [
+              "iron"
+            ]
+          },
+          {
+            "slot": "dinner",
+            "title": "Egg yolk",
+            "foods": [
+              "Egg yolk"
+            ],
+            "target_nutrients": [
+              "vitamin_d"
+            ]
+          }
+        ]
+      }
+    ],
+    "notes": "Built to raise iron, vitamin D, vitamin B12 over the next month."
+  },
   "citations": [
     "USDA FoodData Central. https://fdc.nal.usda.gov/"
   ],

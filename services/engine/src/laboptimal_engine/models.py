@@ -78,6 +78,30 @@ class SupplementSuggestion(BaseModel):
     notes: str | None = None
 
 
+class MealIdea(BaseModel):
+    """One meal in the plan: a slot, the foods it uses, and why."""
+
+    slot: str = Field(..., description="'breakfast' | 'lunch' | 'dinner'")
+    title: str = Field(..., description="Human-readable meal line, e.g. 'Lentils, cooked'")
+    foods: list[str] = Field(default_factory=list, description="Food names from food_suggestions")
+    target_nutrients: list[str] = Field(default_factory=list)
+
+
+class MealPlanDay(BaseModel):
+    day: int = Field(..., ge=1, description="1-based day index within the plan")
+    meals: list[MealIdea] = Field(default_factory=list)
+
+
+class MealPlan(BaseModel):
+    """A week of meals assembled from the food suggestions, biased toward the
+    most deficient nutrients. `focus` is the chip-sized weekly summary the UI
+    shows ('Salmon 3x', 'Lentils daily')."""
+
+    focus: list[str] = Field(default_factory=list)
+    days: list[MealPlanDay] = Field(default_factory=list)
+    notes: str | None = None
+
+
 class Protocol(BaseModel):
     """Top-level engine output. This is the API response body for a completed scan."""
 
@@ -86,6 +110,7 @@ class Protocol(BaseModel):
     findings: list[Finding] = Field(default_factory=list)
     food_suggestions: list[FoodSuggestion] = Field(default_factory=list)
     supplement_suggestions: list[SupplementSuggestion] = Field(default_factory=list)
+    meal_plan: MealPlan | None = None
     citations: list[str] = Field(default_factory=list)
     warnings: list[str] = Field(default_factory=list)
 

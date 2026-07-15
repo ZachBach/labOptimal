@@ -40,12 +40,31 @@ export interface SupplementSuggestion {
   notes?: string | null;
 }
 
+export interface MealIdea {
+  slot: 'breakfast' | 'lunch' | 'dinner';
+  title: string;
+  foods: string[];
+  target_nutrients: string[];
+}
+
+export interface MealPlanDay {
+  day: number;
+  meals: MealIdea[];
+}
+
+export interface MealPlan {
+  focus: string[];
+  days: MealPlanDay[];
+  notes?: string | null;
+}
+
 export interface Protocol {
   generated_at: string;
   engine_version: string;
   findings: Finding[];
   food_suggestions: FoodSuggestion[];
   supplement_suggestions: SupplementSuggestion[];
+  meal_plan?: MealPlan | null;
   citations: string[];
   warnings: string[];
 }

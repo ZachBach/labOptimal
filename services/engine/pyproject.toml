@@ -22,9 +22,11 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest>=9.0"]
+service = ["fastapi>=0.115", "uvicorn[standard]>=0.32", "python-multipart>=0.0.12"]
 
 [project.scripts]
 laboptimal-engine = "laboptimal_engine.pipeline:main"
+laboptimal-engine-serve = "laboptimal_engine.service:run"
 
 [tool.setuptools.packages.find]
 where = ["src"]

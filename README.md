@@ -120,7 +120,7 @@ The three services integrate through two documents so the two build lanes can pr
 
 Change a contract, and both lanes get the update in one place.
 
-## Getting started (engine)
+## Getting started (engine development)
 
 ```bash
 cd services/engine
@@ -130,6 +130,61 @@ pip install -e ".[dev]"            # editable install puts the package on the pa
 python -m laboptimal_engine.pipeline --demo
 pytest
 ```
+
+## Running the stack (engine service + mobile app)
+
+The mobile app scans a lab report and sends it to the engine's HTTP service.
+Two terminals, PowerShell.
+
+**Terminal 1 — engine service** (leave it running):
+
+```powershell
+cd services\engine
+.\.venv\Scripts\laboptimal-engine-serve.exe
+```
+
+First run only, install the service deps before that:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -e ".[service]"
+```
+
+You should see `Uvicorn running on http://0.0.0.0:8000`. Sanity check: open
+`http://localhost:8000/health` in a browser and expect `{"status":"ok", ...}`.
+Stop with Ctrl+C. A `only one usage of each socket address` error means an old
+instance is still running; stop that one first.
+
+**Terminal 2 — mobile app:**
+
+```powershell
+cd services\mobile
+npm install                          # first time only
+npx expo start -c
+```
+
+Press `w` for the browser, or scan the QR with Expo Go on a phone. On the web,
+the app reaches the engine at `http://localhost:8000` automatically.
+
+**On a physical phone**, localhost is the phone itself, so point the app at
+your computer's LAN IP before starting Expo (find it with `ipconfig`, e.g.
+`192.168.1.104`), with the phone on the same Wi-Fi:
+
+```powershell
+$env:EXPO_PUBLIC_API_URL = "http://<your-lan-ip>:8000"
+npx expo start -c
+```
+
+One-time firewall rule so the phone can reach port 8000 (admin PowerShell):
+
+```powershell
+New-NetFirewallRule -DisplayName "LabOptimal engine 8000" -Direction Inbound -LocalPort 8000 -Protocol TCP -Action Allow -Profile Private
+```
+
+Phone-side sanity check: open `http://<your-lan-ip>:8000/health` in the phone's
+browser. If the engine is unreachable, the app falls back to bundled sample
+results so the flow still completes; real engine results for the demo panel
+show Ferritin as the priority finding, while the fallback shows the sample
+score of 86.
 
 ## License
 

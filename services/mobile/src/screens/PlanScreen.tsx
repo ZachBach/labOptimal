@@ -23,7 +23,7 @@ interface PlanScreenProps {
 }
 
 export function PlanScreen({ onBack }: PlanScreenProps) {
-  const { supplements, mealFocus, summary } = useResults();
+  const { supplements, mealFocus, mealNote, summary } = useResults();
   const [taken, setTaken] = useState<Record<string, boolean>>({});
   const takenCount = useMemo(() => Object.values(taken).filter(Boolean).length, [taken]);
 
@@ -74,9 +74,7 @@ export function PlanScreen({ onBack }: PlanScreenProps) {
                 <Chip key={m} label={m} variant="onGreen" />
               ))}
             </View>
-            <Body style={styles.mealNote}>
-              Chosen to raise vitamin D, magnesium, and omega-3 over the next month.
-            </Body>
+            <Body style={styles.mealNote}>{mealNote}</Body>
           </LinearGradient>
         </Reveal>
       </View>

@@ -33,6 +33,7 @@ cd services/engine && PYTHONPATH=src python -m laboptimal_engine.pipeline --demo
   "findings": [ /* Finding[] */ ],
   "food_suggestions": [ /* FoodSuggestion[] */ ],
   "supplement_suggestions": [ /* SupplementSuggestion[] */ ],
+  "meal_plan": { /* MealPlan, or null when no actionable findings */ },
   "citations": [ "string" ],
   "warnings": [ "string" ]
 }
@@ -74,6 +75,35 @@ cd services/engine && PYTHONPATH=src python -m laboptimal_engine.pipeline --demo
   "form": "Ferrous bisglycinate",
   "suggested_dose": null,    // left null until the dossier library lands
   "notes": "Better tolerated than sulfate; pair with vitamin C."
+}
+```
+
+### MealPlan
+
+A week of meals assembled from `food_suggestions`, with slots distributed in
+proportion to how badly each nutrient is needed (deficient outweighs
+suboptimal, scaled by severity). Deterministic for a given panel. `null` when
+there are no actionable findings or no foods.
+
+```jsonc
+{
+  "focus": ["Beef liver 3x", "Egg yolk 3x", "Clams 1x"],  // chip-sized weekly summary
+  "days": [
+    {
+      "day": 1,                       // 1-based
+      "meals": [
+        {
+          "slot": "breakfast",        // breakfast | lunch | dinner
+          "title": "Egg yolk",        // human-readable meal line
+          "foods": ["Egg yolk"],      // names drawn from food_suggestions
+          "target_nutrients": ["vitamin_d"]
+        }
+        // lunch, dinner ...
+      ]
+    }
+    // days 2..7
+  ],
+  "notes": "Built to raise iron, vitamin D, vitamin B12 over the next month."
 }
 ```
 

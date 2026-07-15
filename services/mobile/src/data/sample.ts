@@ -68,6 +68,8 @@ export const supplements: SupplementVM[] = [
 
 export const mealFocus = ['Oily fish 2x', 'Leafy greens daily', 'Fortified foods'];
 
+export const mealNote = 'Chosen to raise vitamin D, magnesium, and omega-3 over the next month.';
+
 export const planTags = ['D3 + K2', 'Magnesium glycinate'];
 
 export const categories = ['Nutrients', 'Microbiome', 'Metabolic'];

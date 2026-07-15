@@ -44,6 +44,25 @@ pytest -q
 `requirements.txt` is kept for pinned installs; `pip install -e ".[dev]"` is the
 developer path and is what makes the module and console script importable.
 
+## HTTP service
+
+`service.py` exposes the engine over HTTP so the mobile app (and later the Node
+API) can run a real scan. `POST /analyze` accepts a multipart `image` (OCR'd via
+the configured provider), an already-extracted `text`, or `demo=true` for the
+bundled sample panel, and returns the `Protocol` JSON.
+
+```bash
+pip install -e ".[service]"
+laboptimal-engine-serve             # uvicorn on 0.0.0.0:8000 (ENGINE_PORT to override)
+
+# Smoke test (no OCR binary needed)
+curl -F demo=true http://localhost:8000/analyze
+curl -F "text=Vitamin D 22 ng/mL 30-100" http://localhost:8000/analyze
+```
+
+CORS is dev-open so the Expo app can call it directly. The mobile client points
+at it via `EXPO_PUBLIC_API_URL` (see `services/mobile/src/api/config.ts`).
+
 ## Notes
 
 - OCR is pluggable. `TesseractProvider` is the local default and needs the

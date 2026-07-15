@@ -14,6 +14,7 @@ import json
 import sys
 
 from .deficiency.detector import DeficiencyDetector
+from .mealplan.generator import MealPlanGenerator
 from .models import Protocol
 from .normalize.normalizer import Normalizer
 from .ocr.base import OCRProvider, StaticTextProvider
@@ -56,11 +57,13 @@ def analyze_text(text: str) -> Protocol:
 
     findings = detector.detect(readings, confidences=confidences)
     foods, supplements = recommender.recommend(findings)
+    meal_plan = MealPlanGenerator().generate(findings, foods)
 
     return Protocol(
         findings=findings,
         food_suggestions=foods,
         supplement_suggestions=supplements,
+        meal_plan=meal_plan,
         citations=CITATIONS,
         warnings=warnings,
     )
