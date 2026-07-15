@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node
+node_modules/
+dist/
+build/
+.expo/
+*.log
+npm-debug.log*
+
+# Env / secrets
+.env
+.env.local
+*.local
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Data / uploads (never commit lab images)
+uploads/
+*.pdf
+samples/*.png
+samples/*.jpg
+samples/*.jpeg
+
+# Internal planning + LLC/IP experimental trademark artifacts
+TASKS.md
+trademark-experiments/
+legal/trademark-experiments/
+docs/brand/trademark-experiments/
+*.trademark-draft.*
+*.tm-draft.*

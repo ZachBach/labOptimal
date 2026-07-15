@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ScanStatus {
+  PROCESSING
+  COMPLETE
+  FAILED
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  scans Scan[]
+
+  @@map("users")
+}
+
+model Scan {
+  id        String     @id @default(cuid())
+  userId    String     @map("user_id")
+  imagePath String     @map("image_path")
+  status    ScanStatus @default(PROCESSING)
+  createdAt DateTime   @default(now()) @map("created_at")
+  updatedAt DateTime   @updatedAt @map("updated_at")
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  result Result?
+
+  @@index([userId])
+  @@map("scans")
+}
+
+model Result {
+  id        String   @id @default(cuid())
+  scanId    String   @unique @map("scan_id")
+  protocol  Json
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  scan Scan @relation(fields: [scanId], references: [id], onDelete: Cascade)
+
+  @@map("results")
+}
+
+model FoodsCache {
+  id        String   @id @default(cuid())
+  cacheKey  String   @unique @map("cache_key")
+  payload   Json
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([expiresAt])
+  @@map("foods_cache")
+}

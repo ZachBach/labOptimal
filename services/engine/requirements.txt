@@ -1,0 +1,13 @@
+# LabOptimal Python engine dependencies
+# Analytical core: OCR -> parse -> normalize -> detect -> recommend
+
+numpy>=2.5
+pandas>=3.0
+pydantic>=2.13
+pillow>=12.0
+pytesseract>=0.3.13
+requests>=2.34
+python-dotenv>=1.2
+
+# Dev / test
+pytest>=9.0
