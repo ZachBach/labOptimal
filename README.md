@@ -10,9 +10,9 @@ LabOptimal is open source by design. Code is MIT, curated nutrient dossiers are 
 2. OCR extracts the raw text.
 3. The engine parses analytes, values, units, and reference ranges out of that text.
 4. Values are normalized to canonical units and mapped to canonical analytes.
-5. Deficiency detection compares each value against reference ranges and applies interaction-aware rules.
-6. Detected deficiencies are mapped to nutrients, then to foods (USDA FoodData Central) and supplement options.
-7. You get a structured protocol: what you are low on, what to eat, what to supplement, and why, with citations.
+5. Deficiency detection compares each value against reference and optimal ranges and applies interaction-aware rules (iron/ferritin/CRP, B12/folate, calcium/vitamin D, zinc/copper, and more). Each finding carries a confidence score with the reasons behind it.
+6. Detected deficiencies are mapped to nutrients, then to foods ranked by nutrient density (USDA FoodData Central), supplement options with dossier-backed doses, and a deterministic 7-day meal plan.
+7. You get a structured protocol: what you are low on, how sure the engine is, what to eat, what to supplement, and why — with citations for every reference range and dossier.
 
 ## Architecture
 
@@ -99,92 +99,135 @@ labOptimal/
   services/
     engine/            Python analytical core (OCR, parsing, detection, recommender)
       src/laboptimal_engine/
+        parsing/ normalize/ deficiency/ recommend/ mealplan/ ocr/
+        dossiers/        Curated nutrient dossiers (CC BY 4.0)
+        data/            Reference ranges (cited)
+        service.py       FastAPI /analyze sidecar
       tests/
-      requirements.txt
       pyproject.toml
-    api/               Node.js REST API + PostgreSQL (Copilot lane)
-    mobile/            React Native app (Copilot lane)
+    api/               Node.js (Fastify) REST API + Prisma/PostgreSQL: auth, scans, history
+    mobile/            React Native (Expo SDK 57) app: capture, auth, results, plan, history
   docs/
-    api-contract.md    Shared contract between engine, api, and mobile
-    reference-ranges.md
-  TASKS.md             Task split: Claude lane vs Copilot/GPT-5 lane
+    api-contract.md       Shared contract between engine, api, and mobile
+    reference-ranges.md   Canonical analytes + cited reference ranges
+    nutrient-dossiers.md  Dossier schema + license
+  docker-compose.yml   Local PostgreSQL
+  TASKS.md             Build plan and status
   README.md
 ```
 
 ## Contracts first
 
-The three services integrate through two documents so the two build lanes can proceed in parallel without stepping on each other:
+The services integrate through three documents so work can proceed in parallel without stepping on each other:
 
-- `docs/api-contract.md` defines the JSON the engine returns and the API exposes.
-- `docs/reference-ranges.md` defines the canonical analytes and reference-range schema the detector consumes.
+- `docs/api-contract.md` defines the JSON the engine returns and the API exposes (findings with confidence + drivers, food suggestions with amounts, supplements with doses, the meal plan, and citations).
+- `docs/reference-ranges.md` defines the canonical analytes and the cited reference-range schema the detector consumes.
+- `docs/nutrient-dossiers.md` defines the dossier schema that backs supplement doses and citations.
 
-Change a contract, and both lanes get the update in one place.
+Change a contract, and every service picks up the update in one place.
 
-## Getting started (engine development)
+## Getting started (engine)
 
 ```bash
 cd services/engine
-py -m venv .venv
-source .venv/Scripts/activate      # Windows Git Bash
-pip install -e ".[dev]"            # editable install puts the package on the path
+py -m venv .venv                        # or: python -m venv .venv
+source .venv/Scripts/activate           # Windows Git Bash
+pip install -e ".[dev,service]"         # editable install + FastAPI service extras
 python -m laboptimal_engine.pipeline --demo
-pytest
+pytest                                  # 29 tests
 ```
 
-## Running the stack (engine service + mobile app)
+`--demo` runs the whole pipeline on a bundled panel and prints the protocol JSON
+— the fastest way to see the contract shape.
 
-The mobile app scans a lab report and sends it to the engine's HTTP service.
-Two terminals, PowerShell.
+## Running the app locally
 
-**Terminal 1 — engine service** (leave it running):
+The mobile app has two data paths, chosen by auth state:
+
+- **Guest** — talks to the Python engine's `/analyze` directly. Needs only the
+  engine. Great for demoing the analysis.
+- **Signed in** — goes through the Node API: `POST /scans`, then polls
+  `GET /scans/:id`, with persistence and history. Needs the full stack.
+
+Two env vars point the app at its backends (defaults shown):
+`EXPO_PUBLIC_ENGINE_URL` (engine, `http://localhost:8000`) and
+`EXPO_PUBLIC_API_URL` (Node API, `http://localhost:3000`).
+
+### Tier 1 — quick web (guest flow)
+
+Engine + Expo, no database. Commands are Git Bash.
+
+```bash
+# Terminal A — engine (leave running)
+cd services/engine
+./.venv/Scripts/laboptimal-engine-serve.exe        # Uvicorn on http://0.0.0.0:8000
+
+# Terminal B — mobile
+cd services/mobile
+npm install                                        # first time only
+npx expo start
+```
+
+Press `w` for the browser (http://localhost:8081) → **Continue as guest** →
+Upload. On the demo panel you should see **Ferritin as the priority finding**
+(real engine). A score of **86** means the engine was unreachable and the app
+fell back to bundled sample data — a banner says so.
+
+### Tier 2 — full stack (auth + history)
+
+Adds PostgreSQL + the Node API. Needs Docker Desktop.
+
+```bash
+# Terminal C — Postgres
+cd /path/to/labOptimal
+docker compose up -d
+
+# Terminal D — Node API
+cd services/api
+cp .env.example .env
+# point the engine subprocess at the engine venv's python (plain `python` may not be on PATH):
+sed -i 's#ENGINE_PYTHON_CMD=python#ENGINE_PYTHON_CMD='"$PWD"'/../engine/.venv/Scripts/python.exe#' .env
+npm install
+npm run prisma:generate
+npm run prisma:migrate
+npm run dev                                        # http://localhost:3000
+```
+
+Keep the engine (Tier 1, Terminal A) and Expo running. In the app, **Create
+account** → scan → **Account → Scan history** lists your scans.
+
+### Tier 3 — on a phone
+
+Point the app at your machine's LAN IP (find it with `ipconfig`), phone on the
+same Wi-Fi:
+
+```bash
+cd services/mobile
+export EXPO_PUBLIC_ENGINE_URL="http://<your-lan-ip>:8000"
+export EXPO_PUBLIC_API_URL="http://<your-lan-ip>:3000"
+npx expo start
+```
+
+Open in **Expo Go** (must support SDK 57 — update it if you hit an "unsupported
+SDK" message), or build a standalone **dev client** that never needs SDK
+matching:
+
+```bash
+npx eas-cli login
+npx eas-cli build --platform android --profile development   # free; .apk
+# iOS dev builds on a device require the paid Apple Developer Program
+```
+
+One-time firewall rules so the phone can reach the ports (admin PowerShell):
 
 ```powershell
-cd services\engine
-.\.venv\Scripts\laboptimal-engine-serve.exe
+New-NetFirewallRule -DisplayName "LabOptimal 8000" -Direction Inbound -LocalPort 8000 -Protocol TCP -Action Allow -Profile Private
+New-NetFirewallRule -DisplayName "LabOptimal 3000" -Direction Inbound -LocalPort 3000 -Protocol TCP -Action Allow -Profile Private
 ```
 
-First run only, install the service deps before that:
-
-```powershell
-.\.venv\Scripts\python.exe -m pip install -e ".[service]"
-```
-
-You should see `Uvicorn running on http://0.0.0.0:8000`. Sanity check: open
-`http://localhost:8000/health` in a browser and expect `{"status":"ok", ...}`.
-Stop with Ctrl+C. A `only one usage of each socket address` error means an old
-instance is still running; stop that one first.
-
-**Terminal 2 — mobile app:**
-
-```powershell
-cd services\mobile
-npm install                          # first time only
-npx expo start -c
-```
-
-Press `w` for the browser, or scan the QR with Expo Go on a phone. On the web,
-the app reaches the engine at `http://localhost:8000` automatically.
-
-**On a physical phone**, localhost is the phone itself, so point the app at
-your computer's LAN IP before starting Expo (find it with `ipconfig`, e.g.
-`192.168.1.104`), with the phone on the same Wi-Fi:
-
-```powershell
-$env:EXPO_PUBLIC_API_URL = "http://<your-lan-ip>:8000"
-npx expo start -c
-```
-
-One-time firewall rule so the phone can reach port 8000 (admin PowerShell):
-
-```powershell
-New-NetFirewallRule -DisplayName "LabOptimal engine 8000" -Direction Inbound -LocalPort 8000 -Protocol TCP -Action Allow -Profile Private
-```
-
-Phone-side sanity check: open `http://<your-lan-ip>:8000/health` in the phone's
-browser. If the engine is unreachable, the app falls back to bundled sample
-results so the flow still completes; real engine results for the demo panel
-show Ferritin as the priority finding, while the fallback shows the sample
-score of 86.
+> **OCR note:** photo scans need the Tesseract binary on the engine host. Without
+> it, image analysis fails (text and `--demo` still work). Install Tesseract, or
+> implement the `CloudOCRProvider`, to enable real photo uploads.
 
 ## License
 

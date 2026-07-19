@@ -3,12 +3,20 @@
  *
  * The engine gives a status and severity per finding but not the raw reference
  * bounds, so the range-bar position is derived from status + severity here. This
- * is the one place that translates the analytical contract into UI shapes.
+ * is the one place that translates the analytical contract into UI shapes, and
+ * it carries the engine's richer signals through — confidence + drivers, the
+ * clinical note, per-nutrient food sources with amounts, and the meal plan.
  */
 
-import type { MarkerVM, SupplementVM } from '@/data/sample';
+import type { FoodVM, MarkerVM, MealDayVM, SupplementVM } from '@/data/sample';
 import type { Results } from '@/state/ScanContext';
-import { bucketForStatus, type AnalyteStatus, type Finding, type Protocol } from '@/types/protocol';
+import {
+  bucketForStatus,
+  type AnalyteStatus,
+  type Finding,
+  type FoodSuggestion,
+  type Protocol,
+} from '@/types/protocol';
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 function today(): string {
@@ -19,6 +27,14 @@ function today(): string {
 function formatValue(v: number): string {
   return Number.isInteger(v) ? String(v) : String(Math.round(v * 100) / 100);
 }
+
+const STATUS_LABEL: Record<AnalyteStatus, string> = {
+  deficient: 'Deficient',
+  suboptimal: 'Suboptimal',
+  optimal: 'Optimal',
+  elevated: 'Elevated',
+  high: 'High',
+};
 
 /** 0..100 dot position along the deficient / optimal / high bar. */
 function markerPos(status: AnalyteStatus, severity: number): number {
@@ -37,13 +53,35 @@ function markerPos(status: AnalyteStatus, severity: number): number {
   }
 }
 
-function toMarker(f: Finding): MarkerVM {
+function formatAmount(food: FoodSuggestion): string | undefined {
+  if (food.amount_per_100g == null) return undefined;
+  const unit = food.amount_unit ? ` ${food.amount_unit}` : '';
+  return `${food.amount_per_100g}${unit} / 100g`;
+}
+
+/** Group food suggestions by nutrient, formatting each amount, preserving order. */
+function foodsByNutrient(foods: FoodSuggestion[]): Record<string, FoodVM[]> {
+  const map: Record<string, FoodVM[]> = {};
+  for (const f of foods) {
+    (map[f.nutrient] ??= []).push({ name: f.food_name, amount: formatAmount(f) });
+  }
+  return map;
+}
+
+function toMarker(f: Finding, foods: Record<string, FoodVM[]>): MarkerVM {
+  const nutrient = f.target_nutrients[0];
   return {
     name: f.display_name,
     value: `${formatValue(f.value)} ${f.unit}`,
     markerPos: markerPos(f.status, f.severity),
     bucket: bucketForStatus(f.status),
     category: 'Nutrients',
+    nutrient,
+    statusLabel: STATUS_LABEL[f.status],
+    confidence: f.confidence,
+    confidenceDrivers: f.confidence_drivers ?? [],
+    notes: f.notes ?? null,
+    foods: nutrient ? (foods[nutrient] ?? []) : [],
   };
 }
 
@@ -51,13 +89,16 @@ const NEUTRAL: MarkerVM = { name: 'All clear', value: '', markerPos: 50, bucket:
 
 export function protocolToResults(p: Protocol): Results {
   const findings = p.findings;
+  const foods = foodsByNutrient(p.food_suggestions);
   const inRange = findings.filter((f) => bucketForStatus(f.status) === 'in_range').length;
   const watch = findings.filter((f) => bucketForStatus(f.status) === 'watch').length;
   const low = findings.filter((f) => bucketForStatus(f.status) === 'low').length;
 
   // Engine already returns findings ranked most-actionable-first.
-  const actionable = findings.filter((f) => bucketForStatus(f.status) !== 'in_range').map(toMarker);
-  const priorityMarker = actionable[0] ?? (findings[0] ? toMarker(findings[0]) : NEUTRAL);
+  const actionable = findings
+    .filter((f) => bucketForStatus(f.status) !== 'in_range')
+    .map((f) => toMarker(f, foods));
+  const priorityMarker = actionable[0] ?? (findings[0] ? toMarker(findings[0], foods) : NEUTRAL);
 
   const supplements: SupplementVM[] = p.supplement_suggestions.map((s) => ({
     name: s.form,
@@ -71,6 +112,11 @@ export function protocolToResults(p: Protocol): Results {
     ? p.meal_plan.focus
     : Array.from(new Set(p.food_suggestions.map((f) => f.food_name))).slice(0, 3);
   const planTags = supplements.slice(0, 2).map((s) => s.name);
+
+  const mealDays: MealDayVM[] = (p.meal_plan?.days ?? []).map((d) => ({
+    day: d.day,
+    meals: d.meals.map((m) => ({ slot: m.slot, title: m.title })),
+  }));
 
   return {
     summary: {
@@ -88,5 +134,7 @@ export function protocolToResults(p: Protocol): Results {
     mealNote:
       p.meal_plan?.notes ?? 'Meals chosen from foods rich in your target nutrients.',
     planTags,
+    mealDays,
+    citations: p.citations ?? [],
   };
 }

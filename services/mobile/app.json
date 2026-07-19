@@ -10,9 +10,11 @@
       "backgroundColor": "#F5F1E6"
     },
     "ios": {
-      "supportsTablet": false
+      "supportsTablet": false,
+      "bundleIdentifier": "com.laboptimal.app"
     },
     "android": {
+      "package": "com.laboptimal.app",
       "adaptiveIcon": {
         "backgroundColor": "#F5F1E6"
       }

@@ -9,6 +9,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { Card } from '@/components/Card';
 import { Chip } from '@/components/Chip';
+import { ConfidenceMeter } from '@/components/ConfidenceMeter';
 import { MarkerRow } from '@/components/MarkerRow';
 import { RangeBar } from '@/components/RangeBar';
 import { ScreenHeader } from '@/components/ScreenHeader';
@@ -16,8 +17,8 @@ import { StatusPill } from '@/components/StatusPill';
 import { Reveal } from '@/components/motion';
 import { Body, BodyStrong, Heading, Label, Mono } from '@/components/Text';
 import type { MarkerVM } from '@/data/sample';
-import { useResults } from '@/state/ScanContext';
-import { colors, font, space } from '@/theme/tokens';
+import { useScan } from '@/state/ScanContext';
+import { colors, font, space, tint } from '@/theme/tokens';
 import { diagonal, gradients } from '@/theme/gradients';
 
 interface DeficiencyScreenProps {
@@ -27,7 +28,8 @@ interface DeficiencyScreenProps {
 }
 
 export function DeficiencyScreen({ onBack, onOpenMarker, onOpenPlan }: DeficiencyScreenProps) {
-  const { priorityMarker, rankedFindings, planTags, mealNote, summary } = useResults();
+  const { results, usedFallback } = useScan();
+  const { priorityMarker, rankedFindings, planTags, mealNote, summary } = results;
   return (
     <ScrollView
       style={styles.screen}
@@ -37,6 +39,16 @@ export function DeficiencyScreen({ onBack, onOpenMarker, onOpenPlan }: Deficienc
       <ScreenHeader title="Deficiencies" subtitle={`From labs dated ${summary.labDate}`} onBack={onBack} />
 
       <View style={styles.body}>
+        {usedFallback ? (
+          <Reveal delay={20}>
+            <View style={styles.fallback}>
+              <Mono style={styles.fallbackText}>
+                Showing sample data — we couldn't reach the analyzer. Scan again when it's back.
+              </Mono>
+            </View>
+          </Reveal>
+        ) : null}
+
         {/* Priority finding */}
         <Reveal delay={40}>
           <Card style={styles.block}>
@@ -58,6 +70,14 @@ export function DeficiencyScreen({ onBack, onOpenMarker, onOpenPlan }: Deficienc
               <Mono style={styles.scaleLabel}>Optimal</Mono>
               <Mono style={styles.scaleLabel}>High</Mono>
             </View>
+            {priorityMarker.confidence != null ? (
+              <View style={styles.confRow}>
+                <Mono style={styles.confLabel}>Confidence</Mono>
+                <View style={styles.confMeter}>
+                  <ConfidenceMeter confidence={priorityMarker.confidence} />
+                </View>
+              </View>
+            ) : null}
           </Card>
         </Reveal>
 
@@ -116,6 +136,35 @@ const styles = StyleSheet.create({
   },
   block: {
     marginBottom: 13,
+  },
+  fallback: {
+    marginBottom: 13,
+    padding: 11,
+    borderRadius: 11,
+    backgroundColor: tint.watch,
+  },
+  fallbackText: {
+    fontSize: 10.5,
+    lineHeight: 15,
+    color: colors.statusWatch,
+  },
+  confRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    marginTop: 14,
+    paddingTop: 12,
+    borderTopWidth: 1,
+    borderTopColor: colors.hairline,
+  },
+  confLabel: {
+    fontSize: 9,
+    letterSpacing: 0.6,
+    textTransform: 'uppercase',
+    color: colors.textFaint,
+  },
+  confMeter: {
+    flex: 1,
   },
   priorityHead: {
     flexDirection: 'row',

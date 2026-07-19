@@ -1,25 +1,21 @@
 /**
- * Marker detail: one marker in depth. Current value, 12-month trend, what a low
- * reading affects, and a link to the open dossier. Cards cascade in.
+ * Marker detail: one marker in depth, driven by the real finding. Current value
+ * and range, how confident the reading is (with the reasons why), the engine's
+ * clinical note / interaction insight, and the best food sources for the
+ * nutrient with their amounts.
  */
 
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { Card } from '@/components/Card';
+import { ConfidenceMeter } from '@/components/ConfidenceMeter';
 import { RangeBar } from '@/components/RangeBar';
 import { ScreenHeader } from '@/components/ScreenHeader';
 import { StatusPill } from '@/components/StatusPill';
-import { TrendBars } from '@/components/TrendBars';
 import { Reveal } from '@/components/motion';
 import { Body, Heading, Label, Mono } from '@/components/Text';
-import {
-  priorityMarker,
-  vitaminDEffects,
-  vitaminDSourceCount,
-  vitaminDTrend,
-  vitaminDTrendMonths,
-} from '@/data/sample';
+import { priorityMarker } from '@/data/sample';
 import type { MarkerVM } from '@/data/sample';
 import { colors, font, space } from '@/theme/tokens';
 
@@ -28,9 +24,24 @@ interface MarkerScreenProps {
   onBack?: () => void;
 }
 
+function whyItMatters(marker: MarkerVM): string {
+  if (marker.notes) return marker.notes;
+  switch (marker.bucket) {
+    case 'low':
+      return `${marker.name} is outside its reference range — raising it is the priority here.`;
+    case 'watch':
+      return `${marker.name} is within range but below the optimal band, so it's worth nudging up.`;
+    default:
+      return `${marker.name} is within its optimal band.`;
+  }
+}
+
 export function MarkerScreen({ marker = priorityMarker, onBack }: MarkerScreenProps) {
   const [value, ...unitParts] = marker.value.split(' ');
   const unit = unitParts.join(' ');
+  const drivers = marker.confidenceDrivers ?? [];
+  const foods = marker.foods ?? [];
+  const numberColor = marker.bucket === 'in_range' ? colors.statusInRange : colors.statusLow;
 
   return (
     <ScrollView
@@ -47,11 +58,11 @@ export function MarkerScreen({ marker = priorityMarker, onBack }: MarkerScreenPr
               <View>
                 <Label style={styles.currentLabel}>Current</Label>
                 <View style={styles.currentValue}>
-                  <Heading style={styles.bigNumber}>{value}</Heading>
+                  <Heading style={[styles.bigNumber, { color: numberColor }]}>{value}</Heading>
                   <Mono style={styles.bigUnit}>{unit}</Mono>
                 </View>
               </View>
-              <StatusPill variant={marker.bucket} />
+              <StatusPill variant={marker.bucket} label={marker.statusLabel} />
             </View>
             <RangeBar markerPos={marker.markerPos} bucket={marker.bucket} size="lg" delay={320} />
             <View style={styles.scale}>
@@ -64,34 +75,51 @@ export function MarkerScreen({ marker = priorityMarker, onBack }: MarkerScreenPr
           </Card>
         </Reveal>
 
-        <Reveal delay={130}>
-          <Card style={styles.block}>
-            <View style={styles.trendHead}>
-              <Label>12-month trend</Label>
-              <Mono style={{ color: colors.statusLow }}>Below range</Mono>
-            </View>
-            <TrendBars values={vitaminDTrend} months={vitaminDTrendMonths} bucket={marker.bucket} />
-          </Card>
-        </Reveal>
-
-        <Reveal delay={220}>
-          <Card style={styles.block}>
-            <Label style={styles.effectsLabel}>What low {marker.name.toLowerCase()} affects</Label>
-            <View style={styles.effects}>
-              {vitaminDEffects.map((effect) => (
-                <View key={effect} style={styles.effectRow}>
-                  <View style={styles.effectDot} />
-                  <Body style={styles.effectText}>{effect}</Body>
+        {marker.confidence != null ? (
+          <Reveal delay={110}>
+            <Card style={styles.block}>
+              <Label style={styles.cardLabel}>Reading confidence</Label>
+              <ConfidenceMeter confidence={marker.confidence} />
+              {drivers.length > 0 ? (
+                <View style={styles.drivers}>
+                  {drivers.map((d) => (
+                    <View key={d} style={styles.driverRow}>
+                      <View style={styles.driverDot} />
+                      <Body style={styles.driverText}>{d}</Body>
+                    </View>
+                  ))}
                 </View>
-              ))}
-            </View>
+              ) : null}
+            </Card>
+          </Reveal>
+        ) : null}
+
+        <Reveal delay={190}>
+          <Card style={styles.block}>
+            <Label style={styles.cardLabel}>Why it matters</Label>
+            <Body style={styles.note}>{whyItMatters(marker)}</Body>
           </Card>
         </Reveal>
 
-        <Reveal delay={300}>
+        {foods.length > 0 ? (
+          <Reveal delay={270}>
+            <Card style={styles.block}>
+              <Label style={styles.cardLabel}>Best foods{marker.nutrient ? ` for ${marker.name.toLowerCase()}` : ''}</Label>
+              <View style={styles.foods}>
+                {foods.map((f) => (
+                  <View key={f.name} style={styles.foodRow}>
+                    <Body style={styles.foodName}>{f.name}</Body>
+                    {f.amount ? <Mono style={styles.foodAmount}>{f.amount}</Mono> : null}
+                  </View>
+                ))}
+              </View>
+            </Card>
+          </Reveal>
+        ) : null}
+
+        <Reveal delay={340}>
           <View style={styles.footer}>
-            <Mono style={styles.footerText}>Synthesized from {vitaminDSourceCount} sources</Mono>
-            <Mono style={styles.footerLink}>Open dossier ›</Mono>
+            <Mono style={styles.footerText}>Ranges cited · foods from USDA FoodData Central</Mono>
           </View>
         </Reveal>
       </View>
@@ -131,7 +159,6 @@ const styles = StyleSheet.create({
     fontFamily: font.serif,
     fontSize: 32,
     lineHeight: 34,
-    color: colors.statusLow,
   },
   bigUnit: {
     fontSize: 11,
@@ -146,36 +173,56 @@ const styles = StyleSheet.create({
     fontSize: 9,
     color: colors.textFaint,
   },
-  trendHead: {
+  cardLabel: {
+    marginBottom: 11,
+  },
+  drivers: {
+    gap: 8,
+    marginTop: 13,
+  },
+  driverRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: 9,
+  },
+  driverDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    marginTop: 6,
+    backgroundColor: colors.brand,
+  },
+  driverText: {
+    flex: 1,
+    fontSize: 12.5,
+    lineHeight: 17,
+    color: '#3A4A40',
+  },
+  note: {
+    fontSize: 13,
+    lineHeight: 19,
+    color: '#3A4A40',
+  },
+  foods: {
+    gap: 10,
+  },
+  foodRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 11,
   },
-  effectsLabel: {
-    marginBottom: 10,
+  foodName: {
+    fontSize: 13.5,
+    color: colors.ink,
   },
-  effects: {
-    gap: 9,
-  },
-  effectRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 9,
-  },
-  effectDot: {
-    width: 7,
-    height: 7,
-    borderRadius: 2,
-    backgroundColor: colors.statusLow,
-  },
-  effectText: {
-    fontSize: 12.5,
-    color: '#3A4A40',
+  foodAmount: {
+    fontFamily: font.monoSemiBold,
+    fontSize: 10,
+    color: colors.brand,
   },
   footer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     paddingTop: 12,
     paddingHorizontal: 4,
@@ -185,10 +232,5 @@ const styles = StyleSheet.create({
   footerText: {
     fontSize: 10,
     color: colors.textFaint,
-  },
-  footerLink: {
-    fontFamily: font.monoSemiBold,
-    fontSize: 10,
-    color: colors.brand,
   },
 });

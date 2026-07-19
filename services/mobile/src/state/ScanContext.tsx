@@ -26,7 +26,7 @@ import { analyzeDemo, analyzeImage } from '@/api/client';
 import { protocolToResults } from '@/api/mapProtocol';
 import { useAuth } from '@/state/AuthContext';
 import * as sample from '@/data/sample';
-import type { MarkerVM, SupplementVM } from '@/data/sample';
+import type { MarkerVM, MealDayVM, SupplementVM } from '@/data/sample';
 
 export interface Results {
   summary: typeof sample.summary;
@@ -37,6 +37,8 @@ export interface Results {
   mealFocus: string[];
   mealNote: string;
   planTags: string[];
+  mealDays: MealDayVM[];
+  citations: string[];
 }
 
 const baseResults: Results = {
@@ -48,6 +50,8 @@ const baseResults: Results = {
   mealFocus: sample.mealFocus,
   mealNote: sample.mealNote,
   planTags: sample.planTags,
+  mealDays: sample.mealDays,
+  citations: sample.citations,
 };
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -65,6 +69,8 @@ interface ScanState {
   progress: number;
   markersFound: number;
   results: Results;
+  /** True when the last scan fell back to bundled sample data (backend unreachable). */
+  usedFallback: boolean;
   history: apiClient.ScanSummary[];
   /** Kick off a scan of the picked image (or the demo panel when omitted). */
   startScan: (imageUri?: string) => void;
@@ -83,6 +89,7 @@ export function ScanProvider({ children }: { children: React.ReactNode }) {
   const [progress, setProgress] = useState(0);
   const [markersFound, setMarkersFound] = useState(0);
   const [results, setResults] = useState<Results>(baseResults);
+  const [usedFallback, setUsedFallback] = useState(false);
   const [history, setHistory] = useState<apiClient.ScanSummary[]>([]);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -97,6 +104,7 @@ export function ScanProvider({ children }: { children: React.ReactNode }) {
     const mapped = protocolToResults(protocol);
     clear();
     setResults(mapped);
+    setUsedFallback(false);
     setMarkersFound(mapped.summary.markersTracked);
     setProgress(1);
     setStatus('complete');
@@ -105,6 +113,7 @@ export function ScanProvider({ children }: { children: React.ReactNode }) {
   const finishWithSample = useCallback(() => {
     clear();
     setResults({ ...baseResults, summary: { ...baseResults.summary, labDate: today() } });
+    setUsedFallback(true);
     setMarkersFound(TOTAL_MARKERS);
     setProgress(1);
     setStatus('complete');
@@ -196,6 +205,7 @@ export function ScanProvider({ children }: { children: React.ReactNode }) {
         progress,
         markersFound,
         results,
+        usedFallback,
         history,
         startScan,
         openScan,

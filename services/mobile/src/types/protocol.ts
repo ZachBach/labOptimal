@@ -21,6 +21,7 @@ export interface Finding {
   status: AnalyteStatus;
   severity: number;
   confidence: number;
+  confidence_drivers?: string[];
   target_nutrients: string[];
   notes?: string | null;
 }

@@ -13,7 +13,7 @@ import { Icon } from '@/components/Icon';
 import { ScreenHeader } from '@/components/ScreenHeader';
 import { PressableScale, Reveal } from '@/components/motion';
 import { Body, BodyStrong, Label, Mono } from '@/components/Text';
-import type { SupplementVM } from '@/data/sample';
+import type { MealDayVM, SupplementVM } from '@/data/sample';
 import { useResults } from '@/state/ScanContext';
 import { colors, font, radius, space, tint } from '@/theme/tokens';
 import { diagonal, gradients } from '@/theme/gradients';
@@ -23,7 +23,7 @@ interface PlanScreenProps {
 }
 
 export function PlanScreen({ onBack }: PlanScreenProps) {
-  const { supplements, mealFocus, mealNote, summary } = useResults();
+  const { supplements, mealFocus, mealNote, mealDays, summary } = useResults();
   const [taken, setTaken] = useState<Record<string, boolean>>({});
   const takenCount = useMemo(() => Object.values(taken).filter(Boolean).length, [taken]);
 
@@ -77,8 +77,38 @@ export function PlanScreen({ onBack }: PlanScreenProps) {
             <Body style={styles.mealNote}>{mealNote}</Body>
           </LinearGradient>
         </Reveal>
+
+        {mealDays.length > 0 ? (
+          <Reveal delay={230}>
+            <View style={styles.sectionHead}>
+              <Label>The week, day by day</Label>
+              <BodyStrong style={styles.link}>{mealDays.length} days</BodyStrong>
+            </View>
+            <View style={styles.days}>
+              {mealDays.map((day) => (
+                <DayCard key={day.day} day={day} />
+              ))}
+            </View>
+          </Reveal>
+        ) : null}
       </View>
     </ScrollView>
+  );
+}
+
+function DayCard({ day }: { day: MealDayVM }) {
+  return (
+    <Card style={styles.dayCard}>
+      <Label style={styles.dayLabel}>Day {day.day}</Label>
+      <View style={styles.dayMeals}>
+        {day.meals.map((meal) => (
+          <View key={meal.slot} style={styles.mealRow}>
+            <Mono style={styles.mealSlot}>{meal.slot}</Mono>
+            <Body style={styles.mealTitle}>{meal.title}</Body>
+          </View>
+        ))}
+      </View>
+    </Card>
   );
 }
 
@@ -195,5 +225,35 @@ const styles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 17,
     color: colors.onGreen,
+  },
+  days: {
+    gap: 10,
+  },
+  dayCard: {
+    paddingVertical: 13,
+  },
+  dayLabel: {
+    marginBottom: 10,
+  },
+  dayMeals: {
+    gap: 9,
+  },
+  mealRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  mealSlot: {
+    fontFamily: font.monoMedium,
+    fontSize: 9,
+    letterSpacing: 0.6,
+    textTransform: 'uppercase',
+    color: colors.textFaint,
+    width: 62,
+  },
+  mealTitle: {
+    flex: 1,
+    fontSize: 13,
+    color: colors.ink,
   },
 });
